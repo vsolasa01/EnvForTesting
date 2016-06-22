@@ -1,0 +1,156 @@
+<div class="proposal-details-popup popup">
+    <div class="popup-header clearfix">
+        <div class="title-container">
+            <div class="title">
+                {{proposaltitle}}
+            </div>
+            <div class="sub-title">
+                Proposal ID: {{proposalId}}
+            </div>
+        </div>
+        <div class="close" ng-click="hidepreviewinputs()">
+            <span class="icon-x"><?xml version="1.0" encoding="utf-8"?>
+                <!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                     viewBox="0 0 14 14" style="enable-background:new 0 0 14 14;" xml:space="preserve">
+                    <g>
+                        <path d="M1,14c-0.3,0-0.5-0.1-0.7-0.3c-0.4-0.4-0.4-1,0-1.4l12-12c0.4-0.4,1-0.4,1.4,0s0.4,1,0,1.4l-12,12C1.5,13.9,1.3,14,1,14z"
+                              />
+                        <path d="M13,14c-0.3,0-0.5-0.1-0.7-0.3l-12-12c-0.4-0.4-0.4-1,0-1.4s1-0.4,1.4,0l12,12c0.4,0.4,0.4,1,0,1.4
+                              C13.5,13.9,13.2,14,13,14z"/>
+                    </g>
+                </svg>
+            </span>               
+        </div>
+    </div>
+    <div class="popup-content clearfix">
+        <div class="utility-analysis">
+            <div class="popup-content-title">Utility analysis</div>
+            <div class="list-container">
+                <div class=" clearfix list-item">
+                    <div class="left">Utility bill savings</div>
+                    <div class="right"><span>$</span>{{billsavings}}</div>
+                </div>
+                <div class=" clearfix list-item">
+                    <div class="left">Average cost of electricity</div>
+                    <div class="right"><span>$</span>{{averagecost}}<span>/&nbsp;kWh</span></div>
+                </div>
+                <div class=" clearfix list-item">
+                    <div class="left">Pre solar utility bill</div>
+                    <div class="right"><span>$</span>{{presolarutility}}</div>
+                </div>
+                <div class=" clearfix list-item">
+                    <div class="left">Post solar utility bill</div>
+                    <div class="right"><span>$</span>{{postsolarutility}}</div>
+                </div>
+                <div class=" clearfix list-item">
+                    <div class="left">Utility Provider</div>
+                    <div class="right right-text">{{utilityprovider}}</div>
+                </div>
+                <!--div class=" clearfix list-item">
+                    <div class="left">Average mpthly bill</div>
+                    <div class="right">5 <span>%</span></div>
+                </div-->
+                <div class=" clearfix list-item">
+                    <div class="left">Utility tax rate</div>
+                    <div class="right"><span>$</span>{{taxrate}}</div>
+                </div>
+                <div class=" clearfix list-item">
+                    <div class="left">Yearly kWh consumed</div>
+                    <div class="right">{{annualusage}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="system-analysis">
+            <div class="popup-content-title">System analysis</div>
+            <div class="list-container">
+                <div class=" clearfix list-item">
+                    <div class="left">System size (DC)</div>
+                    <div class="right">{{systemsize}} <span>kW</span></div>
+                </div>
+                <div class=" clearfix list-item">
+                    <div class="left">Yearly production</div>
+                    <div class="right">{{year1production}}<span>$</span></div>
+                </div>
+                <div class=" clearfix list-item">
+                    <div class="left">Annual usage offset</div>
+                    <div class="right">{{offset}}<span> %</span></div>
+                </div>
+            </div>
+            <div ng-repeat="arrays in panelarrays">
+            <div class="list-container">
+                <div class="sub-title">
+                    Array {{arrays.ArrayNumber}}
+                </div>
+                <!--div class=" clearfix list-item">
+                    <div class="left">Mount type</div>
+                    <div class="right right-text">Slopen roof</div>
+                </div-->
+                <div class=" clearfix list-item">
+                    <div class="left">Module type</div>
+                    <div class="right right-text">{{arrays.ModuleType}}</div>
+                </div>
+                <div class=" clearfix list-item">
+                    <div class="left">Module count</div>
+                    <div class="right">{{arrays.ModuleQuantity}}</div>
+                </div>
+                <div class=" clearfix list-item">
+                    <div class="left">Inverter type</div>
+                    <div class="right right-text">{{arrays.InverterModel}}</div>
+                </div>
+                <div class=" clearfix list-item">
+                    <div class="left">Tilt</div>
+                    <div class="right">{{arrays.Tilt}}<sup>o</sup></div>
+                </div>
+                <div class=" clearfix list-item">
+                    <div class="left ">Azimuth</div>
+                    <div class="right">{{arrays.Azimuth}}<sup>o</sup></div>
+                </div>
+                <div class=" clearfix list-item">
+                    <div class="left">Yearly shade</div>
+                    <div class="right">{{arrays.AnnualShading}}</div>%
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="incentive-finance">
+            <div class="incentive">
+                <div class="popup-content-title">Incentive</div>
+                <div class="list-container">
+                    <div class=" clearfix list-item">
+                        <div class="left">System size (DC)</div>
+                        <div class="right">6.5 <span>kW</span></div>
+                    </div>
+                    <div class=" clearfix list-item">
+                        <div class="left">Yearly production</div>
+                        <div class="right">9458 <span>kWh</span></div>
+                    </div>
+                    <div class=" clearfix list-item">
+                        <div class="left">Annual usage offset</div>
+                        <div class="right">65 <span>%</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="finance">
+                <div class="popup-content-title">Finance program</div>
+                <div class="list-container">
+                    <div class="sub-title">
+                        {{financeprogram}}
+                    </div>
+                    <div class=" clearfix list-item">
+                        <div class="left">System size (DC)</div>
+                        <div class="right">6.5 <span>kW</span></div>
+                    </div>
+                    <div class=" clearfix list-item">
+                        <div class="left">Yearly production</div>
+                        <div class="right">9458 <span>kWh</span></div>
+                    </div>
+                    <div class=" clearfix list-item">
+                        <div class="left">Annual usage offset</div>
+                        <div class="right">65 <span>%</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

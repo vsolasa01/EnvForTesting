@@ -1,0 +1,639 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="css/StyleSheet.css">
+    <title>Proposals</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <script type="text/javascript" src="scripts/jquery-2.1.3.js"></script>
+    <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=geometry&v=3.exp"></script>
+    <script type="text/javascript" src="scripts/main.js"></script>
+    <script type="text/javascript" src="scripts/worksData.js"></script>
+    <script type="text/javascript" src="scripts/kinetic.js"></script>
+    <script type="text/javascript" src="scripts/hdsolar2.js"></script>
+    <script type="text/javascript" src="scripts/handler.js"></script>
+    <script type="text/javascript" src="scripts/d3.min.js"></script>
+    <script type="text/javascript" src="scripts/verify.js"></script>
+</head>
+<body>
+    <div id="map-view" class="container-fluid">
+        <div class="row" style="padding:4px;height:100%;">
+            <form method="post" onsubmit="return false;">
+            <div class="col-sm-3" style="padding:4px;">
+                <div id="htab" class="htab">                    
+                    <!--div class="htabitem" onclick="htabitemClicked('UtilityRates', this)">
+                        <img alt="Icon" src="images/66590.png" />
+                        <div><h4>Utility Rates</h4></div>
+						<div class ="msg">Utility tax details</div>
+                    </div>!-->
+                    <div class="htabitem htabitem-top" onclick="htabitemClicked('CurrentUsage', this)">
+                        <img alt="Icon" src="images/66590.png" />
+                        <div><h4>Current Usage</h4></div>
+						<div class ="msg">Yearly usage details</div>
+                    </div>
+<!--                    <div class="htabitem" onclick="htabitemClicked('Shading', this)">
+                        <img alt="Icon" src="images/53577.png" />
+                        <div><h4>Shading</h4></div>
+						<div class ="msg">Shading details</div>
+                    </div>-->
+                    <div class="htabitem" onclick="htabitemClicked('Areas', this)">
+                        <img alt="Icon" src="images/areas.png" />
+                        <div><h4>Areas</h4></div>
+						<div class ="msg">Area details</div>
+                    </div>
+                    <div class="htabitem" onclick="htabitemClicked('PanelsInverters', this)">
+                        <img alt="Icon" src="images/34518.png" />
+                        <div><h4>Panels &amp; Inverters</h4></div>
+						<div class ="msg">Panel details</div>
+                    </div>
+                    <div class="htabitem" onclick="htabitemClicked('Production', this); makeProductionCall('true')">
+                        <img alt="Icon" src="images/34504.png" />
+                        <div><h4>Production</h4></div>
+						<div class ="msg">Production details</div>
+                    </div>
+                    <div class="htabitem htabitem-bottom" onclick="htabitemClicked('Finance', this)">
+                        <img alt="Icon" src="images/66337.png" />
+                        <div><h4>Finance</h4></div>
+						<div class ="msg">Finance details</div>
+                    </div>
+                    <!--section id="UtilityRates" class="htabitem-panel">
+                        <br>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <label>Utility Provider:</label>
+                                        <select class="form-control" id="rate_provider" onchange="updateOnTaxRateChange()">
+                                        </select>
+                                    </td>
+                                </tr>
+                            </table>
+                    </section>!-->
+                    <section id="CurrentUsage" class="htabitem-panel">
+                        <table>
+                            <br>
+                                <tr>
+                                    <td>
+                                        <label>Utility Provider:<span style="color: red">&#42</span></label>
+                                        <select class="form-control" id="rate_provider" style="width:267px;" onchange="updateOnTaxRateChange()">
+                                        </select>
+                                    </td>
+                                </tr>
+                        </table>
+                        <table>
+                            <tr><td><br /></td></tr>
+                            <tr>
+                                <td>
+                                    <label for="tax_rate" style="width:124px;">
+                                        Utility tax rate&nbsp;:
+                                    </label>
+                                </td>
+                                <td>
+                                    <input class="form-control" id="tax_rate" style="width: 128px; margin-left: 15px;" onchange="updateOnTaxChange();" data-validate="decimal,minVal(1)"/>
+                                </td>
+                            </tr>   
+                        </table>
+                        <table>
+                            <tr><td><hr style="margin-bottom: 2px; margin-top: 18px; width: 268px"></td></tr>
+                        </table>
+                        <table>
+                            <tr>
+                                <td>
+                                    <input type="radio" class="UsageOpt" name="usage_option" id="OneMonthBill" value="1" checked> Avg monthly Electricity Bill&nbsp;($):
+                                     
+                                </td>
+                                <td>
+                                    <input class="form-control" name="amount" id="monthly_bill" onchange="updateOnMonthly();" data-validate="required,decimal,minVal(1)"/>
+                                </td>
+                            </tr>
+                            <tr><td><br /></td></tr>
+                            <tr>
+                                <td>
+                                    <label style="margin-left: 120px;">OR</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="radio" class="UsageOpt" name="usage_option" id="AnualUsage" value="2">Annual Usage kWh&nbsp;:
+                                </td>
+                                <td>
+                                    <input class="form-control" id="yearly_kwh" value = "0" onchange="updateOnYearly()" data-validate="required,decimal,minVal(1)"/>
+                                </td>
+                            </tr>
+                            <tr><td><br /></td></tr>
+                            <tr>
+                                <td>
+                                    <label style="margin-left: 120px;">OR</label>
+                                </td>
+                            </tr>
+                            <tr>                
+                                <td>
+                                    <input type="radio" class="UsageOpt" name="usage_option" id="MonthlyUsage" value="3"> Monthly Electricity Usage&nbsp;:
+                                </td>
+                            </tr>
+                            <br>
+                            <tr>
+                                <td>Jan (kWh):</td>
+                                <td><input class="form-control monthwise" id ="month_1" value = "0" data-validate="required,decimal,minVal(1)"/></td>
+                            </tr>
+                            <tr><td><br /></td></tr>
+                            <tr>
+                                <td>Feb (kWh):</td>
+                                <td><input class="form-control monthwise" id ="month_2" value = "0" data-validate="required,decimal,minVal(1)"/></td>
+                            </tr>
+                            <tr><td><br /></td></tr>
+                            <tr>
+                                <td>Mar (kWh):</td>
+                                <td><input class="form-control monthwise" id ="month_3" value = "0" data-validate="required,decimal,minVal(1)"/></td>
+                            </tr>
+                            <tr><td><br /></td></tr>
+                            <tr>
+                                <td>Apr (kWh):</td>
+                                <td><input class="form-control monthwise" id ="month_4" value = "0" data-validate="required,decimal,minVal(1)"/></td>
+                            </tr>
+                            <tr><td><br /></td></tr>
+                            <tr>
+                                <td>May (kWh):</td>
+                                <td><input class="form-control monthwise" id ="month_5" value = "0" data-validate="required,decimal,minVal(1)"/></td>
+                            </tr>
+                            <tr><td><br /></td></tr>
+                            <tr>
+                                <td>Jun (kWh):</td>
+                                <td><input class="form-control monthwise" id ="month_6" value = "0" data-validate="required,decimal,minVal(1)"/></td>
+                            </tr>
+                            <tr><td><br /></td></tr>
+                            <tr>
+                                <td>Jul (kWh):</td>
+                                <td><input class="form-control monthwise" id ="month_7" value = "0" data-validate="required,decimal,minVal(1)"/></td>
+                            </tr>
+                            <tr><td><br /></td></tr>
+                            <tr>
+                                <td>Aug (kWh):</td>
+                                <td><input class="form-control monthwise" id ="month_8" value = "0" data-validate="required,decimal,minVal(1)"/></td>
+                            </tr>
+                            <tr><td><br /></td></tr>
+                            <tr>
+                                <td>Sept (kWh):</td>
+                                <td><input class="form-control monthwise" id ="month_9" value = "0" data-validate="required,decimal,minVal(1)"/></td>
+                            </tr>
+                            <tr><td><br /></td></tr>
+                            <tr>
+                                <td>Oct (kWh):</td>
+                                <td><input class="form-control monthwise" id ="month_10" value = "0" data-validate="required,decimal,minVal(1)"/></td>
+                            </tr>
+                            <tr><td><br /></td></tr>
+                            <tr>
+                                <td>Nov (kWh):</td>
+                                <td><input class="form-control monthwise" id ="month_11" value = "0" data-validate="required,decimal,minVal(1)"/></td>
+                            </tr>
+                            <tr><td><br /></td></tr>
+                            <tr>
+                                <td>Dec (kWh):</td>
+                                <td><input class="form-control monthwise" id ="month_12" value = "0" onchange="updateOnYearly()" data-validate="required,decimal,minVal(1)"/></td>
+                            </tr> 
+                        </table>
+                    </section>             
+
+                    <section id="Areas" class="htabitem-panel">
+                        <!--    <div class="array_drop_down">-->
+                        <label id="panelMsg">!!!Please place panels!!!</label>
+                        <div class="array_cls"  id ="foo">
+                            <div class="array_main_menu" id="array_menu">
+                                <a class="array_single" style="display:none;">Dummy</a>
+                                <ul class="inner_category" id="inner_category">
+                                    <table>
+                                        <br>
+                                        <tr>
+                                            <td>
+                                                <label>Mount Type&nbsp:</label>
+                                                <select id="roof-type" name="roof-type" class="form-control" style="font-weight:normal;">
+                                                    <option value="slope">Sloped Roof</option>
+                                                    <option value="flat">Flat Roof</option>
+                                                    <option value="ground">Ground Mount</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr><td><br /></td></tr>
+                                        <tr>
+                                            <td>
+                                                <label>Slope (degree)&nbsp:</label>
+                                                <input type="range"  id="input-slope" name="input-slope" value="26" min="0" max="60" onchange="updaterange(this.value)" />
+                                                <input type="text" id="slopeinput" class = "form-control" name="slopeinput" value ="26" onchange="updaterange(this.value)" data-validate="required,decimal,maxVal(60)" >
+                                            </td>
+                                        </tr>
+                                        <tr><td><br /></td></tr>
+                                        <tr>
+                                            <td>
+                                                <label>Panel orientation:</label>                        
+                                                <select id="slope-orientation" name="slope-orientation" class="form-control" onchange="updateSlope()">
+                                                    <option value="landscape">Landscape</option>
+                                                    <option value="portrait">Portrait</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr><td><br /></td></tr>
+                                        <tr>
+                                        <ul>
+                                            <td colspan="2">
+                                                Area&nbsp:&nbsp;<span id="area">24</span><span>&nbsp;sq meter</span>
+                                            </td>
+                                        </ul>
+                                        </tr>   
+                                        <tr><td><br /></td></tr>
+                                        <tr>
+                                            <td colspan="2">Number of Panels &nbsp;:
+                                            <span id="no-of-panels" style="font-family:italic;">0</span>
+                                            </td>
+                                        </tr>
+                                        <tr><td><br /></td></tr>
+                                        <tr>
+                                            <td>Azimuth&nbsp;:
+                                            <span id="azimuth" style="font-family:italic;">0.00</span></td>
+                                        </tr>
+                                        <tr><td><br /></td></tr>
+                                    </table>
+                                    <table style="width:85%;">
+                                        <tr>
+                                            <td>
+                                                <label>Shading:</label> 
+                                            </td>  
+                                        </tr>
+                                        <tr>
+                                            <td style ="width: 44%;">Yearly (%):</td>
+                                            <td><input class="input-percent form-control" id ="yearlyshade" name ="yearlyshade" style="width: 80%" onchange = "calculatemonthly()" data-validate="required,decimal,maxVal(100)" /></td>
+                                        </tr>   
+                                        <tr><td><hr style ="width:250%"/></td></tr>
+                                        <tr>
+                                            <td>Jan (%):</td>
+                                            <td><input class="input-percent form-control" id="janshade" name="janshade" style="width: 80%" data-validate="required,decimal,maxVal(100)" /></td>
+                                        </tr>
+                                        <tr><td><br /></td></tr>
+                                        <tr>
+                                            <td>Feb (%):</td>
+                                            <td><input class="input-percent form-control" id="febshade" name="febshade"  style="width: 80%" data-validate="required,decimal,maxVal(100)"/></td>
+                                        </tr>
+                                        <tr><td><br /></td></tr>
+                                        <tr>
+                                            <td>Mar (%):</td>
+                                            <td><input class="input-percent form-control" name="marshade" id="marshade" style="width: 80%" data-validate="required,decimal,maxVal(100)"/></td>
+                                        </tr>
+                                        <tr><td><br /></td></tr>
+                                        <tr>
+                                            <td>Apr (%):</td>
+                                            <td><input class="input-percent form-control" name="aprshade" id="aprshade" style="width: 80%" data-validate="required,decimal,maxVal(100)"/></td>
+                                        </tr>
+                                        <tr><td><br /></td></tr>
+                                        <tr>
+                                            <td>May (%):</td>
+                                            <td><input class="input-percent form-control" name="mayshade" id="mayshade" style="width: 80%" data-validate="required,decimal,maxVal(100)"/></td>
+                                        </tr>
+                                        <tr><td><br /></td></tr>
+                                        <tr>
+                                            <td>Jun (%):</td>
+                                            <td><input class="input-percent form-control" name="junshade" id="junshade" style="width: 80%" data-validate="required,decimal,maxVal(100)"/></td>
+                                        </tr>
+                                        <tr><td><br /></td></tr>
+                                        <tr>
+                                            <td>Jul (%):</td>
+                                            <td><input class="input-percent form-control" name="julshade" id="julshade" style="width: 80%" data-validate="required,decimal,maxVal(100)"/></td>
+                                        </tr>
+                                        <tr><td><br /></td></tr>
+                                        <tr>
+                                            <td>Aug (%):</td>
+                                            <td><input class="input-percent form-control" name="augshade" id="augshade" style="width: 80%" data-validate="required,decimal,maxVal(100)"/></td>
+                                        </tr>
+                                        <tr><td><br /></td></tr>
+                                        <tr>
+                                            <td>Sept (%):</td>
+                                            <td><input class="input-percent form-control" name="sepshade" id="sepshade" style="width: 80%" data-validate="required,decimal,maxVal(100)"/></td>
+                                        </tr>
+                                        <tr><td><br /></td></tr>
+                                        <tr>
+                                            <td>Oct (%):</td>
+                                            <td><input class="input-percent form-control" name="octshade" id="octshade" style="width: 80%" data-validate="required,decimal,maxVal(100)"/></td>
+                                        </tr>
+                                        <tr><td><br /></td></tr>
+                                        <tr>
+                                            <td>Nov (%):</td>
+                                            <td><input class="input-percent form-control" name="novshade" id="novshade" style="width: 80%" data-validate="required,decimal,maxVal(100)"/></td>
+                                        </tr>
+                                        <tr><td><br /></td></tr>
+                                        <tr>
+                                            <td>Dec (%):</td>
+                                            <td><input class="input-percent form-control" name="decshade" id="decshade" style="width: 80%" data-validate="required,decimal,maxVal(100)"/></td>
+                                        </tr> 
+                                    </table>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                    <section id="PanelsInverters" class="htabitem-panel">
+                        <table>
+                            <br>
+                            <tr>
+                                <td>
+                                    <label>Panel Layout Type:</label><br />
+                                    <select class="form-control" id="panellayouttype">
+                                        <option value="panel1">SunEdison-Bow:270</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr><td><br /></td></tr>
+                            <tr>
+                                <td>
+                                    <label>Inverter Manufacturer:</label><br />
+                                    <select class="form-control" id ="manufacturer">
+                                        <option value="nonselected">&nbsp;&nbsp;---Please select---</option>
+                                        <option value="invmanufacture1">Enphase Energy</option>
+                                        <option value="invmanufacture2">Fronius USA</option>
+                                        <option value="invmanufacture3">SMA America</option>
+                                        <option value="invmanufacture4">SolarEdge</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr><td><br /></td></tr>
+                            <tr>
+                                <td>
+                                    <label>Inverter Model:</label><br />
+                                    <select class="form-control" id ="invertermodel">
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr><td><br /></td></tr>                    
+                            <tr>
+                                <td>
+                                    <label for="inverterQuant" style="width:120px;">
+                                        Inverter Quantity:
+                                    </label>
+                                    <br>
+                                    <input class="form-control" id="inverter_quant" style="width:100px;" data-validate="required,number,minVal(1)"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </section>
+                    <section id="Production" class="htabitem-panel">
+                        <br>
+                        <table>                                      
+                            <tr>
+                                <th>Production Values&nbsp;:</th>
+                            </tr>
+                            <br>
+                        </table>
+                        <div class="prod_main_menu" id="prod_menu">
+                            <a class="prod_single" style="display:none;">Dummy</a>
+                            <table border="1" id="production_table"> 
+                                <br>
+                                <tr>
+                                    <th>Month </th>
+                                    <th>Total Production</th>
+                                    <th>Shaded Production</th>
+                                </tr>
+                                <tr>
+                                    <td>January(kwh)</td>
+                                    <td class="actual_prod">0</td>
+                                    <td class="shaded_prod">0</td>
+                                </tr>
+                                <tr>
+                                    <td>February(kwh)</td>
+                                    <td class="actual_prod">0</td>
+                                    <td class="shaded_prod">0</td>
+                                </tr>
+                                <tr>
+                                    <td>March(kwh)</td>
+                                    <td class="actual_prod">0</td>
+                                    <td class="shaded_prod">0</td>
+                                </tr>
+                                <tr>
+                                    <td>April(kwh)</td>
+                                    <td class="actual_prod">0</td>
+                                    <td class="shaded_prod">0</td>
+                                </tr>
+                                <tr>
+                                    <td>May(kwh)</td>
+                                    <td class="actual_prod">0</td>
+                                    <td class="shaded_prod">0</td>
+                                </tr>
+                                <tr>
+                                    <td>June(kwh)</td>
+                                    <td class="actual_prod">0</td>
+                                    <td class="shaded_prod">0</td>
+                                </tr>
+                                <tr>
+                                    <td>July(kwh)</td>
+                                    <td class="actual_prod">0</td>
+                                    <td class="shaded_prod">0</td>
+                                </tr>
+                                <tr>
+                                    <td>August(kwh)</td>
+                                    <td class="actual_prod">0</td>
+                                    <td class="shaded_prod">0</td>
+                                </tr>
+                                <tr>
+                                    <td>September(kwh)</td>
+                                    <td class="actual_prod">0</td>
+                                    <td class="shaded_prod">0</td>
+                                </tr>
+                                <tr>
+                                    <td>October(kwh)</td>
+                                    <td class="actual_prod">0</td>
+                                    <td class="shaded_prod">0</td>
+                                </tr>
+                                <tr>
+                                    <td>November(kwh)</td>
+                                    <td class="actual_prod">0</td>
+                                    <td class="shaded_prod">0</td>
+                                </tr>
+                                <tr>
+                                    <td>December(kwh)</td>
+                                    <td class="actual_prod">0</td>
+                                    <td class="shaded_prod">0</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </section>
+                    <section id="Finance" class="htabitem-panel">
+                        <table>
+                            <br>
+                            <tr>
+                                <th>Finance option&nbsp;:</th>
+                            </tr>
+                            <tr><td colspan="3"><hr  style="margin-bottom: 10px; margin-top: 10px;"/></td></tr>
+                            <tr>
+                                <td>
+                                    <div class="radio">
+                                        <input type="checkbox" class="financeOpt" name="finance_option" value="lease_monthly" checked>PPA<br />
+                                        <input type="checkbox" class="financeOpt" name="finance_option" value="loan" disabled="true">Loan<br />
+                                        <input type="checkbox" class="financeOpt" name="finance_option" value="cash" disabled="true">Cash<br />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr><td><br /></td></tr>
+                            <tr>
+                                <td>
+                                    <label for="installation" style="width:124px;">
+                                        Installation price per watt($)&nbsp;:
+                                    </label>
+                                </td>
+                                <td>
+                                    <input class="form-control" id="installationsprice" style="width:100px;" onchange="updateInstPrice()" data-validate="required,decimal,maxVal(10)"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="additional" style="width:124px;">
+                                        Additional amount($)&nbsp;:
+                                    </label>
+                                </td>
+                                <td>
+                                    <input class="form-control" id="additionalprice" style="width:100px;" onchange="totalamnt()" data-validate="decimal,minVal(0)"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="discount" style="width:124px;">
+                                        Discount($)&nbsp;:
+                                    </label>
+                                </td>
+                                <td>
+                                    <input class="form-control" id="discount" style="width:100px;" onchange="totalamnt()" data-validate="decimal,minVal(0)"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="incentive" style="width:124px;">
+                                        Federal Tax Credit($)&nbsp;:
+                                    </label>
+                                </td>
+                                <td>
+                                    <input class="form-control" id="taxcredit" style="width:100px;" onchange="totalamnt()" data-validate="decimal,minVal(0)"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="incentive" style="width:124px;">
+                                        Local Rebates($)&nbsp;:
+                                    </label>
+                                </td>
+                                <td>
+                                    <input class="form-control" id="rebate" style="width:100px;"  onchange="totalamnt()" data-validate="decimal,minVal(0)"/>
+                                </td>
+                            </tr>
+                            <tr><td colspan="3"><hr  style="margin-bottom: 10px; margin-top: 10px;"/></td></tr>
+                            <tr>
+                                <td>
+                                    <label for="totalamount" style="width:125px;">
+                                        Total amount($)&nbsp;:
+                                    </label>
+                                </td>
+                                <td>
+                                    <input type ="text" id="totalprice" style="width:100px; border: none;" readonly/>
+                                </td>
+                            </tr>
+                        </table>
+                    </section>
+                </div>
+                <table style="width:100%;">
+                    <tr>
+                        <td style="text-align: center; padding: 8px;">
+                            
+                            <input type="button" id="reset" value= "Reset" class="btn btn-warning"/>
+                            <input type ="button" id="update" class="btn btn-warning" value="Update" onclick="return validateInput()"/>
+                        </td>
+                        <!--<td style="text-align: center; padding: 8px;">
+                            
+                        </td>-->
+                    </tr>
+                </table>
+            </div>
+            </form>
+            <div class="col-sm-6" style="padding:4px;height:100%;">
+                <div id="map-panel" class="map-panel">
+                    Map will be here
+                </div>
+            </div>
+            <div class="col-sm-3" style="padding:4px;">
+                <div id="status-panel">
+                    
+                    <h5 style="margin:0;">-------Proposal Details---------</h5>
+                    <input type="button" id="click" onclick="OpenInNewTab()" value="click it">
+                    <tr><td><hr /></td></tr>
+                    <table class="table firstSide">                        
+                        <tr>
+                            <td>Installation price per watt($)&nbsp;:</td>
+                            <td><span id="instPricePerWattRight" class="info-number" style="font-family:italic;">0</span></td>
+                        </tr>
+                        <tr>
+                            <td>Yearly Usage (Total kWh)&nbsp;:</td>
+                            <td><span id="yearUsg" class="info-number" style="font-family:italic;">0</span></td>
+                        </tr>
+                        <tr>
+                            <td>Projected Solar<br />Production (DC Watts)&nbsp;:</td>
+                            <td><span id="dcWatts" class="info-number" style="font-family:italic;">0</span></td>
+                        </tr>
+                        <tr>
+                            <td>Total number of Panels&nbsp;:</td>
+                            <td><span id="totalpanels" class="info-number" style="font-family:italic;">0</span></td>
+                        </tr>
+                        <tr id ="acwatt_tr" style="display:none">
+                            <td>Production (AC Watts)&nbsp;:</td>
+                            <td><span id="acWatts" class="info-number" style="font-family:italic;">0</span></td>
+                        </tr>
+                        <tr id ="offset_tr" style="display:none">
+                            <td>Offset (%)&nbsp;:</td>
+                            <td><span id="offset" class="info-number" style="font-family:italic;">0</span></td>
+                        </tr>
+                    </table>
+                    <table>                        
+                        <tr>
+                            <td colspan="3" id="graph"></td>
+                        </tr>
+                    </table>
+                    <table id="rightContent" class="table sideContent" style="display:none">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Utility Bill</th>
+                                <th>Yearly Utility Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>without solar</td>
+                                <td><span id ="solarmonthly" style="font-family:italic;">0</span></td>
+                                <td><span id ="solaryearly" style="font-family:italic;">0</span></td>
+                            </tr>
+                            <tr>
+                                <td>with solar</td>
+                                <td><span style="font-family:italic;">0</span></td>
+                                <td><span style="font-family:italic;">0</span></td>
+                            </tr>
+                            <tr>
+                                <td>Reduction in bill</td>
+                                <td><span id="reducedmonthbill" style="font-family:italic;">0</span></td>
+                                <td><span id="reducedyearbill" style="font-family:italic;">0</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <table style="width:100%;">
+                    <tr>
+                        <td style="text-align:center; padding: 8px;">
+                             <input type ="button" id="preview" class="btn btn-warning" value ="Preview Proposal" onclick="makeProposalCall()" style="display:none; background: #e3802f;"/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div id="blackout" style="display: none;">
+                <div style="width:100%; height:30%"></div>
+                    <div id="inside_blackout">
+                        <div id="dispMsg">
+                            <h1>Processing...</h1>
+                        </div>
+                    </div>
+            </div>
+        </div>
+     </div>
+</body>
+</html>

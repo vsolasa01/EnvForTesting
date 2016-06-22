@@ -1,0 +1,102 @@
+<div class="container-fluid"
+     id="dashboard">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="nav-pills-container">
+                <ul class="nav nav-pills">
+
+                    <li role="presentation"
+                        ng-class="{ active: $state.includes('homeowners') }">
+                        <a ui-sref="homeowners">
+                            Sales
+                        </a>
+                    </li>
+                    <!--li role="presentation"
+                        ng-class="{ active: $state.includes('map') }">
+                        <a ui-sref="map"
+                           ng-class="{ active: $state.includes('contacts') }">
+                            Map View
+                        </a>
+                    </li-->
+		    <li role="presentation"
+                        ng-class="{ active: $state.includes('design') }">
+                        <a ui-sref="design">
+                            Design
+                        </a>
+                    </li>
+                    <li role="presentation"
+                        ng-class="{ active: $state.includes('projectStatus') }">
+                        <a ui-sref="projectStatus">
+                            Project Status
+                        </a>
+                    </li>
+                </ul>
+                <div class="dropdown" style="float: right; width:35%; right:0.2%" ng-show="dashboardController.userCurrentRole === 'SalesManager'">
+                        <a id="searchPartner"
+                           role="button"
+                           data-toggle="dropdown">
+                           <input ng-model="searchPartner"
+                               id="searchPartner"
+                               type="text"
+                               class="form-control"
+                               style="background-color: white; margin-top: 1.25%"
+                               placeholder="Click and start typing to search for partner">
+                        </a>
+                    <ul class="dropdown-menu dropdown-menu-right" style="width:100%; margin-top: 5%; overflow: auto; max-height: 400px"role="menu" aria-labelledby="searchPartner">
+                        <li ng-repeat="partner in dashboardController.partnerList | filter:searchPartner" ng-click="dashboardController.changePartner(partner)" style="cursor: pointer">
+                            {{partner.Name}}
+                        </li>
+                    </ul>
+                </div>
+                <div class="search-bar-container">
+                    <div class="input-group leadSearch"
+                         ng-if="$state.includes('homeowners') || $state.includes('projectStatus')">
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-search"
+                                  aria-hidden="true"></span>
+                        </span>
+                        <input ng-model="dashboardController.searchText"
+                               id="leadSearchInput"
+                               type="text"
+                               class="form-control"
+                               placeholder="Start typing to search">
+                    </div>
+                </div>
+                <!--div style="float:right; margin-top: 0.5%; background-color: white; border-radius: 5px; min-width: 300px" ng-show="dashboardController.userCurrentRole === 'SalesManager'">
+                    <select class="form-control"
+                            id="chosenPartner"
+                            name="chosenPartner"
+                            tabindex="15"
+                            required
+                            ng-change="dashboardController.changePartner()"
+                            ng-model="dashboardController.chosenPartner"
+                            ng-init="dashboardController.chosenPartner"
+                            ng-options="partner.partnerRecId as partner.Name for partner in dashboardController.partnerList">                    
+                    </select>
+                </div-->
+            </div>
+        </div>
+    </div>
+    <div class="row" style="text-align: center" ng-if="dashboardController.isPaginationRequired && ($state.includes('homeowners') || $state.includes('map'))">
+        <div class="col-md-12">
+            <ul class="pagination" style="margin:7px;">
+                <li>
+                    <a href="" aria-label="Previous" id="paginate-next-button" ng-click="dashboardController.getPreviousLeads()" ng-class="dashboardController.currentPageNo == 1 ? 'noActionNeeded' : ''">
+                        <span aria-hidden="true">Prev</span>
+                    </a>
+                </li>
+                <li ng-repeat="page in dashboardController.pages">
+                    <a ng-click="dashboardController.getLeadsByPageNo(page)" target="_blank" ng-class="page == dashboardController.currentPageNo ? 'selected disabled' : ''" >
+                        {{page}}
+                    </a>
+                </li>                        
+                <li>
+                    <a ng-click="dashboardController.getMoreLeads()" target="_blank" ng-class="!dashboardController.nextPageExists || dashboardController.moreLeadsRequested ? 'noActionNeeded' : ''">
+                        Next
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <ui-view/>
+</div>

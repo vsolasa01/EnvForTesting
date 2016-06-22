@@ -1,0 +1,29 @@
+{
+    "Array": [
+        {
+            "ArrayNumber":"1",
+            "InverterType": "String",            
+            "panelAzimuth": "180.00",
+            "panelTilt": "26",
+            "SystemSize": 7.42,
+            "Shading": [
+                "97",
+                "97",
+                "97",
+                "97",
+                "97",
+                "97",
+                "97",
+                "97",
+                "97",
+                "97",
+                "97",
+                "97"
+            ],
+            "ItemLabel":"SolarEdge Technologies SE3800A-US-U"
+        }
+    ],
+    "Lat": 37.53,
+    "Lng": -122.27,
+    "State": "California"
+}

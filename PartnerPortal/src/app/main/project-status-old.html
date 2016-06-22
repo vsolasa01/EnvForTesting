@@ -1,0 +1,217 @@
+<script>
+    $headerDivs = $('.header-wrapper');
+            $rowDivs = $('.row-wrapper');
+            $rowDivs.scroll(function(e) {
+            $headerDivs.css({
+            left: - $rowDivs[0].scrollLeft + 'px'
+            });
+            });
+            $headerDiv = $("#header-wrapper-main");
+            $rowDiv = $("#row-wrapper-main");
+            $rowDiv.scroll(function(e) {
+            $headerDiv.css({
+            left: - $rowDiv[0].scrollLeft + 'px'
+            });
+            });
+            $(function(){
+
+            $('.linked').scroll(function(){
+            $('.linked').scrollTop($(this).scrollTop());
+            })
+
+                    })
+</script>
+<div id="project-status-table">
+    <div style="float:left;overflow: hidden; position: relative"  class="table-responsive">
+        <div id="header-wrapper-main" class="linked">   
+            <table id="header-main"  class="table table-hover table-striped table-bordered" style="margin-bottom: 0px">
+                <thead>
+                <th ><a  class="{{projectStatus.classForFN}}" href=""  ng-click="projectStatus.order('FirstName')">First&nbsp;Name</a></th>
+                <th><a class="{{projectStatus.classForLN}}" href=""  ng-click="projectStatus.order('LastName')">Last&nbsp;Name</a></th>
+                </thead>
+            </table>
+        </div>
+        <div id="row-wrapper-main" class="linked" style="position:relative">
+            <table id="row-main" class="table table-hover table-striped table-bordered" >
+                <tbody>
+                    <tr ng-repeat="projectData in projectStatusDataList| filter:dashboardController.searchText">
+                        <td>{{projectData['FirstName']}}</td>
+                        <td>{{projectData['LastName']}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="project-status-table-div"  class="table-responsive grid-canvas">
+        <div class="header-wrapper linked">
+            <table class="table table-hover table-striped table-bordered" id="project-status-table" style="margin-bottom: 0px">
+                <thead>
+                    <tr>
+                        <th><a class="{{projectStatus.classForStreet}}" href=""  ng-click="projectStatus.order('Street')">Address</a></th>
+                        <th><a class="{{projectStatus.classForCity}}" href=""  ng-click="projectStatus.order('City')">City</a></th>
+                        <th><a class="{{projectStatus.classForState}}" href=""  ng-click="projectStatus.order('State')">State</a></th>
+                        <th><a class="{{projectStatus.classForZip}}" href=""  ng-click="projectStatus.order('Zip')">Zipcode</a></th>
+                        <th>CPM</th>
+                        <th>Contract Signed Date</th>
+                        <th >Site Visit Status</th>
+                        <th >Site Visit Date </th>
+                        <th >PDA Status</th>
+                        <th >PDA Approved Date</th>
+                        <th >Promised Install Date</th>
+                        <th >Substantial Completion Status</th>
+                        <th >Substantial Completion Date</th>
+                        <th >Substantial Completion Payment Status</th>                    
+                        <th >PTO Status</th>
+                        <th >PTO Payment Status</th>
+                        <th >PTO Date</th> 
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="row-wrapper linked">
+            <table class="table table-hover table-striped table-bordered" id="project-status-table">
+            <tbody>
+                <tr  ng-repeat="projectData in projectStatusDataList| filter:dashboardController.searchText ">
+                    <td>{{projectData['Address']}}</td>
+                    <td>{{projectData['City']}}</td>
+                    <td>{{projectData['State']}}</td>
+                    <td>{{projectData['Zip']}}</td>
+                    <td>{{projectData['AssignedCPM']}}</td>
+                    <td>{{projectData['ContractSignedDate']}}</td>
+                    <!--td>{{projectData['SiteVisitStatus']}}</td-->
+                    <td>
+                        <div class="indicator-container">
+                            <span class="indicator" ng-class="{
+                                'project- status - table - processIndicator': projectData.SiteVisitStatus === 'Scheduled' || projectData.SiteVisitStatus === 'Re-scheduled' , 
+                                'project-status - table - acceptedIndicator': projectData.SiteVisitStatus === 'Completed', 
+                                'project - status - table - failedIndicator': projectData.SiteVisitStatus === 'Not Scheduled'}">
+                            </span>  
+                            <span class></span>
+                            <span class="indicator-text">
+                                {{projectData['SiteVisitStatus']}}
+                            </span>                                        
+                        </div>
+                    </td>
+                    <td>
+                        <div class="indicator-container" ng-if="projectData.SiteVisitDate">
+                            <span class="indicator" ng-if="projectData.SiteVisitDateStatus" ng-class="{
+                            'project-status - table - acceptedIndicator': projectData.SiteVisitDateStatus === 'green',
+                            'project-status - table - processIndicator': projectData.SiteVisitDateStatus === 'orange',
+                            'project-status - table - failedIndicator': projectData.SiteVisitDateStatus === 'red'}">
+                            </span>  
+                            <span class></span>
+                            <span class="indicator-text">
+                                {{projectData['SiteVisitDate']}}
+                            </span>             
+                        </div>
+                    </td>
+                    <td>
+                        <div class="indicator-container" ng-if="projectData.PdaphaseStatus">
+                            <span class="indicator" ng-class="{
+                                    'project - status - table - acceptedIndicator': projectData.PdaphaseStatusIndicator === 'green',
+                                    'project - status - table - processIndicator': projectData.PdaphaseStatusIndicator === 'orange',
+                                    'project - status - table - failedIndicator': projectData.PdaphaseStatusIndicator === 'red'}">
+                            </span>  
+                            <span class></span>
+                            <span class="indicator-text"
+                                  ng-if="projectData.PdaphaseStatus === 'Signed by SunEdison'">
+                                Approved
+                            </span>
+                            <span class="indicator-text"
+                                  ng-if=" projectData.PdaphaseStatus !== 'Signed by SunEdison'">
+                                Pending
+                            </span>                                           
+                        </div>
+                    </td>
+                    <td>{{projectData['PdaapprovalDate']}}</td>
+                    <td>{{projectData['PromisedInstallDate']}}</td>
+                    <td>
+                        <div class="indicator-container" ng-if="projectData.SubstantialCompletionPaymentStatus">
+                            <span class="indicator" ng-if="projectData.SubstantialCompletionPaymentStatus" ng-class="{
+                                'project-status - table - acceptedIndicator': projectData.SubstantialCompletionPaymentStatus === 'Paid',
+                                'project- status - table - processIndicator': projectData.SubstantialCompletionPaymentStatus === 'Pending'}">
+                            </span>  
+                            <span class></span>
+                            <span class="indicator-text"
+                                  ng-if="projectData.SubstantialCompletionPaymentStatus === 'Paid'">
+                                Approved
+                            </span>
+                            <span class="indicator-text"
+                                  ng-if=" projectData.SubstantialCompletionPaymentStatus === 'Pending'">
+                                Pending
+                            </span>             
+                        </div>
+                    </td>
+                    <td>
+                        <div class="indicator-container" ng-if="projectData.SubstantialCompletionDate">
+                            <span class="indicator" ng-if="projectData.SubstantialCompletionDate" ng-class="{
+                                'project-status - table - acceptedIndicator': projectData.SubstantialCompletionDateStatus === 'green',
+                                'project- status - table - processIndicator': projectData.SubstantialCompletionDateStatus === 'orange',
+                                'project - status - table - failedIndicator': projectData.SubstantialCompletionDateStatus === 'red'}">
+                            </span>  
+                            <span class></span>
+                            <span class="indicator-text">
+                                {{projectData['SubstantialCompletionDate']}}
+                            </span>             
+                        </div>
+                    </td>
+                    <td>
+                        <div class="indicator-container" ng-if="projectData.SubstantialCompletionPaymentStatus">
+                            <span class="indicator" ng-if="projectData.SubstantialCompletionPaymentStatus" ng-class="{
+                                'project-status - table - acceptedIndicator': projectData.SubstantialCompletionPaymentStatus === 'Paid',
+                                'project- status - table - processIndicator': projectData.SubstantialCompletionPaymentStatus === 'Pending'}">
+                            </span>  
+                            <span class></span>
+                            <span class="indicator-text"
+                                  ng-if="projectData.SubstantialCompletionPaymentStatus === 'Paid'">
+                                Paid
+                            </span>
+                            <span class="indicator-text"
+                                  ng-if=" projectData.SubstantialCompletionPaymentStatus === 'Pending'">
+                                Pending
+                            </span>             
+                        </div>
+                    </td>
+                    <td>
+                        <div class="indicator-container" ng-if="projectData.Ptophase">
+                            <span class="indicator" ng-class="{
+                            'project-status - table - processIndicator': projectData.Ptophase === 'Pending Approval', 
+                            'project-status - table - acceptedIndicator': projectData.Ptophase === 'Reviewed & Approved'}">
+                            </span>  
+                            <span class></span>
+                            <span class="indicator-text"
+                                  ng-if="projectData.Ptophase === 'Pending Approval'">
+                                Pending
+                            </span>
+                            <span class="indicator-text"
+                                  ng-if=" projectData.Ptophase === 'Reviewed & Approved'">
+                                Approved
+                            </span>                                        
+                        </div>
+                    </td>
+                    <td>
+                        <div class="indicator-container" ng-if="projectData.PtopaymentStatus">
+                            <span class="indicator" ng-class="{
+                            'project-status - table - processIndicator': projectData.PtopaymentStatus !== 'Paid', 
+                            'project-status - table - acceptedIndicator': projectData.PtopaymentStatus === 'Paid'}">
+                            </span>  
+                            <span class></span>
+                            <span class="indicator-text"
+                                  ng-if="projectData.PtopaymentStatus !== 'Paid'">
+                                Pending
+                            </span>
+                            <span class="indicator-text"
+                                  ng-if=" projectData.PtopaymentStatus === 'Paid'">
+                                Paid
+                            </span>                                        
+                        </div>
+                    </td>                    
+                    <td>{{projectData['Ptodate']}}</td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>

@@ -1,0 +1,455 @@
+@theme-path: "themes/default/";
+//@import "@{theme-path}variables"; //these should work, but don't: https://github.com/twitter/recess/issues/143
+//@import "@{theme-path}bootswatch";
+
+@import "../bower_components/bootstrap/less/bootstrap";
+@import "../bower_components/font-awesome/less/font-awesome";
+//@import "../bower_components/ng-grid/src/less/global";
+
+@import 'themes/sunedison/bootswatch';
+//theme file
+@import 'themes/sunedison/variables';
+//theme file
+@import "mixins";
+
+@import "typography";
+@import "spinner";
+@import "login";
+@import "navigation";
+@import "admin";
+@import "alerts";
+@import "dashboard";
+@import "exec-dash";
+@import "grid";
+@import "charts";
+@import "overviewBar/overviewBarBase";
+@import "passwordChangeModal/passwordChangeModal";
+@import "noMembership/noMembership";
+@import "mule-reset/mule-reset-base";
+
+@brand-blue-dk: #1e7bcc;
+@brand-blue-subdued: #4888CA;
+@brand-orange-subdued: #ED995A;
+@brand-yellow-subdued: #F7C257;
+@brand-purple: #977DCC;
+@brand-purple-subdued: #EAE5F6;
+@brand-red: #E41E1D;
+@brand-orange: #e4701e;
+@brand-gray: #f5f5f5;
+@dark-gray: #5F5F5F;
+@darker-gray: #3D4146;
+@blue-white-text: #e1eff9;
+@dkblue-text: #43474d;
+@grid-bg: #f5f5f5;
+@modal-header-bg: #f5f5f5;
+@grid-border: #dfdfdf;
+@grid-text : #272727;
+@input-border: fade(@dkblue-text, 20%);
+@brand-white: #FFF;
+
+//global styles
+
+* {
+  .box-sizing();
+}
+
+html {
+  min-height: 100%;
+  min-width: 1024px;
+  body {
+    //    padding-top: 65px;
+    background: url("../img/bg-pattern.png") repeat scroll 0 0 transparent;
+    padding-bottom: 20px;
+    min-width: 1024px;
+    .content {
+      margin: 0 15px;
+    }
+    a {
+      cursor: pointer;
+      color: @link-color;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      font-weight: @light;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+    }
+    h2 {
+      font-size: 24px;
+    }
+    button.fa {
+      //buttons with FontAwesome icons
+
+      &::before {
+        padding-right: 7px;
+      }
+    }
+  }
+}
+
+div.netsuite-iframe-outer-wrapper {
+
+}
+
+section.netsuite-iframe-wrapper {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  min-height: 525px;
+  background: white;
+  iframe {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.truncate-info-item {
+  width: 200px;
+  display: block;
+  word-wrap: break-word;
+}
+
+div.pac-container {
+  z-index: 9999;
+}
+
+.modal-content-modsolar-login .modal-dialog {
+  width: 95%;
+  margin-top: 100px;
+}
+
+.modsolar-login-iframe {
+  width: 100%;
+  height: 700px;
+}
+
+
+
+#map-news-row {
+  margin-bottom: 30px;
+}
+
+#viewMoreHomeowners {
+  color: white;
+}
+
+.defaultSortColumn{
+    font-weight: normal;
+}
+
+.highlightSortColumn{
+    font-weight: bold;
+    font-style: italic;
+}
+.solarNewsColumn{
+    float: left;
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 25%;
+}
+.homePageMap{
+    float: left;
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 75%;
+}
+.btn-temp{
+    background-color: #3d4146;
+    border-color: #3d4146;
+}
+.btn-temp:hover{
+    background-color: #3d4146;
+    border-color: #3d4146;
+}
+.modal-call-support-message .modal-dialog {
+  width: 35%;
+  height: 30%;
+  margin-top: 100px;
+  font-size: 150%;
+  text-align:center;
+}
+.modal-call-resendCreditCheck-message .modal-dialog {
+  width: 35%;
+  height: 30%;
+  margin-top: 100px;
+}
+#resend-back{
+ border-color: grey;
+ background-color:grey;
+ color:white;
+ width:130px;
+ height:36px;
+}
+#resend-continue{
+ float: right;
+ background-color:#e4701e;
+ color:white;
+ width:130px;
+ height:36px;
+}
+#creditMsgDiv{
+    padding: 1%;
+}
+#creditResendConfirmHeading{
+    color: white;
+    font-family: inherit;
+    font-size:larger;
+}
+
+
+/**start of project-status-table**/
+  
+div#project-status-table .grid .grid-canvas .header-wrapper .header tbody tr td {
+  background-color: #F2F2F2 !important;
+  //height: 43px;
+  vertical-align: middle;
+}
+div#project-status-table .grid .grid-canvas .row-wrapper .rows tbody tr  {
+    height: 55px;
+}
+div#project-status-table #grid-main #grid-canvas-main #row-wrapper-main #row-main tbody tr  {
+    height: 55px;
+}
+div#project-status-table #grid-main #grid-canvas-main #header-wrapper-main #header-main tbody tr td {
+  background-color: #F2F2F2 !important;
+  //height: 42px;
+  vertical-align: middle;
+  text-overflow: ellipsis;
+  width: 290px;
+}
+div#project-status-table .grid .grid-canvas .header-wrapper  table tbody tr td  {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  background-color: #F2F2F2 !important;
+}
+div#project-status-table .grid .grid-canvas .row-wrapper  table tbody tr td  {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+div#dashboard .nav-pills li a {
+  width: 153px !important;
+}
+div#dashboard #project-status-table tbody tr td div.indicator-container {
+  width: 105px;
+}
+div#dashboard #project-status-table thead tr th {
+  font-family: "FiraSans", "Helvetica";
+  font-weight: normal;
+}
+div#dashboard #project-status-table tbody tr td {
+  font-family: "FiraSans", "Helvetica";
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/**start of project-status-table**/
+  
+div#project-status-table .grid .grid-canvas .header-wrapper .header tbody tr td {
+  height: 43px;
+  vertical-align: middle;
+}
+div#project-status-table .grid .grid-canvas .row-wrapper .rows tbody tr  {
+    height: 55px;
+}
+div#project-status-table #grid-main #grid-canvas-main #row-wrapper-main #row-main tbody tr  {
+    height: 55px;
+}
+div#project-status-table #grid-main #grid-canvas-main #header-wrapper-main #header-main tbody tr  {
+  background-color: #F2F2F2 !important;
+  height: 42px;
+  vertical-align: middle;
+  text-overflow: ellipsis;
+  width: 290px;
+}
+div#project-status-table .grid .grid-canvas .header-wrapper  table tbody tr td  {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+div#project-status-table .grid .grid-canvas .row-wrapper  table tbody tr td  {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+div#dashboard .nav-pills li a {
+  width: 153px !important;
+}
+div#dashboard #project-status-table tbody tr td div.indicator-container {
+  width: 105px;
+}
+div#dashboard #project-status-table thead tr th {
+  font-family: "FiraSans", "Helvetica";
+  font-weight: normal;
+}
+div#dashboard #project-status-table tbody tr td {
+  font-family: "FiraSans", "Helvetica";
+  font-weight: normal;
+  vertical-align: middle;
+}
+.project-status-table-processIndicator {
+  background-size: cover;
+  background-image: url('/assets/images/yellowdot.png');
+  display: block;
+  float: left;
+  height: 17px;
+  width: 18px;
+  margin-right: 5px;
+  margin-top: 1px;
+}
+.project-status-table-acceptedIndicator {
+  background-size: cover;
+  background-image: url('/assets/images/greendot.png');
+  display: block;
+  float: left;
+  height: 17px;
+  width: 18px;
+  margin-right: 5px;
+  margin-top: 1px;
+}
+.project-status-table-failedIndicator {
+  background-size: cover;
+  background-image: url('/assets/images/reddot.png');
+  display: block;
+  float: left;
+  height: 17px;
+  width: 18px;
+  margin-right: 5px;
+  margin-top: 1px;
+}
+.grid {
+  height: 103%;
+  width: 74%;
+  float: right;
+}
+.grid-canvas {
+  position: relative;
+  //width: 100%;
+  height: 103%;
+  overflow: hidden;
+}
+.header-wrapper {
+  position: absolute;
+  //width: auto;
+  z-index: 1;
+}
+.header-wrapper tr td{
+  font-family: 'FiraSans', 'Helvetica';
+  font-weight: 400;
+  background-color: #F2F2F2;
+}
+.row-wrapper {
+  position: absolute;
+  top: 42px;
+  height: 94%;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: auto;
+  padding-top: 0px;
+}
+#grid-main {
+  height: 100%;
+  width: 100%;
+
+}
+#grid-canvas-main{
+  position: absolute;
+  width: 25%;
+  height: 75%;
+  overflow: hidden;
+
+
+}
+#header-wrapper-main{
+  position: absolute;
+  top: 0;
+  width: auto;
+  z-index: 1;
+  width: 100%;
+}
+#row-wrapper-main {
+  position: absolute;
+  top: -3px;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: auto;
+  padding-top: 44px;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  white-space: nowrap;
+}
+#project-status-table table tbody:nth-child(odd) {
+  background-color: #F9FCFD;
+}
+/**end of project-status-table**/
+
+div#dashboard .nav-pills li a {
+  width: 153px !important;
+}
+/*CSS for static heading in home owner table */
+div#dashboard .panel-default .homeowner-list-table  {
+  table-layout:fixed;
+  word-wrap:break-word;
+}
+.panel {
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  background-color: transparent;
+}
+div#dashboard .div-table-content  {
+  table-layout:fixed;
+  overflow-y:auto;
+  width: 101.3%;
+}
+.panel-default {
+  height: 80%;
+}
+.heightwithPagination{
+	height:114%;
+}
+.heightwithoutPagination{
+	height:125%;
+}
+
+/*pagination*/
+.pagination .selected{
+    background-color: #e4701e;
+    cursor: not-allowed;
+}
+.pagination .noActionNeeded{
+    background-color: #e5e5e5;
+    cursor: not-allowed;    
+}
+.pagination .noActionNeeded:hover{
+    background-color: #e5e5e5;
+    cursor: not-allowed;    
+}
+#homepage .homeowner-list-table tbody tr td {
+	table-layout:fixed;
+}
+.loadingImg{
+   margin: 0 auto;
+   //width: 35%;
+   height:100%;
+   background-image: url('/assets/images/loadingTemp.gif');
+   background-repeat:no-repeat;
+   //background-attachment: fixed;
+   background-position: center;
+}
+table.homeowner-list-table{
+   table-layout:fixed;
+}

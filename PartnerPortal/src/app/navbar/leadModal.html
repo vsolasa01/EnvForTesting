@@ -1,0 +1,476 @@
+<div id="add-lead-modal" backspace-not-back-button>
+
+
+<form role="form"
+      class="form-horizontal"
+      name="leadForm">
+<div class="modal-header">
+    <div class="button-container"
+         ng-click="cancel()">
+        <a class="modal-close-x-button"></a>
+    </div>
+    <h4 class="modal-title">{{operation}} Lead</h4>
+</div>
+<div class="modal-body">
+
+<div class="row">
+    <div class="col-md-6">
+        <h4 class="section-label">Homeowner</h4>
+    </div>
+    <div class="col-md-6">
+        <p class="text-right required-field-legend">* Required fields</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <!--First Name-->
+        <div class="form-group"
+             ng-class="{ 'has-error':leadForm.FirstName.$invalid && !leadForm.FirstName.$pristine && leadForm.FirstName.$touched}">
+            <label for="firstName"
+                   class="col-sm-4 control-label">First Name <span class="required-field-indicator">*</span></label>
+
+            <div class="col-sm-8">
+                <input type="text"
+                       class="form-control"
+                       name="FirstName"
+                       id="FirstName"
+                       placeholder=""
+                       tabindex="1"
+                       ng-model="homeownerVM.model.FirstName"
+                       ng-pattern="/^[a-zA-Z\s-']*$/"
+                       required>
+
+                <p ng-show="leadForm.FirstName.$error.required && !leadForm.FirstName.$pristine && leadForm.FirstName.$touched"
+                   class="help-block">First Name is required.</p>
+                <p ng-show="leadForm.FirstName.$invalid && !leadForm.FirstName.$pristine && leadForm.FirstName.$touched && !leadForm.FirstName.$error.required"
+                   class="help-block">First Name should not include numbers or special characters aside from hyphen(-) and apostrophe('). Please fix and try again.</p>
+            </div>
+        </div>
+
+        <div class="form-group"
+             ng-init="initializeAddressAutoComplete()"
+             ng-class="{ 'has-error':leadForm.Street.$invalid && !leadForm.Street.$pristine && leadForm.Street.$touched}">
+            <label for="Street"
+                   class="col-sm-4 control-label">Street Address <span class="required-field-indicator">*</span></label>
+
+            <div class="col-sm-8">
+                <input type="text"
+                       class="form-control"
+                       id="Street"
+                       name="Street"
+                       placeholder=""                       
+                       ng-blur="disableUpload(false)"
+                       tabindex="3"
+                       ng-model="homeownerVM.model.Street"
+                       maxlength="40"
+                       ng-maxlength="40"
+                       required>
+
+                <p ng-show="leadForm.Street.$invalid && !leadForm.Street.$pristine && leadForm.Street.$touched"
+                   class="help-block">Street is required, up to 40 characters. </p>
+            </div>
+        </div>
+        <!--City-->
+        <div class="form-group"
+             ng-class="{ 'has-error':leadForm.City.$invalid && !leadForm.City.$pristine && leadForm.City.$touched}">
+            <label for="City"
+                   class="col-sm-4 control-label">City <span class="required-field-indicator">*</span></label>
+
+            <div class="col-sm-8">
+                <input type="text"
+                       class="form-control"
+                       id="City"
+                       name="City"
+                       placeholder=""
+                       tabindex="4"
+                       maxlength="40"
+                       ng-maxlength="40"
+                       ng-model="homeownerVM.model.City"
+                       required>
+
+                <p ng-show="leadForm.City.$invalid && !leadForm.City.$pristine && leadForm.City.$touched"
+                   class="help-block">City is required, up to 40 characters.</p>
+            </div>
+        </div>
+        <!--State-->
+        <div class="form-group"
+             ng-class="{ 'has-error':leadForm.State.$invalid && !leadForm.State.$pristine && leadForm.State.$touched}">
+            <label for="State"
+                   class="col-sm-4 control-label">State <span class="required-field-indicator">*</span></label>
+
+            <div class="col-sm-8">
+                <select class="form-control"
+                        id="State"
+                        placeholder=""
+                        name="State"
+                        tabindex="5"
+                        ng-model="homeownerVM.model.State"
+                        required>
+                    <option ng-repeat="state in usStateList">{{state}}</option>
+                </select>
+
+                <p ng-show="leadForm.State.$invalid && !leadForm.State.$pristine && leadForm.State.$touched"
+                   class="help-block">State is required.</p>
+            </div>
+        </div>
+        <!--Zip-->
+        <div class="form-group"
+             ng-class="{ 'has-error':leadForm.Zip.$invalid && !leadForm.Zip.$pristine && leadForm.Zip.$touched && leadForm.Zip.$touched}">
+            <label for="Zip"
+                   class="col-sm-4 control-label">Zip Code <span class="required-field-indicator">*</span></label>
+
+            <div class="col-sm-8">
+                <input type="text"
+                       class="form-control"
+                       id="Zip"
+                       name="Zip"
+                       placeholder=""
+                       tabindex="6"
+                       ng-minlength="5"
+                       ng-maxlength="5"
+                       ng-model="homeownerVM.model.Zip"
+                       ng-pattern="/^\d+$/"
+                       required>
+
+
+                <p ng-show="leadForm.Zip.$error.minlength && !leadForm.Zip.$pristine && leadForm.Zip.$touched"
+                   class="help-block">Zip is too short.</p>
+
+                <p ng-show="leadForm.Zip.$error.maxlength && !leadForm.Zip.$pristine && leadForm.Zip.$touched"
+                   class="help-block">Zip is too long.</p>
+
+                <p ng-show="!leadForm.Zip.$error.minlength && !leadForm.Zip.$error.maxlength && !leadForm.Zip.$error.required && leadForm.Zip.$invalid && !leadForm.Zip.$pristine && leadForm.Zip.$touched"
+                   class="help-block">Zip is invalid.</p>
+
+                <p ng-show="leadForm.Zip.$error.required && !leadForm.Zip.$pristine && leadForm.Zip.$touched"
+                   class="help-block">Zip is required.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <!--Last Name-->
+        <div class="form-group"
+             ng-class="{ 'has-error':leadForm.LastName.$invalid && !leadForm.LastName.$pristine && leadForm.LastName.$touched}">
+            <label for="LastName"
+                   class="col-sm-4 control-label">Last Name <span class="required-field-indicator">*</span></label>
+
+            <div class="col-sm-8">
+                <input type="text"
+                       class="form-control"
+                       id="LastName"
+                       name="LastName"
+                       placeholder=""
+                       tabindex="2"
+                       ng-model="homeownerVM.model.LastName"
+                       ng-pattern="/^[a-zA-Z\s-']*$/"
+                       required>
+
+                <p ng-show="leadForm.LastName.$error.required && !leadForm.LastName.$pristine && leadForm.LastName.$touched"
+                   class="help-block">Last Name is required.</p>
+                <p ng-show="leadForm.LastName.$invalid && !leadForm.LastName.$pristine && leadForm.LastName.$touched"
+                   class="help-block">Last Name should not include numbers or special characters aside from hyphen(-) and apostrophe('). Please fix and try again.</p>
+            </div>
+        </div>
+        <!--Email-->
+        <div class="form-group"
+             ng-class="{ 'has-error':leadForm.Email.$invalid && !leadForm.Email.$pristine && leadForm.Email.$touched}">
+            <label for="Email"
+                   class="col-sm-4 control-label">Email <span class="required-field-indicator">*</span></label>
+
+            <div class="col-sm-8">
+                <input type="text"
+                       class="form-control"
+                       id="Email"
+                       name="Email"
+                       placeholder=""
+                       tabindex="7"
+                       ng-pattern="/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/"
+                       ng-model="homeownerVM.model.Email"
+                       required>
+
+                <p ng-show="!leadForm.Email.$error.required && leadForm.Email.$invalid && !leadForm.Email.$pristine && leadForm.Email.$touched"
+                   class="help-block">Email is invalid.</p>
+
+                <p ng-show="leadForm.Email.$error.required && !leadForm.Email.$pristine && leadForm.Email.$touched"
+                   class="help-block">Email is required.</p>
+            </div>
+        </div>
+        <!--HomePhone-->
+        <div class="form-group"
+             ng-class="{ 'has-error':leadForm.HomePhone.$invalid && !leadForm.HomePhone.$pristine && leadForm.HomePhone.$touched}">
+            <label for="HomePhone"
+                   class="col-sm-4 control-label">Phone <span class="required-field-indicator">*</span></label>
+
+            <div class="col-sm-8">
+                <input type="text"
+                       class="form-control"
+                       id="HomePhone"
+                       name="HomePhone"
+                       tabindex="8"
+                       required
+                       ui-mask="(999) 999-9999"
+                       ng-model="homeownerVM.model.HomePhone">
+
+                <p ng-show="!leadForm.HomePhone.$error.required && leadForm.HomePhone.$invalid && !leadForm.HomePhone.$pristine && leadForm.HomePhone.$touched"
+                   class="help-block">Phone is invalid.</p>
+
+                <p ng-show="leadForm.HomePhone.$error.required && !leadForm.HomePhone.$pristine && leadForm.HomePhone.$touched"
+                   class="help-block">Phone is required.</p>
+            </div>
+        </div>
+        <!--CellPhone-->
+        <div class="form-group"
+             ng-class="{ 'has-error':leadForm.CellPhone.$invalid && !leadForm.CellPhone.$pristine && leadForm.CellPhone.$touched}">
+            <label for="CelPhone"
+                   class="col-sm-4 control-label">Cell Phone: </label>
+
+            <div class="col-sm-8">
+                <input type="text"
+                       class="form-control"
+                       id="CellPhone"
+                       name="CellPhone"
+                       tabindex="9"
+                       ui-mask="(999) 999-9999"
+                       ng-model="homeownerVM.model.CellPhone">
+
+                <p ng-show="!leadForm.CellPhone.$error.required && leadForm.CellPhone.$invalid && !leadForm.CellPhone.$pristine && leadForm.CellPhone.$touched"
+                   class="help-block">Cell Phone is invalid.</p>
+
+                <p ng-show="leadForm.CellPhone.$error.required && !leadForm.CellPhone.$pristine && leadForm.CellPhone.$touched"
+                   class="help-block">Cell Phone is required.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h4 class="section-label">Co-Homeowner</h4>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group"
+             ng-class="{ 'has-error':leadForm.CoHFirstName.$invalid && !leadForm.CoHFirstName.$pristine && leadForm.CoHFirstName.$touched}">
+            <label for="coFirstName"
+                   class="col-sm-4 control-label">First Name</label>
+
+            <div class="col-sm-8">
+                <input type="text"
+                       class="form-control"
+                       id="CoHFirstName"
+                       name="CoHFirstName"
+                       placeholder="optional"
+                       tabindex="10"
+                       ng-pattern="/^[a-zA-Z\s-']*$/"
+                       ng-model="homeownerVM.model.CoHFirstName">
+                <p ng-show="leadForm.CoHFirstName.$invalid && !leadForm.CoHFirstName.$pristine && leadForm.CoHFirstName.$touched"
+                   class="help-block">First Name should not include numbers or special characters aside from hyphen(-) and apostrophe('). Please fix and try again.</p>
+            </div>
+        </div>
+        <div class="form-group"
+             ng-class="{ 'has-error':leadForm.CoHEmail.$invalid && !leadForm.CoHEmail.$pristine && leadForm.CoHEmail.$touched}">
+            <label for="CoHEmail"
+                   class="col-sm-4 control-label">Email Address</label>
+
+            <div class="col-sm-8">
+                <input type="text"
+                       class="form-control"
+                       id="CoHEmail"
+                       name="CoHEmail"
+                       tabindex="12"
+                       placeholder="optional"
+                       ng-pattern="/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/"
+                       ng-model="homeownerVM.model.CoHEmail">
+
+                <p ng-show="!leadForm.CoHEmail.$error.required && leadForm.CoHEmail.$invalid && !leadForm.CoHEmail.$pristine && leadForm.CoHEmail.$touched"
+                   class="help-block">Email is invalid.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group" 
+             ng-class="{ 'has-error':leadForm.CoHLastName.$invalid && !leadForm.CoHLastName.$pristine && leadForm.CoHLastName.$touched}">
+            <label for="CoHLastName"
+                   class="col-sm-4 control-label">Last Name</label>
+
+            <div class="col-sm-8">
+                <input type="text"
+                       class="form-control"
+                       id="CoHLastName"
+                       name="CoHLastName"
+                       placeholder="optional"
+                       tabindex="11"
+                       ng-pattern="/^[a-zA-Z\s-']*$/"
+                       ng-model="homeownerVM.model.CoHLastName">
+                <p ng-show="leadForm.CoHLastName.$invalid && !leadForm.CoHLastName.$pristine && leadForm.CoHLastName.$touched"
+                   class="help-block">Last Name should not include numbers or special characters aside from hyphen(-) and apostrophe('). Please fix and try again.</p>
+            </div>
+        </div>
+        <div class="form-group"
+             ng-class="{ 'has-error':leadForm.CoHHomePhone.$invalid && !leadForm.CoHHomePhone.$pristine && leadForm.CoHHomePhone.$touched}">
+            <label for="CoHHomePhone"
+                   class="col-sm-4 control-label">Phone</label>
+
+            <div class="col-sm-8">
+                <input type="text"
+                       class="form-control"
+                       id="CoHHomePhone"
+                       name="CoHHomePhone"
+                       tabindex="13"
+                       ui-mask="(999) 999-9999"
+                       ng-model="homeownerVM.model.CoHHomePhone">
+
+                <p ng-show="!leadForm.CoHHomePhone.$error.required && leadForm.CoHHomePhone.$invalid && !leadForm.CoHHomePhone.$pristine && leadForm.CoHHomePhone.$touched"
+                   class="help-block">Cell Phone is invalid.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h4 class="section-label">Electricity Usage</h4>
+
+<div class="row">
+    <div class="col-md-6">
+
+        <div class="form-group"
+             ng-class="{ 'has-error':leadForm.ElectricalUtility.$invalid && !leadForm.ElectricalUtility.$pristine && leadForm.ElectricalUtility.$touched}">
+            <label for="ElectricalUtility"
+                   class="col-sm-4 control-label">Utility</label>
+
+            <div class="col-sm-8">
+                <input type="text"
+                       class="form-control"
+                       id="ElectricalUtility"
+                       name="ElectricalUtility"
+                       placeholder="optional"
+                       ng-model="homeownerVM.model.ElectricalUtility"
+                       tabindex="14">
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group"
+             ng-class="{ 'has-error':leadForm.AvgMonthlyUtilityBill.$invalid && !leadForm.AvgMonthlyUtilityBill.$pristine && leadForm.AvgMonthlyUtilityBill.$touched}">
+            <label for="AvgMonthlyUtilityBill"
+                   class="col-sm-4 control-label">Avg. Monthly Bill</label>
+
+            <div class="col-sm-8">
+                <select class="form-control"
+                        id="AvgMonthlyUtilityBill"
+                        name="AvgMonthlyUtilityBill"
+                        tabindex="15"
+                        ng-model="homeownerVM.model.AvgMonthlyUtilityBill">
+                    <option value=""></option>
+                    <option value="<$100">&lt;$100</option>
+                    <option value="$100-$200">$100-$200</option>
+                    <option value="$201-$400">$201-$400</option>
+                    <option value="$401-$600">$401-$600</option>
+                    <option value=">$600">&gt;$600</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+<br/>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="uploadFile" class="col-sm-4 control-label">Utility Bill</label>
+            <div class="col-sm-8">
+                <input  style="opacity: 0; width: 0px; height: 0px" type="file" id="uploadFile" name="uploadFile" onchange="angular.element(this).scope().fileUpload()">        
+                <button class="btn btn-primary btn-temp"
+                        ng-click="fileUploadConfirm();">
+                    <span ng-show="fileUploadInProgress">Uploading ...</span>
+                    <span ng-hide="fileUploadInProgress">Upload a File</span>
+                </button>
+                <span style="font-size: 11px">
+                    Max total upload size: 5MB
+                </span>
+                <div ng-show="!homeownerVM.model.SunEdCustId  && fileUploadInProgress">
+                    <span style="font-size: 11px">(File upload to be completed once the lead is saved)</span>
+                </div>
+                <div ng-show="fileNameForDisplay && !fileUploadInProgress && !fileRetrieveInProcess">
+                    <span style="font-size: 11px">{{fileNameForDisplay}}</span>
+                    <img src="/assets/images/Download.png" alt="Download File" title="Download File" ng-click="downloadFile()" style="width:18px;cursor:pointer">
+                    <img src="/assets/images/Delete.png" alt="Delete File" title="Delete File" ng-click="deleteFileConfirm()" style="width:14px;cursor:pointer">
+                </div>
+                <div ng-show="fileRetrieveInProcess">
+                    <span style="font-size: 11px">Retrieving File. Please wait.</span>                   
+                </div>
+                <!--img src="/assets/images/Uploading.gif" style=""-->
+            </div>
+        </div>                   
+    </div>           
+    <div class="col-md-6">
+        <div class="form-group"
+             ng-class="{ 'has-error':leadForm.PurchaseType.$invalid && !leadForm.PurchaseType.$pristine && leadForm.PurchaseType.$touched}">
+            <label for="PurchaseType"
+                   class="col-sm-4 control-label">Interested in purchase type <span class="required-field-indicator">*</span></label>
+
+            <div class="col-sm-8">
+                <select class="form-control"
+                        id="PurchaseType"
+                        name="PurchaseType"
+                        tabindex="16"
+                        required
+                        ng-model="homeownerVM.model.PurchaseType">
+                    <option value=""></option>
+                    <option value="Lease - Monthly">Lease - Monthly(AZ only)</option>
+                    <option value="Lease - Monthly(WGSW)">Lease - Monthly</option>
+                    <!--option value="Loan">Loan</option-->
+                    <option value="Cash">Cash</option>
+                    <option value="PPA">PPA</option>
+                    <option value="Undecided">Undecided</option>
+                    <!--option ng-show="PartnerType==='SALES ENGINE (Seller)'" value="Loan Mosaic">Loan Mosaic</option>
+                    <option ng-show="PartnerType==='SALES ENGINE (Seller)'" value="Loan Mosaic Signature">Loan Mosaic Signature Series</option-->
+                </select>
+
+                <p ng-show="leadForm.PurchaseType.$invalid && !leadForm.PurchaseType.$pristine && leadForm.PurchaseType.$touched"
+                   class="help-block">Purchase type is required.</p>
+            </div>
+        </div>
+    </div>    
+</div>
+</div>
+<div class="modal-footer" ng-switch="isProdEnv">
+<!--    <button type="button"
+            class="btn btn-primary"
+            tabindex="18"
+            ng-click="openModSolarModal()"
+            ng-show="isUpdate">
+        To Proposal
+    </button>
+
+    <a class="lead-action-button-link" ng-switch-when="false"
+               tab-index="18"
+               ng-href="https://sune.oktapreview.com/home/sunedison_modsolar_1/0oa32hhvwxVNFOCHOJET/9291"
+               ng-click="$event.stopPropagation();"
+               target="_blank">
+        <div class="btn btn-primary btn-temp" ng-if="homeownerVM.model.ProposalStatus === 'In Process' || homeownerVM.model.ProposalStatus === 'Price Requested' || homeownerVM.model.ProposalStatus === 'Proposal Initiated'">
+            <span>To Proposal</span>
+        </div>
+    </a>
+    <a class="lead-action-button-link" ng-switch-when="true"
+               tab-index="18"
+               ng-href="https://sune.okta.com/home/sunedisonportal_modsolar_1/0oayxxoxi1DAMVDNVVCX/42279"
+               ng-click="$event.stopPropagation();"
+               target="_blank">
+        <div class="btn btn-primary btn-temp" ng-if="homeownerVM.model.ProposalStatus === 'In Process' || homeownerVM.model.ProposalStatus === 'Price Requested' || homeownerVM.model.ProposalStatus === 'Proposal Initiated'">
+            <span>To Proposal</span>
+        </div>
+    </a-->
+
+    <button class="btn btn-primary"
+            tabindex="17"
+            ng-click="ok()"
+            ng-disabled="leadForm.$invalid || leadFormInProcess">
+        <span us-spinner="spinnerOptions"
+              id="modal-spinner"
+              ng-show="leadFormInProcess"
+              spinner-key="modal-spinner"></span>
+        <span ng-show="leadFormInProcess">Saving...</span>
+        <span ng-show="!leadFormInProcess">Save</span>
+    </button>
+</div>
+</form>
+</div>

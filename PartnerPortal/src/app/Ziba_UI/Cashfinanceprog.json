@@ -1,0 +1,92 @@
+{
+    "SunEdCustId": "1198460", 
+    "Quote": {
+        "PurchaseType" : "Lease - Monthly",
+        "FinancingProgram": "xyz",
+        "proposaltitle": "abc",
+        "CashDownpayment": "1000",
+        "InstallationPayment": "0",
+        "PricePerWatt": "2.0",
+        "RegistrationNumber": "12345",
+        "YearlyUsage": 12345,
+        "Year1Production": 9000,
+        "lastYear": "25",
+        "PostSolarUtilityCost": 53.9616,
+        "PreSolarTariff": "Domestic-D",
+        "CurrentUtilityCost": 3001.25,
+        "ProposalID": "00050453",
+        "PostSolarTariff": "Domestic-D",
+        "Usage": [
+            "55",
+            "35",
+            "40",
+            "20",
+            "15",
+            "90",
+            "20",
+            "30",
+            "45",
+            "20",
+            "16",
+            "20"]
+
+    },
+    "Array": [
+        {
+            "ArrayNumber": "1",
+            "Azimuth": "215.19390724",
+            "InverterId": "M215-60-2LL-S2X",
+            "InverterModel": "M215-60-2LL-S2X",
+            "ModuleQuantity": "23",
+            "ModuleType": "SunEdison: SE-F270CzC-3y (Landscape)",
+            "Orientation": "Portrait",
+            "MonthlyProduction": [
+                "9000",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "00",
+                "0",
+                "0"
+            ],
+            "Shading": [
+                "97",
+                "97",
+                "97",
+                "97",
+                "97",
+                "97",
+                "97",
+                "97",
+                "97",
+                "97",
+                "97",
+                "97"
+            ],
+            "SystemSize": 6.42,
+            "Tilt": "20"
+        }
+    ],
+    "System": {
+        "InverterManufacturer": "Enphase Energy",
+        "InverterQuantity": "23",
+        "ModuleId": "SunEdison 270 - BoB",
+        "ModuleQuantity": "23",
+        "MountingType": "Flat Roof",
+        "PanelSize": "270",
+        "totalCost": "23400"
+    },
+    "Contract": {
+        "installer.client.name": "Complete Solar",
+        "calcMap.dealerName": "Complete Solar",
+        "product_type": "PV",
+        "installer.client.phone": "8772994943",
+        "calcMap.currentDate": "18/03/2015"
+    }
+
+}

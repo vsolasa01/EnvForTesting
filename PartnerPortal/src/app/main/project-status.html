@@ -1,0 +1,352 @@
+<script>
+    $headerDivs = $('.header-wrapper');
+            $rowDivs = $('.row-wrapper');
+            $rowDivs.scroll(function(e) {
+            $headerDivs.css({
+            left: - $rowDivs[0].scrollLeft + 'px'
+            });
+            });
+            $headerDiv = $("#header-wrapper-main");
+            $rowDiv = $("#row-wrapper-main");
+            $rowDiv.scroll(function(e) {
+            $headerDiv.css({
+            left: - $rowDiv[0].scrollLeft + 'px'
+            });
+            });
+            $(function(){
+
+            $('.linked').scroll(function(){
+            $('.linked').scrollTop($(this).scrollTop());
+            })
+
+             });
+                /*var x = document.getElementById('widthtable').offsetWidth;
+                console.log("width of table head is"+ " " + x);
+                var y = document.getElementById('widthtable1').offsetWidth;
+                console.log("widht of table data is"+ " " + y);*/
+                var addressValues = document.getElementsByClassName("addressValue");
+                var maxWidth = 0;
+                for(var i=0; i< addressValues.length; i++){
+                    if(maxWidth < addressValues[i].offsetWidth){
+                        maxWidth = addressValues[i].offsetWidth;
+                    }
+                }
+                if($('#addressHeading').width() > maxWidth){
+                    $('.addressValue').width($('#addressHeading').width());
+                }else{
+                    $('#addressHeading').width(maxWidth);
+                }
+    
+    setTimeout(function(){
+        if(window.location.href.indexOf('projectstatus') !== -1){
+        $("#project-status-table").css('height', '94%');
+        }else{
+            $("#project-status-table").css('height', '94%');            
+        } 
+    }, 2000);    
+    
+</script>
+<div ng-show="projectStatus.loading" class="loadingImg">
+</div>
+<div ng-hide="projectStatus.loading" id="project-status-table">
+    <div class="row">
+        <div class="col-md-12">
+            <div ng-show="$state.includes('projectStatus')">
+                <ul class="nav nav-pills">
+
+                    <li role="presentation" ng-class="{active: projectStatus.currentSubTab ==='permitEquipment'}">
+                        <a ng-click="projectStatus.changeSubTab('permitEquipment')" target="_blank">
+                            Permit&nbsp;&&nbsp;Equipment
+                        </a>
+                    </li>
+                    <li role="presentation" ng-class="{active: projectStatus.currentSubTab ==='installation'}">
+                        <a ng-click="projectStatus.changeSubTab('installation')" target="_blank">
+                            Installation
+                        </a>
+                    </li>
+                    <li role="presentation" ng-class="{active: projectStatus.currentSubTab ==='interconnection'}">
+                        <a ng-click="projectStatus.changeSubTab('interconnection')" target="_blank">
+                            Interconnection
+                        </a>
+                    </li>
+                    <li role="presentation" ng-class="{active: projectStatus.currentSubTab ==='all'}">
+                        <a ng-click="projectStatus.changeSubTab('all')" target="_blank">
+                            All
+                        </a>
+                    </li>                    
+                </ul>
+            </div>
+            <div>
+                <img src="/assets/images/excel-xls-icon.png" alt="Export to Excel" title="Export to Excel" ng-click="projectStatus.exportToExcel()" style="width:48px; float:right; cursor:pointer">                
+            </div>
+        </div>
+    </div>
+    <div class=grid table table-hover table-striped table-bordered>
+        <div class="grid-canvas" >
+            <div class="header-wrapper linked ">
+                    <table id="widthtable" class="header table table-hover table-striped table-bordered ">
+                        <tbody>
+                            <tr>
+                                <!--td id="addressHeading"><div style="width: 200px;"><a class="{{projectStatus.classForStreet}}" href=""  ng-click="projectStatus.order('Street')">Address</a></div></td-->
+                                <td><div style="width: 110px;"><a class="{{projectStatus.classForCity}}" href=""  ng-click="projectStatus.order('City')">City</a></div></td>
+                                <td><div style="width: 90px;"><a class="{{projectStatus.classForState}}" href=""  ng-click="projectStatus.order('State')">State</a></div></td>
+                                <!--td ><div style="width: 100px;"><a class="{{projectStatus.classForZip}}" href=""  ng-click="projectStatus.order('Zip')">Zipcode</a></div></td-->
+                                <td ><div style="width: 100px;">Purchase Type</div></td>
+                                <!--td ng-hide="$state.includes('design') && projectStatus.userSubRole ==='IntegratedDealer'"><div style="width: 150px;">SAI Territory</div></td-->
+                                <td ng-hide="projectStatus.userSubRole ==='IntegratedDealer'"><div style="width: 150px;">Installer</div></td>
+                                <td ng-hide="$state.includes('design') || projectStatus.userSubRole ==='IntegratedDealer'"><div style="width: 150px;">CPM</div></td>
+                                <td ng-hide="projectStatus.currentSubTab !== 'all' || projectStatus.userSubRole ==='IntegratedDealer'"><div style="width: 120px;">Site Survey Status</div></td>
+                                <td ng-hide="projectStatus.currentSubTab !== 'all' || projectStatus.userSubRole ==='IntegratedDealer'"><div style="width: 120px;">Site Survey Date</div> </td>
+                                <td ng-hide="projectStatus.currentSubTab !== 'all' "><div style="width: 100px;">PDA Status</div></td>
+                                <td ng-hide="projectStatus.currentSubTab !== 'all'"><div style="width: 150px;">PDA Last Updated Date</div></td>
+                                <td ng-hide="projectStatus.currentSubTab !== 'all'"><div style="width: 100px;">MP1 Status</div></td>
+                                <!--td ng-hide="projectStatus.currentSubTab !== 'all'"><div style="width: 100px;">MP1 Amount</div></td-->
+                                <td ng-hide="projectStatus.currentSubTab !== 'all'"><div style="width: 120px;">MP1 Approval Date</div> </td>
+                                <td ng-hide="$state.includes('design') || (projectStatus.currentSubTab === 'installation' || projectStatus.currentSubTab === 'interconnection') || projectStatus.userSubRole ==='IntegratedDealer'"><div style="width: 100px;">Permit Status</div> </td>
+                                <td ng-hide="$state.includes('design') || (projectStatus.currentSubTab === 'installation' || projectStatus.currentSubTab === 'interconnection') || projectStatus.userSubRole ==='IntegratedDealer'"><div style="width: 100px;">Permit Date</div></td>
+                                <td ng-hide="$state.includes('design') || (projectStatus.currentSubTab === 'installation' || projectStatus.currentSubTab === 'interconnection')"><div style="width: 120px;">Equipment Status</div> </td>
+                                <td ng-hide="$state.includes('design') || (projectStatus.currentSubTab === 'installation' || projectStatus.currentSubTab === 'interconnection')"><div style="width: 150px;">Equipment Status Date</div> </td>
+                                <td ng-hide="$state.includes('design') || (projectStatus.currentSubTab === 'permitEquipment' || projectStatus.currentSubTab === 'interconnection') || projectStatus.userSubRole ==='IntegratedDealer'"><div style="width: 120px;">Installation Status</div> </td>
+                                <td ng-hide="$state.includes('design') || (projectStatus.currentSubTab === 'permitEquipment' || projectStatus.currentSubTab === 'interconnection') || projectStatus.userSubRole ==='IntegratedDealer'"><div style="width: 150px;">Installation Status Date</div> </td>
+                                <td ng-hide="$state.includes('design') || (projectStatus.currentSubTab === 'permitEquipment' || projectStatus.currentSubTab === 'interconnection') || projectStatus.userSubRole ==='IntegratedDealer'"><div style="width: 160px;">Main Panel Upgrade Req</div> </td>
+                                <td ng-hide="$state.includes('design') || (projectStatus.currentSubTab === 'permitEquipment' || projectStatus.currentSubTab === 'interconnection')"><div style="width: 100px;">Smart Comm</div> </td>
+                                <td ng-hide="$state.includes('design') || (projectStatus.currentSubTab === 'permitEquipment' || projectStatus.currentSubTab === 'interconnection') || projectStatus.userSubRole ==='IntegratedDealer'"><div style="width: 150px;">AHJ Inspection Status</div> </td>
+                                <td ng-hide="$state.includes('design') || (projectStatus.currentSubTab === 'permitEquipment' || projectStatus.currentSubTab === 'interconnection') || projectStatus.userSubRole ==='IntegratedDealer'"><div style="width: 150px;">AHJ Inspection Date</div> </td>
+                                <td ng-hide="$state.includes('design') || (projectStatus.currentSubTab === 'permitEquipment' || projectStatus.currentSubTab === 'interconnection')"><div style="width: 200px;">MP2 Status</div></td>
+                                <!--td ng-hide="$state.includes('design') || (projectStatus.currentSubTab === 'permitEquipment' || projectStatus.currentSubTab === 'interconnection')"><div style="width: 100px;">MP2 Amount</div></td-->
+                                <td ng-hide="$state.includes('design') || (projectStatus.currentSubTab === 'permitEquipment' || projectStatus.currentSubTab === 'interconnection')"><div style="width: 120px;">MP2 Approval Date</div> </td>
+                                <td ng-hide="$state.includes('design') || (projectStatus.currentSubTab === 'permitEquipment' || projectStatus.currentSubTab === 'installation')"><div style="width: 210px;">SunE Approval To Apply For PTO</div> </td>
+                                <td ng-hide="$state.includes('design') || (projectStatus.currentSubTab === 'permitEquipment' || projectStatus.currentSubTab === 'installation') || projectStatus.userSubRole ==='IntegratedDealer'"><div style="width: 150px;">Utility Interconnection</div> </td>
+                                <td ng-hide="$state.includes('design') || (projectStatus.currentSubTab === 'permitEquipment' || projectStatus.currentSubTab === 'installation')"><div style="width: 200px;">Interconnection Sign Off Date</div> </td>
+                                <td ng-hide="$state.includes('design') || (projectStatus.currentSubTab === 'permitEquipment' || projectStatus.currentSubTab === 'installation')"><div style="width: 150px;">MP3 Doc Status Date</div> </td>
+                                <td ng-hide="$state.includes('design') || (projectStatus.currentSubTab === 'permitEquipment' || projectStatus.currentSubTab === 'installation')"><div style="width: 100px;">PTO Status</div></td>
+                                <td ng-hide="$state.includes('design') || (projectStatus.currentSubTab === 'permitEquipment' || projectStatus.currentSubTab === 'installation')"><div style="width: 100px;">PTO Date</div></td>
+                                <td ng-hide="$state.includes('design') || (projectStatus.currentSubTab === 'permitEquipment' || projectStatus.currentSubTab === 'installation')"><div style="width: 200px;">MP3 Status</div> </td>
+                                <!--td ng-hide="$state.includes('design') || (projectStatus.currentSubTab === 'permitEquipment' || projectStatus.currentSubTab === 'installation')"><div style="width: 100px;">MP3 Amount</div></td-->
+                                <td ng-hide="$state.includes('design') || (projectStatus.currentSubTab === 'permitEquipment' || projectStatus.currentSubTab === 'installation')"><div style="width: 150px;">MP3 Approval Date</div> </td>
+                                
+                                <!--td ><div style="width: 150px;">Contract Signed Date</div></td>                               
+                                <td ><div style="width: 200px;">PDA Approved Date</div></td>
+                                <td ><div style="width: 200px;">Promised Install Date</div></td>
+                                <td ><div style="width: 200px;">Substantial Completion Status</div></td>
+                                <td ><div style="width: 200px;">Substantial Completion Date</div></td>
+                                <td ><div style="width: 260px;">Substantial Completion Payment Status</div></td>                           
+                                <td ><div style="width: 200px;">PTO Payment Status</div></td-->
+                                
+                              </tr>
+                        </tbody>
+                    </table>
+            </div>
+            <div class="row-wrapper linked">
+                <table class="rows table table-hover table-striped ">
+                    <tbody>
+                        <tr  ng-repeat="projectData in projectStatusDataList| filter:dashboardController.searchText" ng-hide="($state.includes('design') && projectData.ContractSignedDate === null)">
+                            <!--td class="addressValue"><div style="width: 213px;">{{projectData['Address']}}</div></td-->
+                            <td style="width: 110px;"><div style="width: 110px;">{{projectData['City']}}</div></td>
+                            <td style="width: 90px;"><div style="width: 90px;">{{projectData['State']}}</div></td>
+                            <!--td><div style="width: 100px;">{{projectData['Zip']}}</div></td-->
+                            <td style="width: 100px;"><div style="width: 100px;">{{projectData.PurchaseType}}</div></td>
+                            <!--td style="width: 150px;" ng-hide="$state.includes('design') && projectStatus.userSubRole ==='IntegratedDealer'" ><div style="width: 150px;">{{projectData.SaiTerritory}}</div></td-->
+                            <td style="width: 150px;" ng-hide="projectStatus.userSubRole ==='IntegratedDealer'"><div style="width: 150px;">{{projectData.ScionInstaller}}</div></td>
+                            <td style="width: 150px;" ng-hide="$state.includes('design') || projectStatus.userSubRole ==='IntegratedDealer'"><div style="width: 150px;">{{projectData.AssignedCPM}}</div></td>
+                            <td style="width:120px" ng-hide="projectStatus.currentSubTab !== 'all' || projectStatus.userSubRole ==='IntegratedDealer'">
+                                <div class="indicator-container" style="width:120px">
+                                        <!--span class="indicator" ng-class="{
+                                            '.project-status-table-processIndicator': projectData.SiteVisitStatus === 'Scheduled' || projectData.SiteVisitStatus === 'Re-scheduled' , 
+                                            'project-status-table-acceptedIndicator': projectData.SiteVisitStatus === 'Completed', 
+                                            'project-status-table-failedIndicator': projectData.SiteVisitStatus === 'Not Scheduled'}">
+                                        </span-->  
+                                        <span class></span>
+                                        <span class="indicator-text">
+                                            {{projectData['SiteVisitStatus']}}
+                                        </span>                                        
+                                </div>
+                            </td>
+                            <td style="width:120px;" ng-hide="projectStatus.currentSubTab !== 'all' || projectStatus.userSubRole ==='IntegratedDealer'">
+                                <div class="indicator-container" ng-if="projectData.SiteVisitDate" style="width:120px;">
+                                        <!--span class="indicator" ng-if="projectData.SiteVisitDateStatus" ng-class="{
+                                        'project-status-table-acceptedIndicator': projectData.SiteVisitDateStatus === 'green',
+                                        'project-status-table-processIndicator': projectData.SiteVisitDateStatus === 'orange',
+                                        'project-status-table-failedIndicator': projectData.SiteVisitDateStatus === 'red'}">
+                                        </span-->  
+                                        <span class></span>
+                                        <span class="indicator-text">
+                                            {{projectData['SiteVisitDate']}}
+                                        </span>             
+                                </div>
+                            </td>
+                            <td style="width: 100px" ng-hide="projectStatus.currentSubTab !== 'all'">
+                                <div class="indicator-container" ng-if="projectData.PdaphaseStatus" style="width: 100px">
+                                        <!--span class="indicator" ng-class="{
+                                                'project-status-table-acceptedIndicator': projectData.PdaphaseStatusIndicator === 'green',
+                                                'project-status-table-processIndicator': projectData.PdaphaseStatusIndicator === 'orange',
+                                                'project-status-table-failedIndicator': projectData.PdaphaseStatusIndicator === 'red'}">
+                                        </span-->  
+                                        <span class></span>
+                                        <span class="indicator-text"
+                                              ng-if="projectData.PdaphaseStatus === 'Signed by SunEdison'">
+                                            Approved
+                                        </span>
+                                        <span class="indicator-text"
+                                              ng-if=" projectData.PdaphaseStatus !== 'Signed by SunEdison'">
+                                            Pending
+                                        </span>                                           
+                                </div>
+                            </td>
+                            <td style="width: 150px;" ng-hide="projectStatus.currentSubTab !== 'all'"><div style="width: 150px;">{{projectData.LastUpdatedOn}}</div></td>
+                            <td style="width: 100px;" ng-hide="projectStatus.currentSubTab !== 'all'"><div style="width: 100px;">{{projectData.Mp1Status}}</div></td>
+                            <!--td style="width: 100px;" ng-hide="projectStatus.currentSubTab !== 'all'"><div style="width: 100px;">{{projectData.Mp1PaymentAmount}}</div></td-->
+                            <td style="width: 120px;" ng-hide="projectStatus.currentSubTab !== 'all'"><div style="width: 120px;">{{projectData.Mp1ApprovalDate}}</div></td>
+                            <td style="width: 100px;" ng-hide="$state.includes('design') || (projectStatus.currentSubTab === 'installation' || projectStatus.currentSubTab === 'interconnection') || projectStatus.userSubRole ==='IntegratedDealer'"><div style="width: 100px;">{{projectData.SePermitStatus}}</div></td>
+                            <td style="width: 100px;" ng-hide="$state.includes('design') || (projectStatus.currentSubTab === 'installation' || projectStatus.currentSubTab === 'interconnection') || projectStatus.userSubRole ==='IntegratedDealer'"><div style="width: 100px;">{{projectData.SePermitSubmitDate}}</div></td>
+                            <td style="width: 120px;" ng-hide="$state.includes('design') || (projectStatus.currentSubTab === 'installation' || projectStatus.currentSubTab === 'interconnection')"><div style="width: 120px;">{{projectData.EquipmentStatus}}</div></td>
+                            <td style="width: 150px;" ng-hide="$state.includes('design') || (projectStatus.currentSubTab === 'installation' || projectStatus.currentSubTab === 'interconnection')"><div style="width: 150px;">{{projectData.EquipmentDate}}</div></td>
+                            <td style="width: 120px;" ng-hide="$state.includes('design') || (projectStatus.currentSubTab === 'interconnection' || projectStatus.currentSubTab === 'permitEquipment') || projectStatus.userSubRole ==='IntegratedDealer'"><div style="width: 120px;">{{projectData.SeInstallStatus}}</div></td>
+                            <td style="width: 150px;" ng-hide="$state.includes('design') || (projectStatus.currentSubTab === 'interconnection' || projectStatus.currentSubTab === 'permitEquipment') || projectStatus.userSubRole ==='IntegratedDealer'"><div style="width: 150px;">{{projectData.InstallationCommissionDate}}</div></td>
+                            <td style="width: 160px;" ng-hide="$state.includes('design') || (projectStatus.currentSubTab === 'interconnection' || projectStatus.currentSubTab === 'permitEquipment') || projectStatus.userSubRole ==='IntegratedDealer'"><div style="width: 160px;">{{projectData.ServicePanelUpgrade}}</div></td>
+                            <td style="width: 100px;" ng-hide="$state.includes('design') || (projectStatus.currentSubTab === 'interconnection' || projectStatus.currentSubTab === 'permitEquipment')"><div style="width: 100px;">{{projectData.CommissionDate}}</div></td>
+                            <td style="width: 150px;" ng-hide="$state.includes('design') || (projectStatus.currentSubTab === 'interconnection' || projectStatus.currentSubTab === 'permitEquipment') || projectStatus.userSubRole ==='IntegratedDealer'"><div style="width: 150px;">{{projectData.AhjinspectStatus}}</div></td>
+                            <td style="width: 150px;" ng-hide="$state.includes('design') || (projectStatus.currentSubTab === 'interconnection' || projectStatus.currentSubTab === 'permitEquipment') || projectStatus.userSubRole ==='IntegratedDealer'"><div style="width: 150px;">{{projectData.AhjinspectApprovalDate}}</div></td>
+                            <td style="width: 100px;" ng-hide="$state.includes('design') || (projectStatus.currentSubTab === 'interconnection' || projectStatus.currentSubTab === 'permitEquipment')"><div style="width: 200px;">{{projectData.Mp2Status}}</div></td>
+                            <!--td style="width: 100px;" ng-hide="$state.includes('design') || (projectStatus.currentSubTab === 'interconnection' || projectStatus.currentSubTab === 'permitEquipment')"><div style="width: 100px;">{{projectData.Mp2PaymentAmount}}</div></td-->
+                            <td style="width: 120px;" ng-hide="$state.includes('design') || (projectStatus.currentSubTab === 'interconnection' || projectStatus.currentSubTab === 'permitEquipment')"><div style="width: 120px;">{{projectData.Mp2ApprovalDate}}</div></td>
+                            <td style="width: 210px;" ng-hide="$state.includes('design') || (projectStatus.currentSubTab === 'permitEquipment' || projectStatus.currentSubTab === 'installation')">
+                                <div style="width: 210px;">
+                                    {{projectData.SunEApprovalToApplyForPTO}}
+                                </div>
+                            </td>
+                            <td style="width: 150px;" ng-hide="$state.includes('design') || (projectStatus.currentSubTab === 'permitEquipment' || projectStatus.currentSubTab === 'installation') || projectStatus.userSubRole ==='IntegratedDealer'"><div style="width: 150px;">{{projectData.UtilityInterconnection}}</div></td>
+                            <td style="width: 200px;" ng-hide="$state.includes('design') || (projectStatus.currentSubTab === 'permitEquipment' || projectStatus.currentSubTab === 'installation')"><div style="width: 200px;">{{projectData.InterconnectionSignOffDate}}</div></td>
+                            <td style="width: 150px;" ng-hide="$state.includes('design') || (projectStatus.currentSubTab === 'permitEquipment' || projectStatus.currentSubTab === 'installation')"><div style="width: 150px;">{{projectData.Mp3DocStatusDate}}</div></td>
+                            <td style="width: 100px;" ng-hide="$state.includes('design') || (projectStatus.currentSubTab === 'permitEquipment' || projectStatus.currentSubTab === 'installation')">
+                                <div class="indicator-container" ng-if="projectData.Ptophase" style="width:100px">
+                                    <!--span class="indicator" ng-class="{
+                                    'project-status - table - processIndicator': projectData.Ptophase === 'Pending Approval', 
+                                    'project-status-table-acceptedIndicator': projectData.Ptophase === 'Reviewed & Approved'}">
+                                    </span-->  
+                                    <span class></span>
+                                    <span class="indicator-text"
+                                          ng-if="projectData.Ptophase === 'Pending Approval'">
+                                        Pending
+                                    </span>
+                                    <span class="indicator-text"
+                                          ng-if=" projectData.Ptophase === 'Reviewed & Approved'">
+                                        Approved
+                                    </span>                                        
+                                </div>
+                            </td>
+                            <td style="width: 100px;" ng-hide="$state.includes('design') || (projectStatus.currentSubTab === 'permitEquipment' || projectStatus.currentSubTab === 'installation')"><div style="width: 100px;">{{projectData['Ptodate']}}</div></td>
+                            <td style="width: 200px;" ng-hide="$state.includes('design') || (projectStatus.currentSubTab === 'permitEquipment' || projectStatus.currentSubTab === 'installation')"><div style="width: 200px;">{{projectData.Mp3Status}}</div></td>
+                            <!--td style="width: 100px;" ng-hide="$state.includes('design') || (projectStatus.currentSubTab === 'permitEquipment' || projectStatus.currentSubTab === 'installation')"><div style="width: 100px;">{{projectData.Mp3PaymentAmount}}</div></td-->
+                            <td style="width: 150px;" ng-hide="$state.includes('design') || (projectStatus.currentSubTab === 'permitEquipment' || projectStatus.currentSubTab === 'installation')"><div style="width: 150px;">{{projectData.Mp3ApprovalDate}}</div></td>
+                            
+                            
+                            
+                            <!--td><div style="width: 150px;">{{projectData['ContractSignedDate']}}</div></td>                           
+                            <td><div style="width: 200px;">{{projectData['PdaapprovalDate']}}</div></td>
+                            <td><div style="width: 200px;">{{projectData['PromisedInstallDate']}}</div></td>
+                            <td>
+                                <div class="indicator-container" ng-if="projectData.SubstantialCompletionPaymentStatus" style="width: 200px">
+                                    <span class="indicator" ng-if="projectData.SubstantialCompletionPaymentStatus" ng-class="{
+                                        'project-status-table-acceptedIndicator': projectData.SubstantialCompletionPaymentStatus === 'Paid',
+                                        'project-status-table-processIndicator': projectData.SubstantialCompletionPaymentStatus === 'Pending'}">
+                                    </span>  
+                                    <span class></span>
+                                    <span class="indicator-text"
+                                          ng-if="projectData.SubstantialCompletionPaymentStatus === 'Paid'">
+                                        Approved
+                                    </span>
+                                    <span class="indicator-text"
+                                          ng-if=" projectData.SubstantialCompletionPaymentStatus === 'Pending'">
+                                        Pending
+                                    </span>             
+                                </div>
+                            </td>
+                            <td>
+                                <div class="indicator-container" ng-if="projectData.SubstantialCompletionDate" style="width:200px">
+                                    <span class="indicator" ng-if="projectData.SubstantialCompletionDate" ng-class="{
+                                        'project-status-table-acceptedIndicator': projectData.SubstantialCompletionDateStatus === 'green',
+                                        'project-status-table-processIndicator': projectData.SubstantialCompletionDateStatus === 'orange',
+                                        'project-status-table-failedIndicator': projectData.SubstantialCompletionDateStatus === 'red'}">
+                                    </span>  
+                                    <span class></span>
+                                    <span class="indicator-text">
+                                        {{projectData['SubstantialCompletionDate']}}
+                                    </span>             
+                                </div>
+                            </td>
+                            <td>
+                                <div class="indicator-container" ng-if="projectData.SubstantialCompletionPaymentStatus" style="width:260px">
+                                    <span class="indicator" ng-if="projectData.SubstantialCompletionPaymentStatus" ng-class="{
+                                        'project-status-table-acceptedIndicator': projectData.SubstantialCompletionPaymentStatus === 'Paid',
+                                        'project-status-table-processIndicator': projectData.SubstantialCompletionPaymentStatus === 'Pending'}">
+                                    </span>  
+                                    <span class></span>
+                                    <span class="indicator-text"
+                                          ng-if="projectData.SubstantialCompletionPaymentStatus === 'Paid'">
+                                        Paid
+                                    </span>
+                                    <span class="indicator-text"
+                                          ng-if=" projectData.SubstantialCompletionPaymentStatus === 'Pending'">
+                                        Pending
+                                    </span>             
+                                </div>
+                            </td>                            
+                            <td>
+                                <div class="indicator-container" ng-if="projectData.PtopaymentStatus" style="width:200px">
+                                    <span class="indicator" ng-class="{
+                                    'project-status - table - processIndicator': projectData.PtopaymentStatus !== 'Paid', 
+                                    'project-status-table-acceptedIndicator': projectData.PtopaymentStatus === 'Paid'}">
+                                    </span>  
+                                    <span class></span>
+                                    <span class="indicator-text"
+                                          ng-if="projectData.PtopaymentStatus !== 'Paid'">
+                                        Pending
+                                    </span>
+                                    <span class="indicator-text"
+                                          ng-if=" projectData.PtopaymentStatus === 'Paid'">
+                                        Paid
+                                    </span>                                        
+                                </div>
+                            </td-->                           
+                        </tr>                                               
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+    </div>
+    <div id="grid-main" class="table table-hover table-striped table-bordered">
+        <div id="grid-canvas-main" >
+            <div id="header-wrapper-main" class="linked">
+                <table id="header-main" class="table table-hover table-striped table-bordered" >
+                  <tbody> 
+                    <tr >
+                        <td><div style="width: 110px;"><a  class="{{projectStatus.classForFN}}" href=""  ng-click="projectStatus.order('FirstName')">First&nbsp;Name</a></div></td>
+                        <td><div style="width: 110px;"><a class="{{projectStatus.classForLN}}" href=""  ng-click="projectStatus.order('LastName')">Last&nbsp;Name</a></div></td>
+                        <td><div style="width: 200px;">Contract&nbsp;Signed&nbsp;Date</div></td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+
+
+            <div id="row-wrapper-main" class="linked">
+                <table id="row-main" class="table table-hover table-striped ">
+                  <tbody>
+                    <tr ng-repeat="projectData in projectStatusDataList| filter:dashboardController.searchText" ng-hide="($state.includes('design') && projectData.ContractSignedDate === null)">
+                     <!--td><div style="width: 50%;" ng-if="projectData['FirstName'].length > 10">{{projectData['FirstName'].substring(0, 10) + ' ...'}} </div>
+                        <div style="width: 50%;" ng-if="projectData['FirstName'].length <= 10">{{projectData['FirstName']}}</div>
+                     </td>
+                     <td><div style="width: 50%;" ng-if="projectData['LastName'].length > 10">{{projectData['LastName'].substring(0, 10) + ' ...'}} </div>
+                        <div style="width: 50%;" ng-if="projectData['LastName'].length <= 10">{{projectData['LastName']}}</div>
+                     </td-->
+                     <td><div style="width: 110px;">{{projectData['FirstNameForUI']}}</div></td>
+                     <td><div style="width: 110px;">{{projectData['LastNameForUI']}}</div></td>
+                     <td><div style="width: 200px;">{{projectData['ContractSignedDate']}}</div></td>
+                    </tr>                        
+                  </tbody>
+                </table>
+            </div>            
+        </div>
+    </div>
+</div>

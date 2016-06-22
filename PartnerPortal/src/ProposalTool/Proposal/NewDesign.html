@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <title>Design Details</title>
+    <link rel="stylesheet" href="css/main.less">
+    <link rel="stylesheet" href="css/main.css">     
+    <link rel="stylesheet" href="css/bootstrap.min.css">   
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script type="text/javascript" src="scripts/jquery-2.1.3.js"></script>
+    <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=geometry&v=3.exp"></script>
+    <script type="text/javascript" src="scripts/worksData.js"></script>
+    <script type="text/javascript" src="scripts/handler.js"></script>
+    <script type="text/javascript" src="scripts/kinetic.js"></script>
+    <script type="text/javascript" src="scripts/hdsolar2.js"></script>
+    <script type="text/javascript" src="scripts/d3.min.js"></script>
+    <script type="text/javascript" src="scripts/verify.js"></script>
+</head>
+    <body>
+    <div id="container">
+        <div class="rel">
+
+            <div id="content_ziba">
+                <div class="rel">
+                        <div class="rel clearfix">
+                            <div id="sidebar">
+                                <div class="proposalpage">                                    
+                                    <div class="section-back">                                                                           
+                                        <div class="btn_ziba orange cancel" onclick="closepopup()">                                            
+                                            Cancel                                             
+                                        </div>                                                                           
+                                    </div>
+                                    <!--div class="" style="text-align: center;">                                                                           
+                                        <div class="btn_ziba orange" id="customername" style="width: 88%;height: 0%; box-shadow: 1px 4px 5px #888888;margin-top: 6%; font-weight: 500; font-size: 18px;" onclick="customerpage()">                                            
+                                                                                         
+                                        </div>                                                                           
+                                    </div-->
+                                    <div class="form-group">
+                                    <div class="element">
+                                            <div class="label_ziba">
+                                                <label>Proposal name</label>
+                                            </div>
+                                            <div class="input">
+                                                <input type="text"  id="proposalname" class="text">
+                                            </div>
+                                        </div>
+                                        <!--div class='title'>
+                                            <span id="customername">-</span>
+                                        </div-->
+                                        <div class="element">
+                                                <div class="label_ziba" >
+                                                    <label>Address</label>
+                                                </div>
+                                                <div class="input">
+                                                    <input type="text" id = "addressLine1" class="text" readonly style="background-color:white">
+                                                    <input type="text" id = "addressLine2" class="text" readonly style="background-color:white">
+                                                </div>
+                                        </div>
+                                    </div>
+                                    <div id='billanalysis'>
+                                        <h4>Bill Analysis</h4>
+                                        <table>
+                                            <tr>
+                                                <td class="element">Annual Usage (kWh):</td>
+                                                <td class="element"><span id='annualusage'></span><span class="spinblock" id = "annualspinner" ></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="element">Average $/kwh ($):</td>
+                                                <td class="element"><span id='avgkwh'></span><span class="spinblock" id="averagespinner"></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="element">Pre solar Utility ($):</td>
+                                                <td class="element"><span id='presolarutility'></span><span class="spinblock" id="presolarspinner"></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="element">Post solar Utility ($):</td>
+                                                <td class="element"><span id='postsolarutility'></span><span class="spinblock" id="postsolarspinner"></span></td>
+                                            </tr>
+											<tr>
+                                                <td class="element">Utility Bill Savings ($):</td>
+                                                <td class="element"><span id='billsavings'></span><span class="spinblock" id="savingsspinner"></span></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div id='designanalysis'>
+                                        <h4>Design Analysis</h4>                                        
+                                        <table>
+                                            <tr>
+                                                <td class="element">System Size (kW):</td>
+                                                <td class="element"><span id='systemsize'></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="element">Year 1 Production (kWh):</td>
+                                                <td class="element"><span id='year1prod'></span></span><span class="spinblock" id="productionspinner"></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="element">Energy Offset (%):</td>
+                                                <td class="element"><span id='offset'></span></span><span class="spinblock" id="offsetspinner"></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="element">System Yield :</td>
+                                                <td class="element"><span id='yield'></span></span><span class="spinblock" id="yieldspinner"></span></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="btn_ziba orange next full" onclick="analysisDataCalculation()" style="margin-right: 10%; width: 25%;">Calculate</div>   
+                            </div>
+
+                            <div id="main">
+                                <div class="rel clearfix middlecontent">
+                                    <div id="utility">
+                                        <div class="proposaltitle">
+                                            Step 1. Estimate Utility Costs
+                                        </div>
+                                        <div id="utilitydetails">
+                                            <div class="left">
+                                                <div id = "" class="a">                                          
+                                                    Utility Provider:                                            
+                                                    <select id="rate_provider" class ="dropdownelem" onchange="utilitychange(); resetBillAndUsageValues();">                                                        
+                                                    </select>
+                                                </div>
+                                                <div id = "" class="a">                                          
+                                                    Current Tariff                                            
+                                                    <select id="currenttariff" class ="dropdownelem" onchange="onTariffChange(); resetBillAndUsageValues();">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="right">
+                                                <div id = "" class="a">                                          
+                                                    Utility tax rate                                           
+                                                    <input type="text" id="taxrate" class="numberval" style="margin:0 0 0 10%   ; width: 59%;" value='0' onchange="resetBillAndUsageValues();" onfocusout="checkinput()">
+                                                </div>                                                
+                                                <div id = "" class="a">                                          
+                                                    After-Solar Tariff                                           
+                                                    <select id="aftertariff" class ="dropdownelem" onchange="onAfterTariffChange(); resetBillAndUsageValues();">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>                                        
+                                            <div id="bills">
+                                                <div id ="radioheading"> 
+                                                <h4 style ="margin-left: 0;">Bills & Usage</h4>
+                                                <div class='billradio'>
+                                                    <input type="radio" name="billtype"  onclick="changeBillType()" value="annual" style="display: block; margin-right: 5px;" checked="checked">Annual&nbsp;
+                                                    <input type="radio" name="billtype"  onclick="changeBillType()" value="monthlyAuto" style="display: block; margin-left: 25px; margin-right: 5px;">Monthly&nbsp;Auto
+                                                    <input type="radio" name="billtype"  onclick="changeBillType()" value="monthlyManual" style="display: block; margin-left: 25px; margin-right: 5px;">Monthly&nbsp;Manual    
+                                                </div>
+                                            </div>
+                                                <div style="display: -webkit-box; display: flex; width: 100%;">
+                                                    <table style="width: 12%;">
+                                                        <tr>
+                                                            <td></td>
+                                                            <td style="padding-left: 11%;">Annual</td>
+                                                        </tr>
+                                                        <tr><td style="line-height: 5px;"><br></td></tr>
+                                                        <tr>
+                                                            <td>$</td>
+                                                            <td><input type="text" class="usagetable numberval" id ="annualbill" style="width: 63%;" onchange="autoCalcFromMonthlyBill(10)" onfocusout="checkinput()" placeholder="0"></td>
+                                                        </tr>
+                                                        <tr><td style="line-height: 10px;"><br></td></tr>
+                                                        <tr>
+                                                            <td>kWh</td>
+                                                            <td><input type="text" class="usagetable numberval" id="kwhusage" style="width: 63%;"  onchange="updateOnYearly()" onfocusout="checkinput()" placeholder="0"></td>
+                                                        </tr>
+                                                    </table>
+                                                
+                                                <div class="verticalbar">&nbsp;</div>
+                                                <table id="firsttable">
+                                                    <tr>
+                                                        <td class="usageheading">Jan</td>
+                                                        <td class="usageheading">Feb</td>
+                                                        <td class="usageheading">Mar</td>
+                                                        <td class="usageheading">Apr</td>
+                                                        <td class="usageheading">May</td>
+                                                        <td class="usageheading">Jun</td>
+                                                        <td class="usageheading">Jul</td>
+                                                        <td class="usageheading">Aug</td>
+                                                        <td class="usageheading">Sep</td>
+                                                        <td class="usageheading">Oct</td>
+                                                        <td class="usageheading">Nov</td>
+                                                        <td class="usageheading">Dec</td>
+                                                    </tr>
+                                                    <tr><td style="line-height: 5px;"><br></td></tr>
+                                                    <tr>
+                                                        <td><input type="text" class="billtable numberval" id ="billmonth_1" name='monthlyBill'  onchange="autoCalcFromMonthlyBill(1)" onfocusout="checkinput()" placeholder="0"></td> 
+                                                        <td><input type="text" class="billtable numberval" id ="billmonth_2" name='monthlyBill'  onchange="autoCalcFromMonthlyBill(2)" onfocusout="checkinput()" placeholder="0"></td> 
+                                                        <td><input type="text" class="billtable numberval" id ="billmonth_3" name='monthlyBill'  onchange="autoCalcFromMonthlyBill(3)" onfocusout="checkinput()" placeholder="0"></td> 
+                                                        <td><input type="text" class="billtable numberval" id ="billmonth_4" name='monthlyBill'  onchange="autoCalcFromMonthlyBill(4)" onfocusout="checkinput()" placeholder="0"></td> 
+                                                        <td><input type="text" class="billtable numberval" id ="billmonth_5" name='monthlyBill'  onchange="autoCalcFromMonthlyBill(5)" onfocusout="checkinput()" placeholder="0"></td> 
+                                                        <td><input type="text" class="billtable numberval" id ="billmonth_6" name='monthlyBill'  onchange="autoCalcFromMonthlyBill(6)" onfocusout="checkinput()" placeholder="0"></td> 
+                                                        <td><input type="text" class="billtable numberval" id ="billmonth_7" name='monthlyBill'  onchange="autoCalcFromMonthlyBill(7)" onfocusout="checkinput()" placeholder="0"></td> 
+                                                        <td><input type="text" class="billtable numberval" id ="billmonth_8" name='monthlyBill'  onchange="autoCalcFromMonthlyBill(8)" onfocusout="checkinput()" placeholder="0"></td> 
+                                                        <td><input type="text" class="billtable numberval" id ="billmonth_9" name='monthlyBill'  onchange="autoCalcFromMonthlyBill(9)" onfocusout="checkinput()" placeholder="0"></td> 
+                                                        <td><input type="text" class="billtable numberval" id ="billmonth_10" name='monthlyBill' onchange="autoCalcFromMonthlyBill(10)" onfocusout="checkinput()" placeholder="0"></td> 
+                                                        <td><input type="text" class="billtable numberval" id ="billmonth_11" name='monthlyBill' onchange="autoCalcFromMonthlyBill(11)" onfocusout="checkinput()" placeholder="0"></td> 
+                                                        <td><input type="text" class="billtable numberval" id ="billmonth_12" name='monthlyBill' onchange="autoCalcFromMonthlyBill(12)" onfocusout="checkinput()" placeholder="0"></td>                                                         
+                                                    </tr>
+                                                    <tr><td style="line-height: 10px;"><br></td></tr>
+                                                    <tr>
+                                                        <td><input type="text" class="usagetable numberval" id ="usagemonth_1" name='monthlyUsage' onchange="autoCalcFromMonthlyUsage(1)" onfocusout="checkinput()" placeholder="0"></td>
+                                                        <td><input type="text" class="usagetable numberval" id ="usagemonth_2" name='monthlyUsage' onchange="autoCalcFromMonthlyUsage(2)" onfocusout="checkinput()" placeholder="0"></td>
+                                                        <td><input type="text" class="usagetable numberval" id ="usagemonth_3" name='monthlyUsage' onchange="autoCalcFromMonthlyUsage(3)" onfocusout="checkinput()" placeholder="0"></td>
+                                                        <td><input type="text" class="usagetable numberval" id ="usagemonth_4" name='monthlyUsage' onchange="autoCalcFromMonthlyUsage(4)" onfocusout="checkinput()" placeholder="0"></td>
+                                                        <td><input type="text" class="usagetable numberval" id ="usagemonth_5" name='monthlyUsage' onchange="autoCalcFromMonthlyUsage(5)" onfocusout="checkinput()" placeholder="0"></td>
+                                                        <td><input type="text" class="usagetable numberval" id ="usagemonth_6" name='monthlyUsage' onchange="autoCalcFromMonthlyUsage(6)" onfocusout="checkinput()" placeholder="0"></td>
+                                                        <td><input type="text" class="usagetable numberval" id ="usagemonth_7" name='monthlyUsage' onchange="autoCalcFromMonthlyUsage(7)" onfocusout="checkinput()" placeholder="0"></td>
+                                                        <td><input type="text" class="usagetable numberval" id ="usagemonth_8" name='monthlyUsage' onchange="autoCalcFromMonthlyUsage(8)" onfocusout="checkinput()" placeholder="0"></td>
+                                                        <td><input type="text" class="usagetable numberval" id ="usagemonth_9" name='monthlyUsage' onchange="autoCalcFromMonthlyUsage(9)" onfocusout="checkinput()" placeholder="0"></td>
+                                                        <td><input type="text" class="usagetable numberval" id ="usagemonth_10" name='monthlyUsage' onchange="autoCalcFromMonthlyUsage(10)" onfocusout="checkinput()" placeholder="0"></td>
+                                                        <td><input type="text" class="usagetable numberval" id ="usagemonth_11" name='monthlyUsage' onchange="autoCalcFromMonthlyUsage(11)" onfocusout="checkinput()" placeholder="0"></td>
+                                                        <td><input type="text" class="usagetable numberval" id ="usagemonth_12" name='monthlyUsage' onchange="autoCalcFromMonthlyUsage(12)" onfocusout="checkinput()" placeholder="0"></td>                                                        
+                                                    </tr>
+                                                </table>
+                                                </div>
+                                            </div>
+                                    </div>
+                                    <div id="design">
+                                        <div class="proposaltitle">
+                                            Step 2. Design System
+                                        </div>
+                                        <button value="Quick Design" data-text-swap="Layout" id="designtolayout" class="btn_ziba orange full">Quick Design</button>
+                                        <div id="designrow">
+                                            <div id = "panelmodellabel">                                          
+                                                Solar&nbsp;Panel:                                            
+                                                <select id="panelmodelinput" class ="dropdownelem" onchange="resetSolarCalculations();">
+                                                    
+                                                </select>
+                                            </div>
+                                            <div id = "inverter">                                          
+                                                Inverter                                            
+                                                <select id="inverterinput" class ="dropdownelem" onchange="inverterchange(); resetSolarCalculations();">                                                    
+                                                </select>
+                                            </div>
+                                            <div id = "inverterCount" style="display: none; width: 30%">                                          
+                                                Inverter&nbsp;Count:                                            
+                                                <input type="text" id="InvCount" class ="numberval" onfocusout="QDcheckinput()" onchange="resetSolarCalculations();">                                                    
+                                                </input>
+                                            </div>
+                                        </div>
+                                        <hr id="horizontalruler">
+                                        <div id="layout">
+                                            <div style="padding:4px;height:100%;">
+                                                <div id="map-panel" class="map-panel">
+                                                    Map will be here
+                                                </div>
+                                            </div>
+                                            <br>
+                                                <div id="array">
+                                                    <div id="arraytitle" style="display: none;">
+                                                        <div id="" style="text-align: center; margin-left: 18%;">
+                                                            Solar Access: 100% = No Shade , 0% = Fully Shaded
+                                                        </div>                                        
+                                                        <hr id="horizontalbar">
+                                                            <div id="whole" class="table-responsive" 
+                                                                 style="overflow: hidden;">
+                                                                <table  class="table" style="width: 100%; margin-left: 0%; text-align: center;">
+                                                                    <tr style="border: 2px solid white;">
+                                                                        <!-- <td class="arrayheading"></td> -->
+                                                                        <td class="arrayheading">Azimuth</td>
+                                                                        <td class="arrayheading">Tilt</td>
+                                                                        <td class="arrayheading">Annual</td>
+                                                                        <td class="arrayheading">Jan</td>
+                                                                        <td class="arrayheading">Feb</td>
+                                                                        <td class="arrayheading">Mar</td>
+                                                                        <td class="arrayheading">Apr</td>
+                                                                        <td class="arrayheading">May</td>
+                                                                        <td class="arrayheading">Jun</td>
+                                                                        <td class="arrayheading">Jul</td>
+                                                                        <td class="arrayheading">Aug</td>
+                                                                        <td class="arrayheading">Sep</td>
+                                                                        <td class="arrayheading">Oct</td>
+                                                                        <td class="arrayheading">Nov</td>
+                                                                        <td class="arrayheading">Dec</td>
+                                                                    </tr>
+                                                                    <tr><td style="line-height: 8px;"><br></td></tr>
+                                                                </table>
+                                                            </div>                                                
+                                                    </div>
+                                                    <div class="array_cls" style="margin: -4% 0 0% 3%;">
+                                                        <div id="arraydetails" class="array_single" style="display:none;">
+                                                            <td><span class="arrayNumber"></span></td>
+                                                            <table class="arraytable">  
+                                                                <tr>                                                            
+                                                                    <td style="width: 9%;"><span id="azimuth">180</span></td>
+                                                                    <td><input type="text" class=" numberval" id ="tilt" onfocusout="checkinput()" onchange="updateSlope(); resetSolarCalculations();"></td>
+                                                                    <td><input type="text" class=" numberval" id ="yearlyshade" onchange="calculatemonthly(); resetSolarCalculations()" onfocusout="checkinput()"></td>                                                    
+                                                                    <td><input type="text" class=" numberval" id="janshade" onfocusout="checkinput()" onchange="onMonthlyShadingChange(); resetSolarCalculations()"></td>
+                                                                    <td><input type="text" class=" numberval" id="febshade" onfocusout="checkinput()" onchange="onMonthlyShadingChange(); resetSolarCalculations()"></td>
+                                                                    <td><input type="text" class=" numberval" id="marshade" onfocusout="checkinput()" onchange="onMonthlyShadingChange(); resetSolarCalculations()"></td>
+                                                                    <td><input type="text" class=" numberval" id="aprshade" onfocusout="checkinput()" onchange="onMonthlyShadingChange(); resetSolarCalculations()"></td>
+                                                                    <td><input type="text" class=" numberval" id="mayshade" onfocusout="checkinput()" onchange="onMonthlyShadingChange(); resetSolarCalculations()"></td>
+                                                                    <td><input type="text" class=" numberval" id="junshade" onfocusout="checkinput()" onchange="onMonthlyShadingChange(); resetSolarCalculations()"></td>
+                                                                    <td><input type="text" class=" numberval" id="julshade" onfocusout="checkinput()" onchange="onMonthlyShadingChange(); resetSolarCalculations()"></td>
+                                                                    <td><input type="text" class=" numberval" id="augshade" onfocusout="checkinput()" onchange="onMonthlyShadingChange(); resetSolarCalculations()"></td>
+                                                                    <td><input type="text" class=" numberval" id="sepshade" onfocusout="checkinput()" onchange="onMonthlyShadingChange(); resetSolarCalculations()"></td>
+                                                                    <td><input type="text" class=" numberval" id="octshade" onfocusout="checkinput()" onchange="onMonthlyShadingChange(); resetSolarCalculations()"></td>
+                                                                    <td><input type="text" class=" numberval" id="novshade" onfocusout="checkinput()" onchange="onMonthlyShadingChange(); resetSolarCalculations()"></td>
+                                                                    <td><input type="text" class=" numberval" id="decshade" onfocusout="checkinput()" onchange="onMonthlyShadingChange(); resetSolarCalculations()"></td>                                                        
+                                                                </tr>
+                                                            </table>                                                    
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                            <div id="quickdesign">
+                                            <div class="QD_arrays">
+                                                <div id="QD_arraydetails" class="QD_array_single" style="display:none;">
+                                                    <div>
+                                                        <span id="QD_arrayNumber" style="font-size: 18px;"></span>
+                                                        <img src="images/button_cancel.png" class="deleteArrayIcon" id="deleteArrayIcon" alt="Delete" onclick="deleteArray(this.id)">
+                                                    </div>                                                    
+                                                    <!--div class="">
+                                                       <div class="">
+                                                               <div class="col-md-3">
+                                                                   <div class="col-md-6" id = "mountTypeBlock" >                                          
+                                                                       Mount Type</div>
+                                                                       <div class="col-md-6">                                            
+                                                                       <select id="QD_mounttype" class ="arrdropdown" onchange="resetSolarCalculations();">  
+                                                                           <option value="Sloped Roof">Sloped Roof</option>
+                                                                           <option value="Grount Mount">Ground Mount</option>
+                                                                           <option value="Flat Roof">Flat Roof</option>
+                                                                       </select>
+                                                                   </div>
+                                                               </div>
+                                                               <div class="col-md-3">
+                                                                    <div class="col-md-7">
+                                                                       Panel Count</div>
+                                                                    <div class="col-md-5">
+                                                                        <input type="text" id="QD_panelcount" class= " arrval" onfocusout="QDcheckinput()" onchange="getTotalPanelCountForQD();
+                                                                               resetSolarCalculations();">
+                                                                    </div>
+                                                               </div>
+                                                               <div class="col-md-3">
+                                                                    <div class="col-md-8">
+                                                                       Panel-Spacing (Inches)</div>
+                                                                    <div class="col-md-4">
+                                                                       <input type="text" id="QD_panelspacing" class= " arrval" value="1" onfocusout="QDcheckinput()" onchange="resetSolarCalculations();">
+                                                                    </div>
+                                                               </div>
+                                                               <div class="col-md-3">
+                                                                    <div class="col-md-4" >
+                                                                       Tilt</div>
+                                                                    <div class="col-md-8">
+                                                                       <input type="text" id="QD_tilt" class= " arrval" value="20" onfocusout="QDcheckinput()" onchange="resetSolarCalculations();" >
+                                                                    </div>
+                                                               </div>
+                                                       </div>
+                                                       <div class="">
+                                                           <div class= "col-md-3">
+                                                                <div id = "Orientationblock" class="col-md-6" >                                          
+                                                                   Orientation    
+                                                                </div>
+                                                                <div class="col-md-6" >                                       
+                                                                    <select id="QD_orientation" class =" arrdropdown" onchange="resetSolarCalculations();" >  
+                                                                       <option value="Portrait">Portrait</option>
+                                                                       <option value="Landscape">Landscape</option>                            
+                                                                    </select>
+                                                                </div>
+                                                           </div>
+                                                           <div class="col-md-3">
+                                                               <div class="col-md-7">
+                                                                   Azimuth</div>
+                                                                <div class="col-md-5">
+                                                                   <input type="text" id="QD_azimuth" class= " arrval" value="180" onfocusout="QDcheckinput()" onchange="resetSolarCalculations();" >
+                                                                </div>
+                                                           </div>
+                                                           <div class="col-md-3">
+                                                               <div class="col-md-8" >
+                                                                   Row-Spacing (Inches)</div>
+                                                                <div class="col-md-4">
+                                                                   <input type="text" id="QD_rowspacing" class= " arrval" value="2" onfocusout="QDcheckinput()"  onchange="resetSolarCalculations();" >
+                                                               </div>
+                                                           </div>
+                                                           <div class="col-md-3">
+                                                               <div class="col-md-4">
+                                                                   Fire Offset (Feet)</div>
+                                                                <div class="col-md-8">
+                                                                   <input type="text" id="QD_fireoffset" class= " arrval" onfocusout="QDcheckinput()" onchange="resetSolarCalculations();" >
+                                                               </div>
+                                                           </div>
+                                                       </div>
+                                                   </div-->
+                                                    <div class="quickDesignText" >
+                                                        <div class="" style="width: 100%; display: inline-flex; display: -webkit-box;">
+                                                            <div class ="a" style="width: 52%">
+                                                                    Mount Type
+                                                                    <select id="QD_mounttype" class ="dropdownelem" onchange="resetSolarCalculations();" style=" margin-left: 10%;">  
+                                                                        <option value="Sloped Roof">Sloped Roof</option>
+                                                                        <option value="Grount Mount">Ground Mount</option>
+                                                                        <option value="Flat Roof">Flat Roof</option>
+                                                                    </select>
+                                                            </div>
+                                                            <div class="a" style="width: 48%;">
+                                                                 Orientation    
+                                                                    <select id="QD_orientation" class =" dropdownelem" onchange="resetSolarCalculations();" style="float: right;width: 67%; margin-right: 6%;">  
+                                                                        <option value="Portrait">Portrait</option>
+                                                                        <option value="Landscape">Landscape</option>                            
+                                                                    </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="" style="width: 100%; display: inline-flex; display: -webkit-box;">
+                                                            <div class="a" style="width: 33.3%;">
+                                                                    Panel Count
+                                                                    <input type="text" id="QD_panelcount" style="width: 20%; margin-left: 15%" class= "numberval" onfocusout="QDcheckinput()" onchange="getTotalPanelCountForQD(); resetSolarCalculations();">
+                                                            </div>
+                                                            <div class="a" style="width: 33.3%; text-align: center;">
+                                                                    Tilt
+                                                                    <input type="text" id="QD_tilt" class= " numberval" style="width: 20%; margin-left: 12%" value="20" onfocusout="QDcheckinput()" onchange="resetSolarCalculations();" >
+                                                            </div>
+                                                            <div class="a" style="width: 30.5%; text-align: right;">
+                                                                    Azimuth
+                                                                    <input type="text" id="QD_azimuth" class= " numberval"style="width: 20%; margin-left: 12%"  value="180" onfocusout="QDcheckinput()" onchange="resetSolarCalculations();" >
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="" class="col-md-12" style="padding: 4px 0px 10px 0px; font-size: 15px; text-align: center">
+                                                        Solar Access: 100% = No Shade , 0% = Fully Shaded
+                                                    </div> 
+                                                    <table class="QDarraytable" class="col-md-12">                                                    
+                                                        <tr style="border: 2px solid white;">
+                                                            <td class="arrayheading">Annual</td>
+                                                            <td class="arrayheading">Jan</td>
+                                                            <td class="arrayheading">Feb</td>
+                                                            <td class="arrayheading">Mar</td>
+                                                            <td class="arrayheading">Apr</td>
+                                                            <td class="arrayheading">May</td>
+                                                            <td class="arrayheading">Jun</td>
+                                                            <td class="arrayheading">Jul</td>
+                                                            <td class="arrayheading">Aug</td>
+                                                            <td class="arrayheading">Sep</td>
+                                                            <td class="arrayheading">Oct</td>
+                                                            <td class="arrayheading">Nov</td>
+                                                            <td class="arrayheading">Dec</td>
+                                                        </tr>
+                                                        <tr>                                                            
+                                                            <td><input type="text" class=" numberval" id ="QD_yearlyshade" value="97" onchange="calculateMonthlyOnQD(this.id); resetSolarCalculations()" onfocusout="QDcheckinput()"></td>                                                    
+                                                            <td><input type="text" class=" numberval" id="QD_janshade" value="97" onfocusout="QDcheckinput()" onchange="onMonthlyShadingChangeOnQD(this.id); resetSolarCalculations()"></td>
+                                                            <td><input type="text" class=" numberval" id="QD_febshade" value="97" onfocusout="QDcheckinput()" onchange="onMonthlyShadingChangeOnQD(this.id); resetSolarCalculations()"></td>
+                                                            <td><input type="text" class=" numberval" id="QD_marshade" value="97" onfocusout="QDcheckinput()" onchange="onMonthlyShadingChangeOnQD(this.id); resetSolarCalculations()"></td>
+                                                            <td><input type="text" class=" numberval" id="QD_aprshade" value="97" onfocusout="QDcheckinput()" onchange="onMonthlyShadingChangeOnQD(this.id); resetSolarCalculations()"></td>
+                                                            <td><input type="text" class=" numberval" id="QD_mayshade" value="97" onfocusout="QDcheckinput()" onchange="onMonthlyShadingChangeOnQD(this.id); resetSolarCalculations()"></td>
+                                                            <td><input type="text" class=" numberval" id="QD_junshade" value="97" onfocusout="QDcheckinput()" onchange="onMonthlyShadingChangeOnQD(this.id); resetSolarCalculations()"></td>
+                                                            <td><input type="text" class=" numberval" id="QD_julshade" value="97" onfocusout="QDcheckinput()" onchange="onMonthlyShadingChangeOnQD(this.id); resetSolarCalculations()"></td>
+                                                            <td><input type="text" class=" numberval" id="QD_augshade" value="97" onfocusout="QDcheckinput()" onchange="onMonthlyShadingChangeOnQD(this.id); resetSolarCalculations()"></td>
+                                                            <td><input type="text" class=" numberval" id="QD_sepshade" value="97" onfocusout="QDcheckinput()" onchange="onMonthlyShadingChangeOnQD(this.id); resetSolarCalculations()"></td>
+                                                            <td><input type="text" class=" numberval" id="QD_octshade" value="97" onfocusout="QDcheckinput()" onchange="onMonthlyShadingChangeOnQD(this.id); resetSolarCalculations()"></td>
+                                                            <td><input type="text" class=" numberval" id="QD_novshade" value="97" onfocusout="QDcheckinput()" onchange="onMonthlyShadingChangeOnQD(this.id); resetSolarCalculations()"></td>
+                                                            <td><input type="text" class=" numberval" id="QD_decshade" value="97" onfocusout="QDcheckinput()" onchange="onMonthlyShadingChangeOnQD(this.id); resetSolarCalculations()"></td>                                                        
+                                                        </tr>
+                                                    </table>                                                    
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div style="display: inline-flex; width: 100%">
+                                                <button type ="button" id="addArrayBlock" class="btn_ziba orange full" onclick="validateArrayAddition()">+ Array</button>
+                                                <div id="qdText"> The image below will appear on the proposal. Please drag and center the roof below.</div>
+                                            </div>
+                                            <hr id="horizontalruler">
+                                            <div style="padding:4px;height:100%; width:100%">
+                                                <div id="qdMapPanel" class="qdMapPanel">
+                                                    Map will be here
+                                                </div>
+                                            </div>   
+                                        </div>
+                                        <div class="btn_ziba orange next full" onclick="financepage()" style="margin-right: 7%; width: 9%; margin-top: 4%;cursor: not-allowed; opacity: .3;" id="NextButton" >Next</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

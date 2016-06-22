@@ -1,0 +1,27 @@
+{
+    "SunEdCustId": "404365",
+    "Quote": {
+        "AppraisedCostPerWatt": "5.5",
+        "ASPW": "3.63",
+        "SystemSize": "7400",
+        "Year1Production": "8644",
+        "CustomerPrepayment": "0",
+        "UpfrontRebateAssumptions": "0",
+        "UpfrontRebateAssumptions-Max": "0",
+        "State": "CA",
+        "UtilityIndex": "734",
+        "ChannelType": "1",
+        "PeriodicRentEscalation": "2.9%",
+        "PBIFraction": "0.08",
+        "PBIYears": "6",
+        "PBIAnnualDerate": "0.5%",
+        "SubstantialCompletionDate": "07/15/2015",
+        "StateTaxRate": "7%",
+        "CurrentUtilityCost": "2154.69",
+        "PostSolarUtilityCost": "254.71",
+        "AuthorizationCode": "MODSOLAR-021513",
+        "upfrontRebateAssumptions": "0",
+        "upfrontRebateAssumptions-Max": "0",
+        "lastYear": "25"
+    }
+}

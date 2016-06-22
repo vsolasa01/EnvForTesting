@@ -1,0 +1,92 @@
+{
+    "SunEdCustId": "409053",
+    "Quote": {
+        "ASPW": "4.0",
+        "CurrentUtilityCost": 2340.01,
+        "CustomerPrepayment": 0,
+        "PeriodicRentEscalation": "2.9%",
+        "PostSolarTariff": "Domestic-D",
+        "PostSolarUtilityCost": 1000,
+        "PreSolarTariff": "Domestic-D",
+        "ProposalID": "111514",
+        "SubstantialCompletionDate": "06/01/2015",
+        "UpfrontRebateAssumptions": "0",
+        "UtilityIndex": "734",
+        "YearlyUsage": 12000,
+        "Rebate": 0,
+        "lastYear": "25",
+        "Credits": "0",
+        "MasterTariffId": "12345"
+    },
+    "Array": [
+        {
+            "ArrayNumber": "1",
+            "Azimuth": "215.19390724",
+            "InverterId": "M215-60-2LL-S2X",
+            "InverterModel": "M215-60-2LL-S2X",
+            "ModuleQuantity": "17",
+            "ModuleType": "SunEdison: SE-F270CzC-3y (Landscape)",
+            "Orientation": "Portrait",
+            "Shading": [
+                "97",
+                "97",
+                "97",
+                "97",
+                "97",
+                "97",
+                "97",
+                "97",
+                "97",
+                "97",
+                "97",
+                "97"
+            ],
+            "SystemSize": 5.559,
+            "Tilt": "20"
+        }
+    ],
+    "System": {
+        "InverterManufacturer": "Enphase Energy",
+        "InverterQuantity": "23",
+        "ModuleId": "SunEdison 270 - BoB",
+        "ModuleQuantity": "23",
+        "MountingType": "Flat Roof",
+        "PanelSize": "270",
+        "totalCost": "23400"
+    },
+    "Contract": {
+        "installer.client.name": "Complete Solar",
+        "calcMap.dealerName": "Complete Solar",
+        "product_type": "PV",
+        "installer.client.phone": "8772994943",
+        "calcMap.currentDate": "18/03/2015"
+    },
+    "ProposalTool": {
+        "UtilityTaxRate": "2",
+        "UtilityProvider": "Pacific Gas & Electric",
+        "PanelType": "panel 1.65",
+        "Area": "245",
+        "NumOfPanels": "5",
+        "PanelLayoutType": "xxx",
+        "InstallationPricePerWatt": "20",
+        "Discount": "10",
+        "AdditionalAmount": "10",
+        "FederalTaxCredit": "0",
+        "TotalAmount": "234567",
+        "ProjectedSolarProduction": "12355",
+        "Usage": [
+            "55",
+            "35",
+            "40",
+            "20",
+            "15",
+            "90",
+            "20",
+            "30",
+            "45",
+            "20",
+            "16",
+            "20"
+        ]
+    }
+}

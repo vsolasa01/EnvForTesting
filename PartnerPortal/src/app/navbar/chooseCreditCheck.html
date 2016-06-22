@@ -1,0 +1,31 @@
+<div id="add-lead-modal">
+	<form role="form"
+	      class="form-horizontal"
+	      name="creditReSendMsgForm">
+		<div class="modal-header" >
+                    <h1 id="creditResendConfirmHeading">Confirmation</h1>
+		    <div class="button-container"
+		         ng-click="cancel()">
+		        <a class="modal-close-x-button"></a>
+                    </div>
+                </div>	
+		<br>
+                <div id="creditMsgDiv">
+                    <p>Please select which financing program this credit check is for.</p>
+                    <br>
+                    <label style="margin-left: 10%;">
+                        <input type="radio" name="loanType" value="Loan-PPA" checked="checked" style="display: inline">
+                        SunEdison PPA or Lease
+                    </label>
+                    <label style="float: right; margin-right: 10%;">
+                        <input type="radio" name="loanType" value="Loan-Mosaic" style="display: inline">
+                        Mosaic Loan
+                    </label>
+                    <br/>
+                    <br>                    
+                    <input type="button" id="resend-back" ng-click="proceed(false)" value="Cancel">
+                    <input type="button" id="resend-continue" ng-click="proceed(true)" value="Continue">
+                <div>
+                
+        </form>
+</div>

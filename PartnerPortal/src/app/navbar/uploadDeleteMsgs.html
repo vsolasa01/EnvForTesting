@@ -1,0 +1,47 @@
+<div id="add-lead-modal">
+	<form role="form"
+	      class="form-horizontal"
+	      name="creditReSendMsgForm">
+		<div class="modal-header" >
+                    <h1 id="creditResendConfirmHeading" ng-show="displayMsg === 'confirmUpload' || displayMsg === 'fileDelete' || displayMsg === 'fileType'">Confirmation</h1>
+                    <h1 id="creditResendConfirmHeading" ng-hide="displayMsg === 'confirmUpload' || displayMsg === 'fileDelete' || displayMsg === 'fileType'">Error</h1>
+		    <div class="button-container"
+		         ng-click="cancel()">
+		        <a class="modal-close-x-button"></a>
+                    </div>
+                </div>	
+		<br>
+                <div id="creditMsgDiv" ng-show="displayMsg === 'confirmUpload'">
+                    <p>Are you sure you want to overwrite?</p>
+                    <p>File already exists. Do you want to overwrite? You cannot undo this action.</p>
+                    <br>                    
+                    <input type="button" id="resend-back" ng-click="uploadfile(false)" value="Cancel">
+                    <input type="button" id="resend-continue" ng-click="uploadfile(true)" value="Yes">
+                </div>
+                <div id="creditMsgDiv" ng-show="displayMsg === 'fileExtensionNotSupported'">
+                    <p>File type not supported.</p>
+                    <p>Supported file types are jpg, png, pdf, doc, docx, xls, xlsx, txt, gif, ppt, pptx, jpeg & zip.</p>
+                    <br>                   
+                    <input type="button" id="resend-back" style="margin-left: 38%" ng-click="proceed(false)" value="Ok">
+                </div>
+                <div id="creditMsgDiv" ng-show="displayMsg === 'fileSizeTooLarge'">
+                    <p>File size too large.</p>
+                    <p>Maximum file size allowed is 5MB.</p>
+                    <br>                   
+                    <input type="button" id="resend-back" style="margin-left: 38%" ng-click="proceed(false)" value="Ok">
+                </div>
+                <div id="creditMsgDiv" ng-show="displayMsg === 'fileDelete'">
+                    <p>Are you sure you want to delete the file.</p>
+                    <p>This item will be deleted immediately. You cannot undo this action.</p>
+                    <br>                   
+                    <input type="button" id="resend-back" ng-click="delete(false)" value="Cancel">
+                    <input type="button" id="resend-continue" ng-click="delete(true)" value="Yes">
+                </div>
+                <div id="creditMsgDiv" ng-show="displayMsg === 'fileType'">
+                    <p>What do you want to upload?</p>
+                    <br>                   
+                    <input type="button" id="resend-continue" ng-click="fileTypeConfirm('bill')" value="Utility Bill" style="float:none;">
+                    <!--input type="button" id="resend-back" ng-click="fileTypeConfirm('docs')" value="Other Documents"-->
+                </div>
+        </form>
+</div>

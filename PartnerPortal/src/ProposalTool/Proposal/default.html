@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="StyleSheet.css">
+    <title>Proposals Container</title>
+    <script type="text/javascript">
+        function onProposalClicked(lat, lng) {
+            var fr = document.getElementById("proposal-frame");
+            fr.src = "proposals.html?lat=" + lat + "&lng=" + lng;
+        }
+    </script>
+</head>
+<body>
+    <div id="header">
+        <img src="images/logo.jpg" style="padding:0;margin:0;height:inherit;float:left;" />
+    </div>
+    <div style="margin-top:5px;">
+        <table align="center" class="table-striped table-hover">
+            <tr style="height:40px;border-bottom:solid;">
+                <th style="width:100px;">First Name</th>
+                <th style="width:100px;">Last Name</th>
+                <th style="width:130px;">Phone #</th>
+                <th style="width:400px;">Address</th>
+                <th style="width:120px;">Proposal</th>
+                <th style="width:120px;">Credit Check</th>
+            </tr>
+            <tr>
+                <td>Demo</td>
+                <td>TT</td>
+                <td>(234) 5678901</td>
+                <td>4832 Foxglove Ct, Santa Rosa, California, 95405</td>
+                <td>
+                    <button class="btn btn-primary" onclick="onProposalClicked(-37.907634, 144.994700)">To Proposal</button>
+                </td>
+                <td>
+                    <button class="btn btn-default">Initiate</button>
+                </td>
+            </tr>
+            <tr>
+                <td>Demo</td>
+                <td>TT</td>
+                <td>(234) 5678901</td>
+                <td>4832 Foxglove Ct, Santa Rosa, California, 95405</td>
+                <td>
+                    <button class="btn btn-primary" onclick="onProposalClicked(-37.907134, 144.999700)">To Proposal</button>
+                </td>
+                <td>
+                    <button class="btn btn-default">Initiate</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <iframe id="proposal-frame" style="width:99%; height:600px" src="proposals.html?lng=144.9988"></iframe>
+    </div>
+</body>
+</html>

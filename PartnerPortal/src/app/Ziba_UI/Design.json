@@ -1,0 +1,70 @@
+{
+  "SunEdCustId": "1200566",
+  "Title": "aa",
+  "Quote": {
+   "Year1Production" : 12500,
+    "CurrentUtilityCost": 2147,
+    "PeriodicRentEscalation": "0.029",
+    "PostSolarUtilityCost": 444,
+    "ProposalID": "74822",
+    "UtilityIndex": "734",
+    "YearlyUsage": 8626,
+    "Rebate": 0,
+    "Credits": "2000",
+    "MasterTariffId": "521"
+  },
+  "Array": [
+    {
+      "ArrayNumber": "1",
+      "Azimuth": "133.000",
+      "InverterId": "M250-60-2LL-S2X (-ZC) (-NA) (240V)",
+      "InverterModel": "M250-60-2LL-S2X (-ZC) (-NA) (240V)",
+      "ModuleQuantity": "18",
+      "ModuleType": "SE-BOW-270",
+      "MountType": "Sloped Roof",
+      "Shading": [
+        "100",
+        "100",
+        "100",
+        "100",
+        "100",
+        "100",
+        "100",
+        "100",
+        "100",
+        "100",
+        "100",
+        "100"
+      ],    
+      "SystemSize": 6.234,
+      "Tilt": 20,
+      "AnnualShading": 99
+    }
+  ],
+  "System": {
+    "InverterManufacturer": "Enphase Energy",
+    "InverterQuantity": "18",
+    "ModuleId": "SunEdison 270 - BoB",
+    "ModuleQuantity": "18",
+    "MountingType": "sloped roof",
+    "PanelSize": "270",
+    "totalCost": "18225"
+  },
+  "Contract": {
+    "installer.client.name": "Complete Solar Inc.",
+    "calcMap.dealerName": "CS Dealer Inc.",
+    "product_type": "PV",
+    "installer.client.phone": "8772994943",
+    "calcMap.currentDate": "06/25/2015"
+  },
+  "CustomerDetails": {
+        "customername": "Apple Maple",
+        "address": "546 West Julian StreetSan Jose , California , 95110"
+    },
+    "DesignDetails": {
+        "averagecost": "0.15",
+        "utilitytaxrate": "",
+        "TaxRate": "",
+        "Base64Image": "iVBORw0KGSUVORK5CYII="
+    }
+  }

@@ -1,0 +1,112 @@
+// out: selectIT.css
+
+.options {
+    display:none;
+    position:absolute;
+    top:100%;
+    right:0;
+    left:0;
+    z-index:999;
+    margin:0 0;
+    padding:0 0;
+    list-style:none;
+    border:1px solid #ccc;
+    background-color:white;
+    -webkit-box-shadow:0 1px 2px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow:0 1px 2px rgba(0, 0, 0, 0.2);
+    box-shadow:0 1px 2px rgba(0, 0, 0, 0.2);
+}
+.options li {
+    padding:0 6px;
+    margin:0 0;
+    padding:0 10px;
+}
+.options li:hover {
+    background-color:#39f;
+    color:white;
+}
+
+select.selectIT{
+    display: none;
+}
+
+.hidden {
+    display: none!important;
+}
+
+.selectIT-container {
+
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    .selectIT-value{
+        position: relative;
+        background-color: #f2f2f2;
+        color: rgb(228, 112, 30);
+        border: 0 none;
+        color: darkgrey;
+        margin-bottom: 8px;
+        padding: 0 6px;
+        vertical-align: middle;
+        line-height: 2;
+        padding-left: 10px;
+        color: #666;
+        &.changed {
+            color: #e4701e;
+        }
+    }
+
+    span.arrow {
+        position: absolute;
+        content: ' ';
+        border-bottom: 8px solid #808080;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        width: 5px;
+        height: 5px;
+        font-size: 6px;
+        line-height: 6px;
+        top: 12px;
+        right: 12px;
+        -moz-transform: rotate(180deg);
+        -webkit-transform: rotate(180deg);
+        -o-transform: rotate(180deg);
+        -ms-transform: rotate(180deg);
+        transform: rotate(180deg);
+    }
+
+    span.arrow.arrow-up {
+        -moz-transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    .selectIT-dropdown-container {
+        background: #ffffff none repeat scroll 0 0;
+        z-index: 99;
+        overflow-y: auto;
+        left: 0px;
+        padding: 5px 5px;
+        position: absolute;
+        top: 33px;
+        width: 100%;
+        min-width: 50%;
+        list-style: none;
+        color: #666666;
+        -webkit-box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+        -moz-box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+        display: none;
+        cursor: pointer;
+        li{
+            padding: 10px 6px;
+            &:hover {
+                color: #e4701e;
+                font-weight: 500;
+            }
+        }
+    }
+}

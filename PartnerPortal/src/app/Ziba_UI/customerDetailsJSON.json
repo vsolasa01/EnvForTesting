@@ -1,0 +1,27 @@
+{
+    "SunEdCustId": "404365",
+    "FirstName": "Jack",
+    "LastName": "Brian",
+    "StreetAddress": "891 Amsterdam Ave",
+    "City": "Belmont",
+    "State": "CA",
+    "Zip": "94002",
+    "Email": "jack@gmail.com",
+    "Phone": "6998765656",
+    "CoHFirstName": "Maria",
+    "CoHLastName": "Brian",
+    
+    "Proposal1":{
+        "id": "40436511",
+        "status":"done",
+        "createddatetime":"08-01-2015 12:00:00",
+        "proposaltitle": "Jack's Proposal"        
+    },   
+    "Proposal2":{
+        "id": "40436522",
+        "status":"draft",
+        "createddatetime":"08-05-2015 04:33:00",
+        "proposaltitle": "New proposal"        
+    }, 
+    "CustomerNotes":" This is draft."
+}

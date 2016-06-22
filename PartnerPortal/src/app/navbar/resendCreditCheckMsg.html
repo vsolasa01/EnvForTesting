@@ -1,0 +1,22 @@
+<div id="add-lead-modal">
+	<form role="form"
+	      class="form-horizontal"
+	      name="creditReSendMsgForm">
+		<div class="modal-header" >
+                    <h1 id="creditResendConfirmHeading">Confirmation</h1>
+		    <div class="button-container"
+		         ng-click="cancel()">
+		        <a class="modal-close-x-button"></a>
+                    </div>
+                </div>	
+		<br>
+                <div id="creditMsgDiv">
+                    <p>Resending a Credit Check will send the homeowner a new application link, and the previous link will no longer be active.</p>
+                    <p>Please confirm the email address before resending the credit check.</p>
+                    <br>                    
+                    <input type="button" id="resend-back" ng-click="proceed(false)" value="Back">
+                    <input type="button" id="resend-continue" ng-click="proceed(true)" value="Continue">
+                <div>
+                
+        </form>
+</div>

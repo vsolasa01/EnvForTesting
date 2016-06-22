@@ -1,0 +1,773 @@
+<link rel="stylesheet" href="app/Ziba_UI/main.css"> 
+<div id="blakout_preview" ng-show="financeoption.waitimplementer">
+    <div  class="loadingImg">
+    </div>
+</div>    
+<div ng-show="financeoption.loading" class="loadingImg">
+</div>    
+<div class="finance-options" ng-hide="financeoption.loading">    
+    <div id="container">
+    <div class="rel">
+        <div class="label_ziba">
+            <div class="global-message ">
+                <div class="content_ziba">
+                    <div class="text">
+                        Uploaded file deleted.
+                    </div>
+                    <div class="close">
+                        <span class="icon-x"><?xml version="1.0" encoding="utf-8"?>
+                            <!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+                            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                 viewBox="0 0 14 14" style="enable-background:new 0 0 14 14;" xml:space="preserve">
+                                <g>
+                                    <path d="M1,14c-0.3,0-0.5-0.1-0.7-0.3c-0.4-0.4-0.4-1,0-1.4l12-12c0.4-0.4,1-0.4,1.4,0s0.4,1,0,1.4l-12,12C1.5,13.9,1.3,14,1,14z"
+                                          />
+                                    <path d="M13,14c-0.3,0-0.5-0.1-0.7-0.3l-12-12c-0.4-0.4-0.4-1,0-1.4s1-0.4,1.4,0l12,12c0.4,0.4,0.4,1,0,1.4
+                                          C13.5,13.9,13.2,14,13,14z"/>
+                                </g>
+                            </svg>
+                        </span>                    	
+                    </div>
+                </div>
+            </div>
+
+            <div id="content_ziba">
+                <div class="rel">
+
+                    <div id="finance-options" style="display: flex;">
+                        <div class="rel clearfix">
+
+                            <div id="sidebar">
+                                <div class="rel">
+
+                                    <div class="section-back {{financeoption.cancel}} {{financeoption.addtocancelclick}}">
+                                        <div class="customer clearfix">
+                                            <div class="normal-state">
+                                                <!--div class="id">
+                                                    
+                                                </div-->
+                                                <div class="buttons">
+                                                    <div class="btn_ziba orange cancel_btn" ui-sref="designTool" ng-click="financeoption.redirectToDesignPage()">
+                                                        Back
+                                                    </div>
+                                                    <div class="btn_ziba orange full save_btn {{financeoption.saveDisabled}}" ng-model='financeoption.saveDisabled' ng-disabled='financeoption.saveDisabled' ng-click="financeoption.designsaving()">
+                                                        Save
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="save-cancel-states">
+                                                <div class="cancel-state">
+                                                    <div class="text">
+                                                        Are you sure you want to leave the page without saving?
+                                                    </div>
+                                                    <div class="buttons">
+                                                        <div class="btn_ziba white dont" ui-sref="customerdetails" ng-class="{active: $state.includes('customerdetails') }">
+                                                            Don't save
+                                                        </div>
+                                                        <div class="btn_ziba white save full {{financeoption.saveDisabled}}" ng-model='financeoption.saveDisabled' ng-disabled='financeoption.saveDisabled' ng-click="financeoption.designsaving()">
+                                                            Save
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="save-state">
+                                                    <div class="loading">
+                                                        <div class="text">Please wait...</div>
+                                                        <div class="spin-container">
+                                                            <div id="loading_hype_container" style="margin:auto;position:relative;width:30px;height:30px;overflow:hidden;" aria-live="polite">
+                                                                <script type="text/javascript" charset="utf-8" src="js/loading.hyperesources/loading_hype_generated_script.js?1114"></script>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="saved">
+                                                        <div class="text">Saved!</div>
+                                                        <div class="tick-wrapper">
+                                                            <span class="icon-tick"><?xml version="1.0" encoding="utf-8"?>
+                                                                <!-- Generator: Adobe Illustrator 19.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+                                                                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                                                     viewBox="0 0 16.7 13" style="enable-background:new 0 0 16.7 13;" xml:space="preserve">
+                                                                    <style type="text/css">
+                                                                        .st0{fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+                                                                    </style>
+                                                                    <g>
+                                                                        <polyline class="st0" points="1,6.4 6.3,12 15.7,1 	"/>
+                                                                    </g>
+                                                                </svg>
+                                                            </span>                                    
+                                                        </div>
+                                                    </div>
+                                                    <div class="error">
+                                                        <div class="text">Error! Please save it again!</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="" style="text-align: center;">                                                                           
+                                            <div class="btn_ziba orange" ui-sref="customerdetails" style="width: 100%; height: 0%; box-shadow: 1px 4px 5px #888888;    margin: 4% 1% 4% 1%; font-weight: 500; font-size: 18px;">                                            
+                                                         {{financeoption.customername}}                                
+                                            </div>                                                                           
+                                        </div>
+                                        <div class="element">
+                                            <div class="label_ziba">
+                                                <label>Proposal name</label>
+                                            </div>
+                                            <div class="input">
+                                                <input type="text" class="text" ng-model="financeoption.proposaltitle">
+                                            </div>
+                                        </div>
+                                        <div class="element">
+                                            <div class="image-container">
+                                                <img src="img/completed-proposal@2x.png" alt="proposal">
+                                                    <!--div class="btn_ziba white">
+                                                        Edit design
+                                                    </div-->
+                                            </div>
+                                        </div>
+
+                                        <div class="area {{financeoption.openutility}}">
+                                            <div class="element">
+                                                <div class="area-title">
+                                                    Utility analysis
+                                                </div>
+                                            </div>
+                                            <div class="element">
+                                                <div class="label-details clearfix">
+                                                    <div class="label_ziba">
+                                                        <label>Average cost of electricity</label>
+                                                    </div>
+                                                    <div class="details">
+                                                        $ <span class="number">{{financeoption.avgcostofelectricity}}</span>/kwh
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="element">
+                                                <div class="label-details clearfix">
+                                                    <div class="label_ziba">
+                                                        <label>Pre solar utility bill</label>
+                                                    </div>
+                                                    <div class="details">
+                                                        $ <span class="number">{{financeoption.presolarmonthly}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="element">
+                                                <div class="label-details clearfix">
+                                                    <div class="label_ziba">
+                                                        <label>Post solar utility bill</label>
+                                                    </div>
+                                                    <div class="details">
+                                                        $ <span class="number">{{financeoption.postsolarmonthly}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>                                            
+                                            <div class="element">
+                                                <div class="label-details clearfix">
+                                                    <div class="label_ziba">
+                                                        <label>Utility bill savings</label>
+                                                    </div>
+                                                    <div class="details">
+                                                        $ <span class="number">{{financeoption.billsavings}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="expandable" ng-show="financeoption.utility" >
+                                                <div class="element">
+                                                    <div class="label-details clearfix">
+                                                        <div class="label_ziba">
+                                                            <label>Utility Provider</label>
+                                                        </div>
+                                                        <div class="details">
+                                                            {{financeoption.utilityprovider}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--div class="element">
+                                                    <div class="label-details clearfix">
+                                                        <div class="label_ziba">
+                                                            <label>Average monthly bill</label>
+                                                        </div>
+                                                        <div class="details">
+                                                            $ <span class="number">269</span>
+                                                        </div>
+                                                    </div>
+                                                </div-->
+                                                <div class="element">
+                                                    <div class="label-details clearfix">
+                                                        <div class="label_ziba">
+                                                            <label>Utility tax rate</label>
+                                                        </div>
+                                                        <div class="details">
+                                                            <span class="number">{{financeoption.taxrate}}</span> %
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="element">
+                                                    <div class="label-details clearfix">
+                                                        <div class="label_ziba">
+                                                            <label>Yearly consumed</label>
+                                                        </div>
+                                                        <div class="details">
+                                                            <span class="number">{{financeoption.presolarconsumption}}</span>&nbsp;kWh
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="element">
+                                                <div class="btn_ziba orange down" ng-click="financeoption.showutilitycategory()">
+                                                    <span class="icon-arrow-down"><?xml version="1.0" encoding="utf-8"?>
+                                                        <!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+                                                        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                                             viewBox="0 0 14.2 9" style="enable-background:new 0 0 14.2 9;" xml:space="preserve">
+                                                            <path d="M14.2,1c0,0.2-0.1,0.5-0.2,0.7l-6.1,7C7.6,8.9,7.3,9,7.1,9C6.8,9,6.5,8.9,6.3,8.6L0.2,1.7c-0.4-0.4-0.3-1,0.1-1.4
+                                                                  c0.4-0.4,1-0.3,1.4,0.1l5.3,6.1l5.4-6.1c0.4-0.4,1-0.5,1.4-0.1C14.1,0.4,14.2,0.7,14.2,1z"/>
+                                                        </svg>
+                                                    </span>                            
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="area {{financeoption.openanalysis}}">
+                                            <div class="element">
+                                                <div class="area-title">
+                                                    System analysis
+                                                </div>
+                                            </div>
+                                            <div class="element">
+                                                <div class="label-details clearfix">
+                                                    <div class="label_ziba">
+                                                        <label>System size (DC)</label>
+                                                    </div>
+                                                    <div class="details">
+                                                        <span class="number">{{financeoption.systemsize}}</span>&nbsp;kW
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="element">
+                                                <div class="label-details clearfix">
+                                                    <div class="label_ziba">
+                                                        <label>Yearly production</label>
+                                                    </div>
+                                                    <div class="details">
+                                                        <span class="number">{{financeoption.totalprod}}</span>&nbsp;kWh
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="element">
+                                                <div class="label-details clearfix">
+                                                    <div class="label_ziba">
+                                                        <label>Annual usage offset</label>
+                                                    </div>
+                                                    <div class="details">
+                                                        <span class="number">{{financeoption.annualoffset}}</span> %
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="element">
+                                                <div class="label-details clearfix">
+                                                    <div class="label_ziba">
+                                                        <label>Yield</label>
+                                                    </div>
+                                                    <div class="details">
+                                                        <span class="number">{{financeoption.yield}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div ng-repeat="arrays in financeoption.panelarrays">
+                                            <div class="expandable" ng-show="financeoption.analysis">
+                                                <div class="element">
+                                                    <div class="section-title">
+                                                        Array {{arrays.ArrayNumber}}
+                                                    </div>
+                                                </div>
+                                                <!--div class="element">
+                                                    <div class="label-details clearfix">
+                                                        <div class="label_ziba">
+                                                            <label>Mount type</label>
+                                                        </div>
+                                                        <div class="details">
+                                                            {{arrays.MountType}}
+                                                        </div>
+                                                    </div>
+                                                </div-->
+                                                <div class="element">
+                                                    <div class="label-details clearfix">
+                                                        <div class="label_ziba">
+                                                            <label>Module type</label>
+                                                        </div>
+                                                        <div class="details">
+                                                            {{arrays.ModuleType}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="element">
+                                                    <div class="label-details clearfix">
+                                                        <div class="label_ziba">
+                                                            <label>Module count</label>
+                                                        </div>
+                                                        <div class="details">
+                                                            <span class="number">{{arrays.ModuleQuantity}}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="element">
+                                                    <div class="label-details clearfix">
+                                                        <div class="label_ziba">
+                                                            <label>Inverter type</label>
+                                                        </div>
+                                                        <div class="details">
+                                                            {{arrays.InverterModel}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="element">
+                                                    <div class="label-details clearfix">
+                                                        <div class="label_ziba">
+                                                            <label>Tilt</label>
+                                                        </div>
+                                                        <div class="details">
+                                                            <span class="number">{{arrays.Tilt}}<sup>o</sup></span>
+                                                        </div>
+                                                    </div> 
+                                                </div>
+                                            <div class="element">
+                                                <div class="label-details clearfix">
+                                                    <div class="label_ziba">
+                                                        <label>Azimuth</label>
+                                                    </div>
+                                                    <div class="details">
+                                                        <span class="number">{{arrays.Azimuth}}<sup>o</sup></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="element">
+                                                <div class="label-details clearfix">
+                                                    <div class="label_ziba">
+                                                        <label>Yearly shade</label>
+                                                    </div>
+                                                    <div class="details">
+                                                        <span class="number">{{arrays.AnnualShading}}</span> %
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </div>
+                                            </div>
+                                        <div class="element">
+                                            <div class="btn_ziba orange down" ng-click="financeoption.showanalysiscategory()">
+                                                <span class="icon-arrow-down"><?xml version="1.0" encoding="utf-8"?>
+                                                    <!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+                                                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                                         viewBox="0 0 14.2 9" style="enable-background:new 0 0 14.2 9;" xml:space="preserve">
+                                                        <path d="M14.2,1c0,0.2-0.1,0.5-0.2,0.7l-6.1,7C7.6,8.9,7.3,9,7.1,9C6.8,9,6.5,8.9,6.3,8.6L0.2,1.7c-0.4-0.4-0.3-1,0.1-1.4
+                                                              c0.4-0.4,1-0.3,1.4,0.1l5.3,6.1l5.4-6.1c0.4-0.4,1-0.5,1.4-0.1C14.1,0.4,14.2,0.7,14.2,1z"/>
+                                                    </svg>
+                                                </span>                            
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="main" class="financepage">
+                            <div class="rel">
+                                <div class="content_ziba">
+                                    <div class="area">
+                                        <div class="label_ziba">
+                                            Step 1. Select Incentives <span class="side-label">(optional)</span>
+                                        </div>
+                                        <div class="checkboxes clearfix">                                            
+                                            <div class="checkfield-container" ng-show="financeoption.showITC">
+                                                <div class="checkfield">
+                                                    <input type="checkbox" name="checkbox2" id="checkbox1" ng-model="activeCheckBox1" ng-change="financeoption.incentiveChecked()">
+                                                        <label for="checkbox1"></label>
+                                                </div>
+                                                <div class="text-price">
+                                                    <div class="text">
+                                                        ITC Incentives
+                                                    </div>
+                                                    <div class="price empty">
+                                                        -
+                                                    </div>
+                                                    <div class="price" ng-show="activeCheckBox1">
+                                                        $ <span class="number">{{financeoption.ITCincentive}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="checkfield-container" ng-show="financeoption.showincentive">
+                                                <div class="checkfield">
+                                                    <input type="checkbox" name="checkbox2" id="checkbox2" ng-model="activeCheckBox2" ng-change="financeoption.incentiveChecked()">
+                                                        <label for="checkbox2"></label>
+                                                </div>
+                                                <div class="text-price">
+                                                    <div class="text">
+                                                        {{financeoption.incentivetitle}}
+                                                    </div>
+                                                    <div class="price empty">
+                                                        -
+                                                    </div>
+                                                    <div class="price" ng-show="activeCheckBox2" >
+                                                        $ <span class="number">{{financeoption.incentivevalue}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--div class="checkfield-container" ng-show="financeoption.showutility">
+                                                <div class="checkfield">
+                                                    <input type="checkbox" name="checkbox3" id="checkbox3" ng-model="activeCheckBox3">
+                                                        <label for="checkbox3"></label>
+                                                </div>
+                                                <div class="text-price">
+                                                    <div class="text">
+                                                        Utility rebate
+                                                    </div>
+                                                    <div class="price empty">
+                                                        -
+                                                    </div>
+                                                    <div class="price" ng-show="activeCheckBox3">
+                                                        $ <span class="number">{{financeoption.utilityincentive}}</span>
+                                                    </div>
+                                                </div>
+                                            </div-->
+                                            <!--div class="checkfield-container">
+                                                <div class="checkfield">
+                                                    <input type="checkbox" name="checkbox4" id="checkbox4" checked="checked" ng-model="activeCheckBox4">
+                                                        <label for="checkbox4"></label>
+                                                </div>
+                                                <div class="text-price">
+                                                    <div class="text">
+                                                        SDG&E rebate
+                                                    </div>
+                                                    <div class="price empty">
+                                                        -
+                                                    </div>
+                                                    <div class="price" ng-show="activeCheckBox4">
+                                                        $ <span class="number">598</span>
+                                                    </div>
+                                                </div>
+                                            </div-->
+                                        </div>
+                                    </div>
+                                    <div class="area fullWidth" ng-show="financeoption.dealertypeview">
+                                        <div class="label_ziba">
+                                            Step 2. Choose Finance program
+                                        </div>
+                                        <div class="custom-table clearfix">
+                                            <div class="column">
+                                                <div class="row"></div>
+                                                <div class="row">
+                                                    <div class="f-text">$/watt</div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="f-text">$/kWh</div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="f-text">Escalator</div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="f-text">20 Year Savings</div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="f-text">Cash Price</div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="f-text">Term(Years)</div>
+                                                </div> 
+                                                <div class="row">
+                                                    <div class="f-text">Build documents</div>
+                                                </div>
+                                            </div>
+                                            <div class="column cash_column" id = "SE_cash_column" ng-class="{'active' : financeoption.SE_checked === 11}" ng-click="financeoption.financeprogchange(11)">
+                                                <div class="row" style="padding: 1px 1px;">
+                                                    <div class="dropdown-box">
+                                                        <div class="input">
+                                                            <select class="dropdown variabledropdown" ng-model="financeoption.cashvariable" ng-options="list as list.label for list in financeoption.Cash_options" ng-change="financeoption.variableChange()">
+                                                                <option value="" ng-if="false"></option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row"><div class="inner-td"><input type="text" class="text-input {{financeoption.setvariable_cash}}" ng-readonly="financeoption.variablePricing_cash" ng-model="financeoption.SE_cash_$watt" ng-change="financeoption.watttokwhconversion()" ng-model-options="{ updateOn: 'blur' }"></div></div>
+                                                <div class="row"><div class="inner-td"> <span class="number">{{financeoption.SE_cash_$kwh}}</span></div></div>
+                                                <div class="row"><div class="inner-td">n/a</div></div>
+                                                <div class="row"><div class="inner-td">$ <span class="number">{{financeoption.SE_cash_savings}}</span></div></div>
+                                                <div class="row"><div class="inner-td">$ <span class="number">{{financeoption.SE_cash_cashprice}}</span></div></div>
+                                                <div class="row"><div class="inner-td">n/a</div></div>
+                                                <div class="row"><input type="radio" name="radio11" id="radio11" ng-model="financeoption.SE_checked" checked="checked" value="11"><label for="radio11"></label></div>
+                                            </div>
+                                            <div class="column cashss_column" id = "SE_cashss_column" ng-class="{'active' : financeoption.SE_checked === 12}" ng-click="financeoption.financeprogchange(12)">
+                                                <div class="row" style="padding: 1px 1px;">
+                                                    <div class="dropdown-box">
+                                                        <div class="input">
+                                                            <select class="dropdown variabledropdown" ng-model="financeoption.cashssvariable" ng-options="list as list.label for list in financeoption.CashSS_options" ng-change="financeoption.variableChange()">
+                                                                <option value="" ng-if="false"></option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row"><div class="inner-td"><input type="text" class="text-input {{financeoption.setvariable_cashss}}" ng-readonly="financeoption.variablePricing_cashss" ng-model="financeoption.SE_cashss_$watt" ng-change="financeoption.watttokwhconversion()" ng-model-options="{ updateOn: 'blur' }"></div></div>
+                                                <div class="row"><div class="inner-td"> <span class="number">{{financeoption.SE_cashss_$kwh}}</span></div></div>
+                                                <div class="row"><div class="inner-td">n/a</div></div>
+                                                <div class="row"><div class="inner-td">$ <span class="number">{{financeoption.SE_cashss_savings}}</span></div></div>
+                                                <div class="row"><div class="inner-td">$ <span class="number">{{financeoption.SE_cashss_cashprice}}</span></div></div>
+                                                <div class="row"><div class="inner-td">n/a</div></div>
+                                                <div class="row"><input type="radio" name="radio12" id="radio12" ng-model="financeoption.SE_checked" value="12"><label for="radio12"></label></div>
+                                            </div>
+                                            <div class="column mosaic_column" id = "SE_mosaic_column" ng-class="{'active' : financeoption.SE_checked === 13}" ng-click="financeoption.financeprogchange(13)">
+                                                <div class="row" style="padding: 0 0;">Mosaic (SCION)</div>
+                                                <div class="row"><div class="inner-td"> <span class="number">{{financeoption.SE_mosaic_$watt}}</span></div></div>
+                                                <div class="row"><div class="inner-td"> <span class="number">{{financeoption.SE_mosaic_$kwh}}</span></div></div>
+                                                <div class="row"><div class="inner-td">n/a</div></div>
+                                                <div class="row"><div class="inner-td">$ <span class="number">{{financeoption.SE_mosaic_savings}}</span></div></div>                                                
+                                                <div class="row"><div class="inner-td">n/a</div></div>
+                                                <div class="row">
+                                                    <div class="dropdown-box">
+                                                        <div class="input">
+                                                            <select class="dropdown"  ng-model="mlist.loanterm" ng-options="mlist.loanterm for mlist in financeoption.mosaic_Array track by mlist.loanterm" ng-change="financeoption.paymentApiCallMosaic(mlist.loanterm)">
+                                                                <option value="" ng-if="false"></option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row"><input type="radio" name="radio13" id="radio13" ng-model="financeoption.SE_checked" value='13'><label for="radio13"> </label></div>
+                                            </div>
+                                            <div class="column mosaicss_column" id = "SE_mosaicss_column" ng-class="{'active' : financeoption.SE_checked === 14}" ng-click="financeoption.financeprogchange(14)">
+                                                <div class="row" style="padding: 0 0;">Mosaic SS (SCION)</div>
+                                                <div class="row"><div class="inner-td"> <span class="number">{{financeoption.SE_mosaicss_$watt}}</span></div></div>
+                                                <div class="row"><div class="inner-td"> <span class="number">{{financeoption.SE_mosaicss_$kwh}}</span></div></div>
+                                                <div class="row"><div class="inner-td">n/a</div></div>
+                                                <div class="row"><div class="inner-td">$ <span class="number">{{financeoption.SE_mosaicss_savings}}</span></div></div>
+                                                <div class="row"><div class="inner-td">n/a</div></div>
+                                                <div class="row">
+                                                    <div class="dropdown-box">
+                                                        <div class="input">
+                                                            <select class="dropdown"  ng-model="msslist.loanterm" ng-options="msslist.loanterm for msslist in financeoption.mosaicss_Array track by msslist.loanterm" ng-change="financeoption.paymentApiCallMosaic(msslist.loanterm)">
+                                                                <option value="" ng-if="false"></option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row"><input type="radio" name="radio14" id="radio14" ng-model="financeoption.SE_checked" value='14'><label for="radio14"> </label></div>
+                                            </div>
+                                            <div class="column lease_column" id = "SE_lease_column" ng-class="{'active' : financeoption.SE_checked === 15}" ng-click=" financeoption.financeprogchange(15)">
+                                                <div class="row" style="padding: 0 0;">Lease (SCION)</div>
+                                                <div class="row"><div class="inner-td"><input type="text" class="text-input {{financeoption.setvariable_lease}}" ng-readonly="financeoption.variablePricing_lease" ng-model="financeoption.SE_lease_$watt" ng-blur="financeoption.watttokwhconversion()"></div></div>
+                                                <div class="row"><div class="inner-td"> <span class="number">{{financeoption.SE_lease_$kwh}}</span></div></div>
+                                                <div class="row">
+                                                    <div class="dropdown-box">
+                                                        <div class="input">
+                                                            <select class="dropdown"  ng-options="ArrayValues.escalator for ArrayValues in financeoption.lease_Array" ng-model="ArrayValues.leaseescalator" ng-change="financeoption.Changeofescalator(ArrayValues.leaseescalator)">
+                                                                <option value="" ng-if="false"></option>
+                                                            </select>&nbsp;%
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row"><div class="inner-td">$ <span class="number">{{financeoption.SE_lease_savings}}</span></div></div>
+                                                <div class="row"><div class="inner-td">n/a</div></div>
+                                                <div class="row"><div class="inner-td">n/a</div></div>
+                                                <div class="row"><input type="radio" name="radio15" id="radio15" ng-model="financeoption.SE_checked" value="15"><label for="radio15"> </label></div>
+                                            </div>
+                                            <div class="column ppa_column" id = "SE_ppa_column" ng-class="{'active' : financeoption.SE_checked === 16}" ng-click="financeoption.financeprogchange(16)">
+                                                <div class="row" style="padding: 1px 1px;">
+                                                    <div class="dropdown-box">
+                                                        <div class="input">
+                                                            <select class="dropdown variabledropdown" ng-model="financeoption.ppavariable" ng-options="list as list.label for list in financeoption.PPA_options" ng-change="financeoption.variableChange()">
+                                                                <option value="" ng-if="false"></option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row"><div class="inner-td"><input type="text" class="text-input {{financeoption.setvariable_ppa}}" ng-readonly="financeoption.variablePricing_ppa" ng-model="financeoption.SE_ppa_$watt" ng-change="financeoption.watttokwhconversion()" ng-model-options="{ updateOn: 'blur' }"></div></div>
+                                                <div class="row"><div class="inner-td"> <span class="number">{{financeoption.SE_ppa_$kwh}}</span></div></div>
+                                                <div class="row">
+                                                    <div class="dropdown-box">
+                                                        <div class="input">
+                                                            <select class="dropdown" ng-options="ArrayValues.escalator for ArrayValues in financeoption.ppa_Array" ng-model="ArrayValues.ppaescalator" ng-change="financeoption.Changeofescalator(ArrayValues.ppaescalator)">
+                                                                <option value="" ng-if="false"></option>
+                                                            </select>&nbsp;%
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row"><div class="inner-td">$ <span class="number">{{financeoption.SE_ppa_savings}}</span></div></div>
+                                                <div class="row"><div class="inner-td">n/a</div></div>
+                                                <div class="row"><div class="inner-td">n/a</div></div>
+                                                <div class="row"><input type="radio" name="radio16" id="radio16" ng-model="financeoption.SE_checked" value="16"><label for="radio16"> </label></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="area fullWidth" ng-hide="financeoption.dealertypeview">
+                                        <div class="label_ziba">
+                                            Step 2. Choose Finance program 
+                                        </div>
+                                        <div class="custom-table clearfix">
+                                            <div class="column">
+                                                <div class="row"></div>
+                                                <div class="row">
+                                                    <div class="f-text">$/watt</div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="f-text">$/kWh</div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="f-text">Escalator</div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="f-text">20 Year Savings</div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="f-text">Cash Price</div>
+                                                </div>
+                                                <!--div class="row">
+                                                    <div class="f-text">Term(Years-Interest)</div>
+                                                </div-->                                                
+                                                <div class="row">
+                                                    <div class="f-text">Build documents</div>
+                                                </div>
+                                            </div>
+                                            <div class="column cash_column" id = "ID_cash_column" ng-class="{'active' : financeoption.ID_checked === 1}" ng-click="financeoption.financeprogchange(1)">
+                                                <div class="row">Cash</div>
+                                                <div class="row"><div class="text-input-wrap"><input type="text" class="text-input" ng-model="financeoption.ID_cash_$watt" ng-blur="financeoption.watttokwhconversion()"></div></div>
+                                                <div class="row"><div class="text-input-wrap"><input type="text" class="text-input" ng-model="financeoption.ID_cash_$kwh" ng-blur="financeoption.kwhtowattconversion()"></div></div>
+                                                <div class="row"><div class="inner-td">n/a</div></div>
+                                                <div class="row"><div class="inner-td">$ <span class="number">{{financeoption.ID_cash_savings}}</span></div></div>
+                                                <div class="row"><div class="inner-td">$ <span class="number">{{financeoption.ID_cash_cashprice}}</span></div></div>
+                                                <div class="row"><input type="radio" name="radio1" id="radio11" checked="checked" ng-model="financeoption.ID_checked" value='1'><label for="radio1"> </label></div>
+                                            </div>
+                                            <div class="column cashss_column" id = "ID_cashss_column"  ng-class="{'active' : financeoption.ID_checked === 2}" ng-click="financeoption.financeprogchange(2)">
+                                                <div class="row">Cash SS</div>
+                                                <div class="row"><div class="text-input-wrap"><input type="text" class="text-input" ng-model="financeoption.ID_cashss_$watt" ng-blur="financeoption.watttokwhconversion()"></div></div>
+                                                <div class="row"><div class="text-input-wrap"><input type="text" class="text-input" ng-model="financeoption.ID_cashss_$kwh" ng-blur="financeoption.kwhtowattconversion()"></div></div>
+                                                <div class="row"><div class="inner-td">n/a</div></div>
+                                                <div class="row"><div class="inner-td">$ <span class="number">{{financeoption.ID_cashss_savings}}</span></div></div>
+                                                <div class="row"><div class="inner-td">$ <span class="number">{{financeoption.ID_cashss_cashprice}}</span></div></div>
+                                                <div class="row"><input type="radio" name="radio2" id="radio2" ng-model="financeoption.ID_checked" value="2"><label for="radio2" > </label></div>
+                                            </div>
+                                            <!--div class="column mosaic_column" ng-click="ID_checked = 3" ng-class="{'active' : ID_checked == 3}">
+                                                <div class="row">Mosaic SCION</div>
+                                                <div class="row"><div class="text-input-wrap"><input type="text" class="text-input mosaicelem" ng-model="financeoption.ID_mosaic_$watt"></div></div>
+                                                <div class="row"><div class="text-input-wrap"><input type="text" class="text-input mosaicelem" ng-model="financeoption.ID_mosaic_$kwh"></div></div>
+                                                <div class="row">
+                                                    <div class="dropdown-box">
+                                                        <div class="input">
+                                                            <select class="dropdown mosaicelem" ng-options="ArrayValues.escalator for ArrayValues in financeoption.mosaic_Array" ng-model="ArrayValues.escalator" ng-change="financeoption.paymentApiCallMosaic(ArrayValues.escalator, mlist.value)">
+                                                                <option value="" ng-if="false"></option>
+                                                            </select>&nbsp;%
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row"><div class="inner-td">$ <span class="number">{{financeoption.ID_mosaic_savings}}</span></div></div>                                                
+                                                <div class="row"><div class="inner-td">n/a</div></div>
+                                                <div class="row">
+                                                    <div class="dropdown-box">
+                                                        <div class="input">
+                                                            <select class="dropdown"  ng-model="mlist.value" ng-options="mlist.label for mlist in financeoption.termlist track by mlist.value" style=" padding-left: 4px;" ng-change="financeoption.MosaicSavings(mlist.value, 1000)">
+                                                                <option value="" ng-if="false"></option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row"><input type="radio" name="radio3" id="radio3" ng-model="ID_checked" value='3'><label for="radio3"> </label></div>
+                                            </div>
+                                            <div class="column mosaicss_column" ng-click="ID_checked = 6" ng-class="{'active' : ID_checked == 6}">
+                                                <div class="row" style="padding: 0 0;">Mosaic SCION SS</div>
+                                                <div class="row"><div class="text-input-wrap"><input type="text" class="text-input" ng-model="financeoption.ID_mosaicss_$watt"></div></div>
+                                                <div class="row"><div class="text-input-wrap"><input type="text" class="text-input" ng-model="financeoption.ID_mosaicss_$kwh"></div></div>
+                                                <div class="row">
+                                                    <div class="dropdown-box">
+                                                        <div class="input">
+                                                            <select class="dropdown mosaicelem" ng-options="ArrayValues.escalator for ArrayValues in financeoption.mosaicss_Array" ng-model="ArrayValues.escalator" ng-change="financeoption.paymentApiCallMosaic(ArrayValues.escalator, msslist.value)">
+                                                                <option value="" ng-if="false"></option>
+                                                            </select>&nbsp;%
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row"><div class="inner-td">$ <span class="number">{{financeoption.ID_mosaicss_savings}}</span></div></div>
+                                                <div class="row"><div class="inner-td">n/a</div></div>
+                                                <div class="row">
+                                                    <div class="dropdown-box">
+                                                        <div class="input">
+                                                            <select class="dropdown"  ng-model="msslist.value" ng-options="msslist.label for msslist in financeoption.termlist track by msslist.value" style=" padding-left: 4px;" ng-change="financeoption.MosaicSSSavings(msslist.value, 1000)">
+                                                                <option value="" ng-if="false"></option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row"><input type="radio" name="radio6" id="radio6" ng-model="ID_checked" value='6'><label for="radio6"> </label></div>
+                                            </div-->
+                                            <div class="column lease_column" id = "ID_lease_column" ng-click="financeoption.financeprogchange(4)" ng-class="{'active' : financeoption.ID_checked === 4}">
+                                                <div class="row">Lease</div>
+                                                <div class="row"><div class="text-input-wrap"><input type="text" class="text-input" ng-model="financeoption.ID_lease_$watt" ng-blur="financeoption.watttokwhconversion()"></div></div>
+                                                <div class="row"><div class="text-input-wrap"><input type="text" class="text-input" ng-model="financeoption.ID_lease_$kwh" ng-blur="financeoption.kwhtowattconversion()"></div></div>
+                                                <div class="row">
+                                                    <div class="dropdown-box">
+                                                        <div class="input">
+                                                            <select class="dropdown" ng-options="ArrayValues.escalator for ArrayValues in financeoption.lease_Array" ng-model="ArrayValues.escalator" ng-change="financeoption.Changeofescalator(ArrayValues.escalator)">
+                                                                <option value="" ng-if="false"></option>
+                                                            </select>&nbsp;%
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row"><div class="inner-td">$ <span class="number">{{financeoption.ID_lease_savings}}</span></div></div>
+                                                <div class="row"><div class="inner-td">n/a</div></div>
+                                                <div class="row"><input type="radio" name="radio4" id="radio4" ng-model="financeoption.ID_checked" value="4"><label for="radio4"> </label></div>
+                                            </div>
+                                            <div class="column ppa_column" id = "ID_ppa_column" ng-click="financeoption.financeprogchange(5)" ng-class="{'active' : financeoption.ID_checked === 5}">
+                                                <div class="row">PPA</div>
+                                                <div class="row"><div class="text-input-wrap"><input type="text" class="text-input" ng-model='financeoption.ID_ppa_$watt' ng-blur="financeoption.watttokwhconversion()"></div></div>
+                                                <div class="row"><div class="text-input-wrap"><input type="text" class="text-input" ng-model='financeoption.ID_ppa_$kwh' ng-blur="financeoption.kwhtowattconversion()"></div></div>
+                                                <div class="row">
+                                                    <div class="dropdown-box">
+                                                        <div class="input">
+                                                            <select class="dropdown" ng-options="ArrayValues.escalator for ArrayValues in financeoption.ppa_Array" ng-model="ArrayValues.escalator" ng-change="financeoption.Changeofescalator(ArrayValues.escalator)">
+                                                                <option value="" ng-if="false"></option>
+                                                            </select>&nbsp;%
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row"><div class="inner-td">$ <span class="number">{{financeoption.ID_ppa_savings}}</span></div></div>
+                                                <div class="row"><div class="inner-td">n/a</div></div>
+                                                <div class="row"><input type="radio" name="radio5" id="radio5" ng-model="financeoption.ID_checked" value="5"><label for="radio5"> </label></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="area">                                        
+                                        <div class="build clearfix">
+                                            <div class="text">
+                                                Build a proposal for selected program
+                                            </div>
+                                            <div style="text-align:center;">
+                                                <div id ="registrationNumber" style=" display:inline; float: left;margin-left: 5%;" ng-show="financeoption.dealertypeview">
+                                                    Home Improvement Registration #
+                                                    <input type="text" class="text" ng-model="financeoption.registrationnumber">
+                                                </div>
+                                                <!--div class="build-doc btn_ziba orange reverse {{financeoption.buildbutton}}" style=" display:inline;" ng-model='financeoption.buildbutton' ng-disabled='financeoption.buildbutton' ng-click="financeoption.buildbutton || financeoption.builddocument()">
+                                                    Build document
+                                                </div-->
+                                                <button class="btn btn-primary" style="border-radius: 15px; float: right; margin-top: 15px"
+                                                        ng-disabled="financeoption.buildbutton"
+                                                        ng-click="financeoption.builddocument()">
+                                                    <span ng-show="financeoption.buildbutton">Calculating...</span>
+                                                    <span ng-show="!financeoption.buildbutton">Build Document</span>
+                                                </button>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div> 
+
+        <div id="footer">
+            <div class="rel">
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</div>

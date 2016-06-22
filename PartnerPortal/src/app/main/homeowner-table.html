@@ -1,0 +1,165 @@
+<div class="row" style="text-align: center" ng-if="($state.includes('homeowners') || $state.includes('map')) && homeownerList.enablePagination">
+    <div class="col-md-12">
+        <ul class="pagination" style="margin:7px;">
+            <li>
+                <a ng-click="homeownerList.getPreviousLeads()" ng-class="homeownerList.currentPageNo == 1 ? 'noActionNeeded' : ''">
+                    Prev
+                </a>
+            </li>
+            <li ng-repeat="page in homeownerList.pages">
+                <a ng-click="homeownerList.getLeadsByPageNo(page)" target="_blank" ng-class="page == homeownerList.currentPageNo ? 'selected disabled' : ''" >
+                    {{page}}
+                </a>
+            </li>            
+            <li>
+                <a ng-hide="homeownerList.hideNextPage" ng-click="homeownerList.getLeadsByPageNo(homeownerList.nextPageNo)" target="_blank" ng-class="dashboardController.disableNextButton || homeownerList.disableNextButton ? 'noActionNeeded' : ''">
+                    {{homeownerList.nextPageNo}}
+                </a>
+                <span style="border:transparent; background-color: #e5e5e5" ng-hide="(homeownerList.totalNoOfPages - homeownerList.lastPageNo <= 2) || !homeownerList.nextPageExists">
+                    ... 
+                </span>
+                <span style="background-color: #e5e5e5" ng-hide="homeownerList.hideTotalPages">
+                    {{homeownerList.totalNoOfPages}}
+                </span>
+                
+                <a ng-click="homeownerList.getMoreLeads()" target="_blank" ng-class="homeownerList.disableNextButton ? 'noActionNeeded' : ''">
+                    Next
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="panel panel-default">
+<table class="homeowner-list-table table-condensed table table-hover table-striped table-bordered">
+    <thead>
+    <tr>
+        <th><a class = "{{homeownerList.classForFN}}" href="" ng-click="homeownerList.order('FirstName')">First Name</a></th>
+        <th><a class = "{{homeownerList.classForLN}}" href="" ng-click="homeownerList.order('LastName')">Last Name</a></th>
+        <th class="hiddenOnIpad"><a class = "{{homeownerList.classForHomePhone}}" href="" ng-click="homeownerList.order('HomePhone')">Phone #</a></th>
+        <th><a class = "{{homeownerList.classForStreet}}" href="" ng-click="homeownerList.order('Street')">Address</a></th>
+        <th><a class = "{{homeownerList.classForCity}}" href="" ng-click="homeownerList.order('City')">City</a></th>
+        <th><a class = "{{homeownerList.classForState}}" href="" ng-click="homeownerList.order('State')">State</a></th>
+        <th><a class = "{{homeownerList.classForZip}}" href="" ng-click="reverse;homeownerList.order('Zip')">Zipcode</a></th>
+        <!--th>Proposal</th-->
+        <th><a class = "{{homeownerList.classForCreditStatus}}" href="" ng-click="homeownerList.customOrderByStatus('CreditStatusInUI')">Credit Check</a></th>
+        <th><a class = "{{homeownerList.classForContractStatus}}" href="" ng-click="homeownerList.customOrderByStatus('ContractStatusInUI')">Contract</a></th>
+    </tr>
+    </thead>
+</table>
+<div id="blackout" ng-show="homeownerList.loading">
+    <div ng-show="homeownerList.loading" class="loadingImg">
+    </div>
+</div>
+<div class="div-table-content" ng-class="homeownerList.enablePagination ? 'heightwithPagination' : 'heightwithoutPagination'">
+      <table class="table table-condensed homeowner-list-table  table table-hover table-striped table-bordered">
+    <tbody>
+    <tr ng-repeat="homeownerVM in homeownerList.viewModels | limitTo: ($state.includes('homepage') ? 5 : homeownerList.viewModels.length ) | filter:dashboardController.searchText"
+        ng-click ="homeownerList.OpenCustomerPage(homeownerVM)">
+        <td>{{homeownerVM.model.FirstName}}</td>
+        <td>{{homeownerVM.model.LastName}}</td>
+        <td class="hiddenOnIpad">
+            <div>{{homeownerVM.model.HomePhone}}</div>
+        </td>
+        <td>
+            <span class="street-column-row">
+                {{homeownerVM.model.Street}}
+            </span>
+        </td>
+        <td>{{homeownerVM.model.City}}</td>
+        <td>{{homeownerVM.model.State}}</td>
+        <td>{{homeownerVM.model.Zip}}</td>        
+        <td id="credit-check-column">
+            <button class="lead-action-button"
+               ng-class="{'credit-check-in-process': homeownerVM.creditCheckInProcess === true}"
+               ng-click="homeownerList.initiateCreditCheck(homeownerVM); $event.stopPropagation();"
+               tab-index="{{$index + 2}}"
+               ng-if="!homeownerVM.model.CreditStatus || homeownerVM.model.CreditStatus === 'In Process' || homeownerVM.model.CreditStatus === 'Initiated'">
+                    <span us-spinner="homeownerList.spinnerOptions"
+                          ng-show="homeownerVM.creditCheckInProcess === true"
+                          spinner-key="{{homeownerVM.model.SunEdCustId}}"></span>
+                    <span ng-hide="homeownerVM.creditCheckInProcess === true || homeownerVM.model.CreditStatus === 'In Process' || homeownerVM.model.CreditStatus === 'Initiated'" ng-if="!homeownerVM.model.CreditStatus" ng-init="homeownerVM.model.CreditStatusInUI='Initiate'">Initiate</span>
+                    <span ng-hide="homeownerVM.creditCheckInProcess === true || !homeownerVM.model.CreditStatus" ng-if="homeownerVM.model.CreditStatus==='Initiated'" ng-init="homeownerVM.model.CreditStatusInUI='Resend'">Resend</span>
+            </button>
+
+            <div class="indicator-container"
+                 ng-if="homeownerVM.model.CreditStatus && homeownerVM.model.CreditStatus != 'In Process' && homeownerVM.model.CreditStatus != 'Initiated'">
+                <span class="indicator"
+                      ng-class="{ 'accepted': homeownerVM.model.CreditStatus === 'Accepted' || homeownerVM.model.CreditStatus === 'CC Passed', 'failed': homeownerVM.model.CreditStatus === 'CC Failed'}" >
+                </span>
+                <!--span class="indicator-text"
+                      ng-if="homeownerVM.model.CreditStatus === 'In Process' || homeownerVM.model.CreditStatus === 'Initiated'">
+                    In Process
+                </span -->                
+                <span class="indicator-text"
+                      ng-if=" homeownerVM.model.CreditStatus === 'Accepted' || homeownerVM.model.CreditStatus === 'CC Passed'" ng-init="homeownerVM.model.CreditStatusInUI='Passed'">
+                    Passed
+                </span>
+                <span class="indicator-text"
+                      ng-if="homeownerVM.model.CreditStatus === 'CC Failed'" ng-init="homeownerVM.model.CreditStatusInUI='Failed'">
+                    Failed
+                </span>
+            </div>
+        </td>
+        <td id="contract-column">
+            <div class="indicator-container">
+                <span class="indicator"
+                      ng-class="{ 'inprocess': homeownerVM.model.ContractStatus === 'Credit Check Completed' || homeownerVM.model.ContractStatus === 'Lease Contract Created' 
+                                  || homeownerVM.model.ContractStatus === 'Signed by Homeowner' || HomeOwnerRegex.test(homeownerVM.model.ContractStatus) === true 
+                                  || homeownerVM.model.ContractStatus === 'Send Trust Doc To Ho' || homeownerVM.model.ContractStatus === 'Initial Review Complete, Pending Final Design'
+                                  || homeownerVM.model.ContractStatus === 'Final Design Complete, Homeowner Review Required' || homeownerVM.model.ContractStatus === 'Sale Hold',
+                                  'accepted': homeownerVM.model.ContractStatus === 'Fully Executed',
+                                  'failed': homeownerVM.model.ContractStatus === 'Awaiting Credit Check Data' || !homeownerVM.model.ContractStatus || homeownerVM.model.ContractStatus === 'Contract Re-sign Required'
+                                  || homeownerVM.model.ContractStatus === 'Contract Cancelled'}">
+                </span>
+                <span class="indicator-text"
+                      ng-if="homeownerVM.model.ContractStatus === 'Awaiting Credit Check Data' || !homeownerVM.model.ContractStatus" ng-init="homeownerVM.model.ContractStatusInUI='Not Initiated'">
+                    Not Initiated
+                </span>
+
+                <span class="indicator-text"
+                      ng-if="homeownerVM.model.ContractStatus === 'Credit Check Completed'" ng-init="homeownerVM.model.ContractStatusInUI='Initiated'">
+                    Initiated
+                </span>
+
+                <span class="indicator-text"
+                      ng-if="homeownerVM.model.ContractStatus === 'Lease Contract Created'" ng-init="homeownerVM.model.ContractStatusInUI='Created'">
+                    Created
+                </span>
+
+                <span class="indicator-text"
+                      ng-if="homeownerVM.model.ContractStatus === 'Signed by Homeowner' || HomeOwnerRegex.test(homeownerVM.model.ContractStatus) === true || homeownerVM.model.ContractStatus === 'Send Trust Doc To Ho' || homeownerVM.model.ContractStatus === 'Initial Review Complete, Pending Final Design'" ng-init="homeownerVM.model.ContractStatusInUI='HO Signed'">
+                    HO Signed
+                </span>
+                
+                <span class="indicator-text"
+                      ng-if="homeownerVM.model.ContractStatus === 'Final Design Complete, Homeowner Review Required'" ng-init="homeownerVM.model.ContractStatusInUI='Need HO Review'">
+                    Need HO Review
+                </span>
+                
+                <span class="indicator-text"
+                      ng-if="homeownerVM.model.ContractStatus === 'Contract Cancelled'" ng-init="homeownerVM.model.ContractStatusInUI='Cancelled'">
+                    Cancelled
+                </span>
+                
+                <span class="indicator-text"
+                      ng-if="homeownerVM.model.ContractStatus === 'Sale Hold'" ng-init="homeownerVM.model.ContractStatusInUI='Sale Hold'">
+                    Sale on hold
+                </span>
+
+                <span class="indicator-text"
+                      ng-if="homeownerVM.model.ContractStatus === 'Fully Executed'" ng-init="homeownerVM.model.ContractStatusInUI='Executed'">
+                    Executed
+                </span> 
+                
+                <span class="indicator-text"
+                      ng-if="homeownerVM.model.ContractStatus === 'Contract Re-sign Required'" ng-init="homeownerVM.model.ContractStatusInUI='Need re-sign'">
+                    Need re-sign
+                </span> 
+                
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</div>
+</div>

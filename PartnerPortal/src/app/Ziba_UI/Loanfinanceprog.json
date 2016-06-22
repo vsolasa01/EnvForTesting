@@ -1,0 +1,103 @@
+{
+  "SunEdCustId": "1283275",
+  "Quote": {
+    "proposaltitle": "abc",
+    "PricePerWatt" : "3.50",
+    "PurchaseType": "Loan",
+    "LoanStartDate":"12/01/2015",
+    "MosaicTenor": "12",
+    "Year1Yield" :"1000",
+    "FinancingProgram": "SunEdison Mosaic SCION",
+    "Year1Production": 3152,
+    "CurrentUtilityCost": 2200,
+    "CustomerPrepayment": 0,
+    "PostSolarTariff": "Residential - (E-1)",
+    "PostSolarUtilityCost": 1188,
+    "PreSolarTariff": "Residential - (E-1)",
+    "ProposalID": "CA-KUM-46186675",
+    "SubstantialCompletionDate": "07/31/2015",
+    "UpfrontRebateAssumptions": "0",
+    "UtilityIndex": "734",
+    "YearlyUsage": 9312,
+    "Rebate": 0,
+    "lastYear": "25",
+    "Credits": "2000",
+    "MasterTariffId": "521",
+    "Usage": [
+      "819",
+      "717",
+      "786",
+      "744",
+      "753",
+      "762",
+      "757",
+      "782",
+      "797",
+      "796",
+      "772",
+      "826"
+    ],
+    "ProposalTitle": "pavan's proposal",
+    "Derate": "0.9163",
+    "SystemSize": "2.16",
+    "UtilityProvider": "Pacific Gas & Electric Co"
+  },
+  "Array": [
+    {
+      "ArrayNumber": "1",
+      "Azimuth": "180.00",
+      "InverterId": "M250-60-2LL-S2X (-ZC) (-NA) (240V)",
+      "InverterModel": "M250-60-2LL-S2X (-ZC) (-NA) (240V)",
+      "ModuleQuantity": "4",
+      "ModuleType": "SunEdison 270 - Black on Black",
+      "Orientation": "Portrait",
+      "Shading": [
+        "97",
+        "97",
+        "97",
+        "97",
+        "97",
+        "97",
+        "97",
+        "97",
+        "97",
+        "97",
+        "97",
+        "97"
+      ],
+      "MonthlyProduction": [
+        "57",
+        "70",
+        "133",
+        "162",
+        "200",
+        "207",
+        "188",
+        "180",
+        "145",
+        "102",
+        "69",
+        "56"
+      ],
+      "SystemSize": "1.08",
+      "Tilt": "0"
+    }
+  ],
+  "System": {
+    "InverterManufacturer": "Fronius IG Plus A 7.5",
+    "InverterQuantity": "1",
+    "ModuleId": "SunEdison 270 - Black on Black",
+    "ModuleQuantity": "8",
+    "MountingType": "sloped roof",
+    "PanelSize": "270",
+    "totalCost": "",
+    "InverterType": "String"
+  },
+  "Contract": {
+    "installer.client.name": "Complete Solar Inc.",
+    "calcMap.dealerName": "CS Dealer Inc.",
+    "product_type": "PV",
+    "installer.client.phone": "8772994943",
+    "calcMap.currentDate": "06/25/2015"
+  }
+}

@@ -1,0 +1,281 @@
+<link rel="stylesheet" href="app/Ziba_UI/main.css"> 
+    <div ng-show="designpage.loading" class="loadingImg">
+    </div>
+    <div id="container" ng-hide="designpage.loading">
+        <div class="rel">
+
+            <div class="global-message ">
+                <div class="text">
+                    Uploaded file deleted.
+                </div>
+                <div class="close">
+                    <span class="icon-x"><?xml version="1.0" encoding="utf-8"?>
+                        <!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+                        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                             viewBox="0 0 14 14" style="enable-background:new 0 0 14 14;" xml:space="preserve">
+                            <g>
+                                <path d="M1,14c-0.3,0-0.5-0.1-0.7-0.3c-0.4-0.4-0.4-1,0-1.4l12-12c0.4-0.4,1-0.4,1.4,0s0.4,1,0,1.4l-12,12C1.5,13.9,1.3,14,1,14z"
+                                      />
+                                <path d="M13,14c-0.3,0-0.5-0.1-0.7-0.3l-12-12c-0.4-0.4-0.4-1,0-1.4s1-0.4,1.4,0l12,12c0.4,0.4,0.4,1,0,1.4
+                                      C13.5,13.9,13.2,14,13,14z"/>
+                            </g>
+                        </svg>
+                    </span>                	
+                </div>
+            </div>
+
+            <div id="content_ziba">
+                <div class="rel">
+                    <div id="customer-details">
+                        <div class="rel clearfix">
+                            <div id="sidebar">
+                                <div class="rel proposalpage">
+                                    <div class="section-back">
+                                                                           
+                                        <div class="btn_ziba orange cancel" ui-sref="customerdetails" ng-class="{active: $state.includes('customerdetails') }">                                            
+                                            Cancel                                             
+                                        </div>                                                                           
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="main">
+                                <div class="rel clearfix middlecontent">
+                                    <div class="proposaltitle">
+                                        Enter Design Tool Outputs
+                                    </div>
+                                    <div class="designdetail">
+                                        <div id ="upper">
+                                        <div class="left">
+                                            <div class="label_ziba header">
+                                                <label>Equipment</label>
+                                            </div>
+                                            <div class="content_ziba">
+                                                <div id = "panelmodellabel">
+                                                    <div>
+                                                        Panel&nbsp;Model:
+                                                    </div>
+                                                    <select id="panelmodelinput">
+                                                        <option value="panel1" ng-model="designpage.panelmodel">SunEdison-BoB:270</option>
+                                                    </select>
+                                                </div>
+                                                <!--div style="display: inline-flex; padding-bottom: 3%; padding-top: 3%;">
+                                                    <div>
+                                                        Total&nbsp;Panel&nbsp;Count:
+                                                    </div>
+                                                    <input type="text" style = "margin-left: 10px; width: 56%;" readonly>
+                                                </div-->
+                                                <div id = "inevrtertype">
+                                                    <div>
+                                                        Inverter&nbsp;Type:
+                                                    </div>
+                                                    <select id = "inverterinput" class="panelmodel" ng-model="designpage.inverterinput">
+                                                        <option value="Enphase Energy">Enphase Energy</option>
+                                                        <option value="Fronius USA">Fronius USA</option>
+                                                        <option value="SMA America">SMA America</option>
+                                                        <option value="SolarEdge">SolarEdge</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="right">
+                                            <div class="label_ziba header">
+                                                <label>Utility&nbsp;Bills</label>
+                                            </div>
+                                            <div class="content_ziba">
+                                                <div id = "utilityproviderlabel">
+                                                    <div>
+                                                        Utility&nbsp;Provider:
+                                                    </div>
+                                                    <select id = "utilityinput">
+                                                        <option ng-repeat="utility in designpage.utilityobjs" id="{{utility.id}}" value='{{utility.id}}' name="{{utility.displayname}}" ng-nodel="designpage.utility">{{utility.name}}</option>
+                                                    </select>
+                                                </div>
+                                                <div id = "presolar">
+                                                    <div>
+                                                        Pre&nbsp;Solar&nbsp;Annual&nbsp;Consumption(kWh):
+                                                    </div>
+                                                    <input id = "presolarinput" type="text" ng-model="designpage.presolarconsumption">
+                                                </div>
+                                                <div id ="presolartotal">
+                                                    <div>
+                                                        Pre&nbsp;Solar&nbsp;Total&nbsp;Annual&nbsp;Utility&nbsp;Bills($):&nbsp;
+                                                    </div>
+                                                    <input id ="presolartotalinput" type="text" ng-model="designpage.presolarbill">
+                                                </div>
+                                                <div id= "postsolartotal">
+                                                    <div>
+                                                        Post&nbsp;Solar&nbsp;Total&nbsp;Annual&nbsp;Utility&nbsp;Bills($):
+                                                    </div>
+                                                    <input id= "postsolartotalinput"  type="text" ng-model="designpage.postsolarbill">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <div class ="center">
+                                            <div class="label_ziba header">
+                                                <label>Monthly Production(kWh)</label>
+                                            </div>
+                                            <div class="first">
+                                                <div id = "jan">
+                                                    January:
+                                                </div>
+                                                <input id = "janinput" type="text" ng-model="designpage.janprod">
+                                                <div id = "feb">
+                                                    February:
+                                                </div>
+                                                <input id = "febinput" type="text" ng-model="designpage.febprod">
+                                                 <div id="mar">
+                                                   March:
+                                                </div>
+                                                <input id = "marinput" type="text" ng-model="designpage.marprod">
+                                                <div id = "apr">
+                                                   April:
+                                                </div>
+                                                <input type="text" id="aprinput" ng-model="designpage.aprprod">
+                                            </div>
+                                            <div class="second">
+                                                <div id= "may">
+                                                    May:
+                                                </div>
+                                                <input type="text" id = "mayinput" ng-model="designpage.mayprod">
+                                                <div id= "jun">
+                                                    June:
+                                                </div>
+                                                <input type="text" id="juninput" ng-model="designpage.junprod">
+                                                 <div id="jul">
+                                                   July:
+                                                </div>
+                                                <input type="text" id= "julinput" ng-model="designpage.julprod">
+                                                <div id="aug">
+                                                   August:
+                                                </div>
+                                                <input type="text" id= "auginput" ng-model="designpage.augprod">
+                                            </div>
+                                            <div class="third">
+                                                <div id="sep">
+                                                    September:
+                                                </div>
+                                                <input type="text" id="sepprod" ng-model="designpage.sepprod">
+                                                <div id="oct">
+                                                    October:
+                                                </div>
+                                                <input type="text" id="octprod" ng-model="designpage.octprod">
+                                                 <div id="nov">
+                                                   November:
+                                                </div>
+                                                <input type="text" id="novprod" ng-model="designpage.novprod">
+                                                <div id="dec">
+                                                   December:
+                                                </div>
+                                                <input type="text" id="decprod" ng-model="designpage.decprod">
+                                            </div>
+                                        </div>
+                                        <div class="bottom">
+                                            <div class="first">
+                                                <div class="label_ziba header">
+                                                <label>Roof 1</label>
+                                                </div>
+                                                <div id="tilt">
+                                                    <div>
+                                                        Tilt:
+                                                    </div>
+                                                    <input type="text" id="tiltinput" ng-model="designpage.tilt_1">
+                                                </div>
+                                                <div id="azimuth">
+                                                    <div>
+                                                        Azimuth:
+                                                    </div>
+                                                    <input type="text" id="azimuthinput" ng-model="designpage.azimuth_1">
+                                                </div>
+                                                <div id="shading">
+                                                    <div>
+                                                        Annual Shading:
+                                                    </div>
+                                                    <input type="text" id="shadinginput" ng-model="designpage.shading_1">
+                                                </div>
+                                                <div id="panelcount">
+                                                    <div>
+                                                        Panel Count:
+                                                    </div>
+                                                    <input type="text" id="panelcountinput" ng-model="designpage.panelcount_1">
+                                                </div>
+                                            </div>
+                                            <div class="second" id ="roof2" ng-show="designpage.roof2">
+                                                <div class="label_ziba header">
+                                                    <label>Roof 2</label>
+                                                </div>
+                                                <div id="tilt">
+                                                    <div>
+                                                        Tilt:
+                                                    </div>
+                                                    <input type="text" id="tiltinput" ng-model="designpage.tilt_2" >
+                                                </div>
+                                                <div id="azimuth">
+                                                    <div>
+                                                        Azimuth:
+                                                    </div>
+                                                    <input type="text" id="azimuthinput" ng-model="designpage.azimuth_2">
+                                                </div>
+                                                <div id="shading">
+                                                    <div>
+                                                        Annual Shading:
+                                                    </div>
+                                                    <input type="text" id="shadinginput" ng-model="designpage.shading_2">
+                                                </div>
+                                                <div id="panelcount">
+                                                    <div>
+                                                        Panel Count:
+                                                    </div>
+                                                    <input type="text" id="panelcountinput" ng-model="designpage.panelcount_2">
+                                                </div>
+                                            </div>
+                                            <div class="third" id ="roof3" ng-show="designpage.roof3">
+                                                <div class="label_ziba header">
+                                                    <label>Roof 3</label>
+                                                </div>
+                                                <div id="tilt">
+                                                    <div>
+                                                        Tilt:
+                                                    </div>
+                                                    <input type="text" id="tiltinput" ng-model="designpage.tilt_3" >
+                                                </div>
+                                                <div id="azimuth">
+                                                    <div>
+                                                        Azimuth:
+                                                    </div>
+                                                    <input type="text" id="azimuthinput" ng-model="designpage.azimuth_3">
+                                                </div>
+                                                <div id="shading">
+                                                    <div>
+                                                        Annual Shading:
+                                                    </div>
+                                                    <input type="text" id="shadinginput" ng-model="designpage.shading_3">
+                                                </div>
+                                                <div id="panelcount">
+                                                    <div>
+                                                        Panel Count:
+                                                    </div>
+                                                    <input type="text" id="panelcountinput" ng-model="designpage.panelcount_3">
+                                                </div>
+                                            </div>                                            
+                                        </div>                                    
+                                    <div class='footer'>                                        
+                                        <div class="roof">
+                                            <a ng-click="designpage.addroof()">+Roof</a>
+                                        </div>
+                                        <div class="btn_ziba orange next full" ng-click="designpage.netsuitecall()">
+                                            Next
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>

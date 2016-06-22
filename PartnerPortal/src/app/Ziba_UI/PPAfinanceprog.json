@@ -1,0 +1,94 @@
+{
+  "SunEdCustId": "1200566",
+  "Quote": {
+   "proposaltitle": "abc",
+   "PurchaseType" : "Lease - Monthly",
+   "FinancingProgram": "xyz",
+   "Year1Production" : 12500,
+    "CurrentUtilityCost": 2147,
+    "CustomerPrepayment": 0,
+    "PeriodicRentEscalation": "0.029",
+    "PostSolarTariff": "Domestic-D",
+    "PostSolarUtilityCost": 444,
+    "PreSolarTariff": "Domestic-D",
+    "ProposalID": "74822",
+    "SubstantialCompletionDate": "07/31/2015",
+    "UtilityIndex": "734",
+    "YearlyUsage": 8626,
+    "Rebate": 0,
+    "lastYear": "25",
+    "Credits": "2000",
+    "MasterTariffId": "521",
+    "Usage": [
+            "55",
+            "35",
+            "40",
+            "20",
+            "15",
+            "90",
+            "20",
+            "30",
+            "45",
+            "20",
+            "16",
+            "20"]
+
+  },
+  "Array": [
+    {
+      "ArrayNumber": "1",
+      "Azimuth": "133.000",
+      "InverterId": "M250-60-2LL-S2X (-ZC) (-NA) (240V)",
+      "InverterModel": "M250-60-2LL-S2X (-ZC) (-NA) (240V)",
+      "ModuleQuantity": "18",
+      "ModuleType": "SunEdison: BoB 270",
+      "Orientation": "Portrait",
+      "Shading": [
+        "100",
+        "100",
+        "100",
+        "100",
+        "100",
+        "100",
+        "100",
+        "100",
+        "100",
+        "100",
+        "100",
+        "100"
+      ],
+      "MonthlyProduction": [
+          "310", 
+          "230", 
+          "150", 
+          "350", 
+          "250", 
+          "300", 
+          "350", 
+          "400", 
+          "250", 
+          "300", 
+          "500", 
+          "230"
+        ],     
+      "SystemSize": 6.234,
+      "Tilt": "20"
+    }
+  ],
+  "System": {
+    "InverterManufacturer": "Enphase Energy",
+    "InverterQuantity": "18",
+    "ModuleId": "SunEdison 270 - BoB",
+    "ModuleQuantity": "18",
+    "MountingType": "sloped roof",
+    "PanelSize": "270",
+    "totalCost": ""
+  },
+  "Contract": {
+    "installer.client.name": "Complete Solar Inc.",
+    "calcMap.dealerName": "CS Dealer Inc.",
+    "product_type": "PV",
+    "installer.client.phone": "8772994943",
+    "calcMap.currentDate": "06/25/2015"
+  }
+  }

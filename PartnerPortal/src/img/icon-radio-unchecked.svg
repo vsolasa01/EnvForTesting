@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="21" height="21" viewBox="0 0 21 21">
+  <defs>
+    <style>
+
+      .cls-2 {
+        fill: #ffffff;
+        stroke: #e4701e;
+        stroke-linejoin: round;
+        stroke-width: 1px;
+        filter: url(#color-overlay-1);
+      }
+    </style>
+
+    <filter id="color-overlay-1" filterUnits="userSpaceOnUse">
+      <feFlood flood-color="#e4701e" flood-opacity="0.1"/>
+      <feComposite operator="in" in2="SourceGraphic"/>
+      <feBlend mode="normal" in2="SourceGraphic" result="colorOverlay"/>
+    </filter>
+  </defs>
+  <g id="radio-uncheckedsvg" style="fill: #ffffff; filter: url(#color-overlay-1);">
+    <circle id="circle-1" class="cls-2" cx="10" cy="10" r="10" style="stroke: inherit; filter: none; fill: inherit;"/>
+  </g>
+  <use xlink:href="#circle-1" style="stroke: #e4701e; fill: none; filter: none;"/>
+</svg>

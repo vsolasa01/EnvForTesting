@@ -1,0 +1,68 @@
+<div class="container-fluid"
+     id="dashboard">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="nav-pills-container">
+                <ul class="nav nav-pills">
+
+                    <li role="presentation"
+                        ng-class="{ active: $state.includes('homeowners') }">
+                        <a ui-sref="homeowners">
+                            Sales
+                        </a>
+                    </li>
+                    <li role="presentation"
+                        ng-class="{ active: $state.includes('map') }">
+                        <a ui-sref="map"
+                           ng-class="{ active: $state.includes('contacts') }">
+                            Map View
+                        </a>
+                    </li>
+                    <li role="presentation"
+                        ng-class="{ active: $state.includes('projectStatus') }">
+                        <a ui-sref="projectStatus">
+                            Project Status
+                        </a>
+                    </li>
+                </ul>                    
+                <div class="search-bar-container">
+                    <div class="input-group leadSearch"
+                         ng-if="$state.includes('homeowners') || $state.includes('projectStatus')">
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-search"
+                                  aria-hidden="true"></span>
+                        </span>
+                        <input ng-model="dashboardController.searchText"
+                               id="leadSearchInput"
+                               type="text"
+                               class="form-control"
+                               placeholder="Start typing to search">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row" style="text-align: center" ng-if="dashboardController.isPaginationRequired && ($state.includes('homeowners') || $state.includes('map'))">
+        <div class="col-md-12">
+            <ul class="pagination" style="margin:7px;">
+                <li>
+                    <a href="" aria-label="Previous" id="paginate-next-button" ng-click="dashboardController.getPreviousLeads()" ng-class="dashboardController.currentPageNo == 1 ? 'noActionNeeded' : ''">
+                        <span aria-hidden="true">Prev</span>
+                    </a>
+                </li>
+                <li ng-repeat="page in dashboardController.pages">
+                    <a ng-click="dashboardController.getLeadsByPageNo(page)" target="_blank" ng-class="page == dashboardController.currentPageNo ? 'selected disabled' : ''" >
+                        {{page}}
+                    </a>
+                </li>                        
+                <li>
+                    <a ng-click="dashboardController.getMoreLeads()" target="_blank" ng-class="!dashboardController.nextPageExists || dashboardController.moreLeadsRequested ? 'noActionNeeded' : ''">
+                        Next
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <ui-view/>
+</div>

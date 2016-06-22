@@ -1,0 +1,83 @@
+<div class="container-fluid"
+     id="homepage">
+    <div class="row" id="map-news-row">
+        <div class="solarNewsColumn">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading home-panel-heading">
+                            <h4>Solar News</h4>
+                        </div>
+                        <div class="list-group">
+                            <a class="list-group-item"
+                               href="http://www.marketwatch.com/story/sunedison-to-construct-three-new-solar-power-plants-in-utah-totaling-262-mw-2015-04-09" target="_blank">
+                                Three New Solar Power Plants in Utah Totaling 262 MW.
+                            </a>
+                            <a class="list-group-item"
+                               href="http://cleantechnica.com/2015/03/02/clean-energy-bringing-jobs-north-carolina/" target="_blank">
+                                Clean energy in North Carolina is bringing jobs.
+                            </a>
+                            <a class="list-group-item"
+                               href="http://phys.org/news/2015-03-solar-california-energy-demand.html#jCp" target="_blank">
+                                Did you hear California has over 6 million acres of land compatible for PV solar construction?
+                            </a>
+                            <a class="list-group-item"
+                               href="http://www.tallahassee.com/story/news/2015/03/23/florida-cities-expand-solar-offerings/70339000/" target="_blank">
+                                Great news from Florida: Lakeland is constructing a 6MW 65&#8209acre solar farm managed by SunEdison.
+                            </a>
+                            <a class="list-group-item"
+                               href="http://www.washingtonpost.com/news/energy-environment/wp/2015/03/17/obama-administration-calls-for-more-renewable-energy-tighter-pollution-controls-on-taxpayer-owned-lands/" target="_blank">
+                                Obama administration wants more renewable energy, tighter pollution controls on public lands.
+                            </a>
+                            <a class="list-group-item"
+                               href="http://cleantechnica.com/2015/03/02/utility-scale-solar-booming-east-coast/" target="_blank">
+                                Why Utility-Scale Solar is Booming on the East Coast.
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="homePageMapViewWrapper"
+             class="homePageMap">
+            <ng-include src="'app/main/homeowner-map.html'"
+                        ng-controller="HomeownerMapCtrl as homeownerMap"></ng-include>
+
+        </div>
+        <!-- Has to be changed and moved out of HTML -->
+        <script type="text/javascript">
+            function resize()
+            {
+                var mapHeight = $('#homePageMapViewWrapper').height();
+                var newsArticles = $(".list-group-item");
+                var newsBlockHeight = (mapHeight - 40)/newsArticles.length;
+                for(i=0; i<newsArticles.length; i++){
+                    newsArticles[i].style.height = newsBlockHeight + "px";
+                }
+            }
+            resize();
+            window.onresize = function() {
+                resize();
+            };
+        </script>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading home-panel-heading clearfix prospects-heading">
+                    <div class="row">
+                        <div class="col-md-10"><h3>Prospects</h3></div><!--
+                        --><div class="col-md-2">
+                            <div class="btn-group pull-right">
+                                <a ui-sref="homeowners"
+                                   id="viewMoreHomeowners">VIEW MORE</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ng-include src="'app/main/homeowner-table.html'"
+                            ng-controller="HomeownerList as homeownerList"></ng-include>
+            </div>
+        </div>
+    </div>
+</div>

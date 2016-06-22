@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<div id="add-lead-modal">
+	<form role="form"
+	      class="form-horizontal"
+	      name="creditReSendMsgForm">
+		<div class="modal-header" >
+                    <h1 id="creditResendConfirmHeading">Confirmation</h1>
+		    <div class="button-container"
+		         ng-click="cancel()">
+		        <a class="modal-close-x-button"></a>
+                    </div>
+                </div>	
+		<br>
+                <div id="creditMsgDiv">
+                    <p>The homeowner {{homeOwnerName}} currently has purchase type set to {{currentPurchaseType}}.</p>
+                    <p>This lead has to be updated before we proceed with a credit check.</p>
+                    <br>                    
+                    <input ng-hide="calledFromCustomerDetailsPage" type="button" id="resend-back" ng-click="proceed(false)" value="Cancel">
+                    <input ng-hide="calledFromCustomerDetailsPage" type="button" id="resend-continue" ng-click="proceed(true)" value="Continue">
+                <div>
+                
+        </form>
+</div>
+
