@@ -82,7 +82,7 @@
                     //localStorageService.add('roles', data.profile.Role);
                     var temp = null;
                     if(data.profile && data.profile.Role && data.profile.Role !== null && typeof data.profile.Role !== 'undefined'){
-                        temp = data.profile.Role.split(',');                    
+                        temp = data.profile.Role.split(',');
                         if(temp !== null && temp!== '' && temp.length === 0){
                             localStorageService.add('userCurrentRole', data.profile.Role);
                         }else{
@@ -116,7 +116,7 @@
 						tempPageInfo.nextPageExists = true;
 						localStorageService.add('pageInfo', tempPageInfo);
 					}
-                    
+
                     if (!data.id) {
                         throw 'Missing id field from login response';
                     }
@@ -134,13 +134,13 @@
                         localStorageService.add('se-chosenPartner', data.profile.PartnerId);
                     }else{
                         if(!localStorageService.get('se-chosenPartner')){
-                           localStorageService.add('se-chosenPartner', '226055'); 
+                           localStorageService.add('se-chosenPartner', '226055');
                         }
                     }*/
                     $http.defaults.headers.common['x-okta-session-id'] = data.id;
                     var currentTime = moment();
                     localStorageService.add('se-timestamp', {timeStamp: currentTime._d});
-                    
+
 
                     // Only redirect through okta when dealing with a real okta-backed login
                     if (!data.IsStubLogin) {
@@ -543,7 +543,7 @@
                 tempPageInfo.pageDetails = {};
                                                 }
             var lastUpdatedOn = '';
-            lastUpdatedOn = tempPageInfo.pageDetails[tempPageInfo.requestedPage];            
+            lastUpdatedOn = tempPageInfo.pageDetails[tempPageInfo.requestedPage];
             if(tempPageInfo.moreLeadsRequested){
                 lastUpdatedOn = tempPageInfo.pageDetails[tempPageInfo.lastPageNo];
             }
@@ -572,7 +572,7 @@
                                 $window.location.reload(true);
                             }else{
                                 $rootScope.$broadcast('backendError', 'No data to display');
-                            }                        
+                            }
                         }else{
                             if(typeof tempPageInfo.pageDetails[tempPageInfo.lastPageNo + 1] === 'undefined' || tempPageInfo.pageDetails[tempPageInfo.lastPageNo + 1] === null){
                                 tempPageInfo.pageDetails[tempPageInfo.lastPageNo + 1] = homeOwnersList[homeOwnersList.length - 1].LastUpdatedOn;
@@ -598,14 +598,14 @@
             return viewModelsPromise;
         }
 
-        
+
         function retrieveHomeownersBySalesPersonID() {
             var tempPageInfo = localStorageService.get('pageInfo');
             if(!tempPageInfo.pageDetails){
-                tempPageInfo.pageDetails = {};                       
+                tempPageInfo.pageDetails = {};
             }
             var lastUpdatedOn = '';
-            lastUpdatedOn = tempPageInfo.pageDetails[tempPageInfo.requestedPage];            
+            lastUpdatedOn = tempPageInfo.pageDetails[tempPageInfo.requestedPage];
             if(tempPageInfo.moreLeadsRequested){
                 lastUpdatedOn = tempPageInfo.pageDetails[tempPageInfo.lastPageNo];
             }
@@ -642,13 +642,13 @@
                                 var vm = newHomeownerVM();
                                 vm.model = model;
                                 vm.id = model.SunEdCustId;
-                                if(model.ProposalIds != null){  
+                                if(model.ProposalIds != null){
                                 var proposallist = model.ProposalIds.split(',');
                                 for(var i=0; i<proposallist.length; i++){
                                     if(proposallist[i] == 'null' || proposallist[i] == null || proposallist[i] == 'data not found' || proposallist[i].indexOf('.txt') !== -1){
                                          proposallist.splice(i, 1);
                                          i = i-1;
-                                    }                                                                 
+                                    }
                                 }
                                 vm.Proposals = proposallist;
                             }
@@ -665,14 +665,14 @@
                 });
             return viewModelsPromise;
         }
-        
+
         function retrieveHomeownersBySunEdisonManagerID() {
             var tempPageInfo = localStorageService.get('pageInfo');
             if(!tempPageInfo.pageDetails){
-                tempPageInfo.pageDetails = {};                       
+                tempPageInfo.pageDetails = {};
             }
             var lastUpdatedOn = '';
-            lastUpdatedOn = tempPageInfo.pageDetails[tempPageInfo.requestedPage];            
+            lastUpdatedOn = tempPageInfo.pageDetails[tempPageInfo.requestedPage];
             if(tempPageInfo.moreLeadsRequested){
                 lastUpdatedOn = tempPageInfo.pageDetails[tempPageInfo.lastPageNo];
             }
@@ -699,23 +699,23 @@
                             localStorageService.add('pageInfo', tempPageInfo);
                             $rootScope.$broadcast('backendError', 'No data to display');
                             $window.location.reload(true);
-                        }else{                        
+                        }else{
                             if(typeof tempPageInfo.pageDetails[tempPageInfo.lastPageNo + 1] === 'undefined' || tempPageInfo.pageDetails[tempPageInfo.lastPageNo + 1] === null){
                                 tempPageInfo.pageDetails[tempPageInfo.lastPageNo + 1] = homeOwnersList[homeOwnersList.length - 1].LastUpdatedOn;
-                            }                        
+                            }
                             tempPageInfo.moreLeadsRequested = false;
                             localStorageService.add('pageInfo', tempPageInfo);
                             viewModels = _.map(homeOwnersList, function (model) {
                                 var vm = newHomeownerVM();
                                 vm.model = model;
                                 vm.id = model.SunEdCustId;
-                                if(model.ProposalIds != null){  
+                                if(model.ProposalIds != null){
                                 var proposallist = model.ProposalIds.split(',');
                                 for(var i=0; i<proposallist.length; i++){
                                     if(proposallist[i] == 'null' || proposallist[i] == null || proposallist[i] == 'data not found' || proposallist[i].indexOf('.txt') !== -1){
                                          proposallist.splice(i, 1);
                                          i = i-1;
-                                    }                                                                 
+                                    }
                                 }
                                 vm.Proposals = proposallist;
                             }
@@ -775,9 +775,9 @@
 
         function getHomeownerViewModelsByPartnerID() {
             var tempPageInfo = localStorageService.get('pageInfo');
-            if (viewModelsPromise && !tempPageInfo.forceReload) {                             
+            if (viewModelsPromise && !tempPageInfo.forceReload) {
                 return viewModelsPromise;
-            } else {                
+            } else {
                 if(tempPageInfo.forceReload){
                     tempPageInfo.forceReload = false;
                     localStorageService.add('pageInfo', tempPageInfo);
@@ -785,12 +785,12 @@
                 return retrieveHomeownersByPartnerID();
             }
         }
-        
+
         function getHomeownerViewModelsBySalesPersonID() {
             var tempPageInfo = localStorageService.get('pageInfo');
-            if (viewModelsPromise && !tempPageInfo.forceReload) {                             
+            if (viewModelsPromise && !tempPageInfo.forceReload) {
                 return viewModelsPromise;
-            } else {                
+            } else {
                 if(tempPageInfo.forceReload){
                     tempPageInfo.forceReload = false;
                     localStorageService.add('pageInfo', tempPageInfo);
@@ -798,12 +798,12 @@
                 return retrieveHomeownersBySalesPersonID();
             }
         }
-        
+
         function getHomeownerViewModelsBySunEdisonManagerID() {
             var tempPageInfo = localStorageService.get('pageInfo');
-            if (viewModelsPromise && !tempPageInfo.forceReload) {                             
+            if (viewModelsPromise && !tempPageInfo.forceReload) {
                 return viewModelsPromise;
-            } else {                
+            } else {
                 if(tempPageInfo.forceReload){
                     tempPageInfo.forceReload = false;
                     localStorageService.add('pageInfo', tempPageInfo);
@@ -985,7 +985,7 @@
         self.getHomeownerViewModelsBySunEdisonManagerID = getHomeownerViewModelsBySunEdisonManagerID;
         self.pollHomeownerUntilCreditStatusExists = pollHomeownerUntilCreditStatusExists;
         self.newHomeownerVM = newHomeownerVM;
-        self.updateFrom = updateFrom;        
+        self.updateFrom = updateFrom;
     }
 
     // From https://gist.github.com/cstephe/1ef2c48b136589935853
@@ -1077,7 +1077,7 @@
 
         self.editHomeownerInModal = editHomeownerInModal;
     }
-    
+
 
     function modSolarModalService(managedModal, $window) {
         /* jshint validthis:true */
@@ -1142,7 +1142,7 @@
 	function proposalModalService(managedModal, $window, localStorageService, TarrifNames) {
         /* jshint validthis:true */
         var self = this;
- 
+
         function openProposalModal(homeownerVM){
             $window.scrollTo('0','0');
             var url = $window.location.href;
@@ -1177,7 +1177,7 @@
                 .then(function () {
                     $window.location.reload();
                 });
-        } 
+        }
         function openDesignPage(homeownerVM){
             $window.scrollTo('0','0');
             var url = $window.location.href;
@@ -1197,62 +1197,62 @@
                         $modalInstance.dismiss('cancel');
                     }
                         $scope.proposalURL = $sce.trustAsResourceUrl('http://' + mainurl + '/ProposalTool/Proposal/NewDesign.html?lat=' + homeownerVM.latitude + '&lng=' + homeownerVM.longitude + '&OID=' + localStorageService.get('se-sessionToken') + '&SunEdCustId=' + homeownerVM.SunEdCustId + '&Zipcode=' + homeownerVM.Zip + '&FinanceProg=' + homeownerVM.FinancingProgram + '&addr1=' + homeownerVM.addr1 + '&addr2=' + homeownerVM.addr2 + '&customerName=' + homeownerVM.customerName);
-                    
+
                 }],
             });
-         
+
             }
         self.openDesignPage = openDesignPage;
         self.openProposalModal = openProposalModal;
-    }   
+    }
         //var popupflag =1, contractflag = 1;
    function proposalIdService(ProposalIDfact,ContractIdfact) {
         /* jshint validthis:true */
-        var self = this;        
-             
-        function proposalIDcall(proposal){            
+        var self = this;
+
+        function proposalIDcall(proposal){
 	var popupWindow = '_blank';
-            ProposalIDfact.get({proposal: proposal}).$promise   
+            ProposalIDfact.get({proposal: proposal}).$promise
                     .then(function (response) {
                         var pdfURL = "data:application/pdf;base64," + response.pdf;
                         popupWindow = window.open('', '', 'height=800,width=750, top=0, left=400');
                         popupWindow.document.writeln('<html><head><title>Proposal for Solar Installation</title><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"></head><body><div><iframe id="pdfIframe" style="width:100%; height: 95%"></iframe></div><div style="text-align:center"><button class="btn btn-warning" id = "contract" style="width:48%;">View Contract</button></div></body></html>');
                         popupWindow.document.getElementById("pdfIframe").src = pdfURL;
-                        popupWindow.document.getElementById("contract").onclick = function() {openContract(proposal);}                       
-                    });       
+                        popupWindow.document.getElementById("contract").onclick = function() {openContract(proposal);}
+                    });
             //popupflag++;
             popupWindow = null;
         }
         function openContract(proposal){
             //popupWindow.close();
             var contractWindow = '_blank';//'contractWin_'+ contractflag ;
-            ContractIdfact.get({proposal: proposal}).$promise   
+            ContractIdfact.get({proposal: proposal}).$promise
                     .then(function (response) {
                         var pdfURL = "data:application/pdf;base64," + response.pdf;
                         contractWindow = window.open('', '', 'height=800,width=750, top=0, left=400');
                         contractWindow.document.writeln('<html><head><title>Proposal for Solar Installation</title><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"></head><body><div><iframe id="pdfIframe" style="width:100%; height: 95%"></iframe></div><div style="text-align:center"></div></body></html>');
                         contractWindow.document.getElementById("pdfIframe").src = pdfURL;
-                        //contractWindow.document.getElementById("contract").onclick = openContract;                       
+                        //contractWindow.document.getElementById("contract").onclick = openContract;
                     }
-                ); 
+                );
         //contractflag++;
         contractWindow = null;
         }
        self.proposalIDcall = proposalIDcall;
-    }   
-    
+    }
+
     function CustomerService ($rootScope, $state){
-        var self = this;        
-        function OpenCustomerDetails(homeownerVM){   
+        var self = this;
+        function OpenCustomerDetails(homeownerVM){
             console.log(homeownerVM.model.SunEdCustId);
            // $rootScope.SunEdCustId = homeownerVM.model.SunEdCustId;
             localStorage.setItem('SunEdCustId', JSON.stringify(homeownerVM.model.SunEdCustId));
             $state.go('customerdetails');
-            
-        }        
+
+        }
         self.OpenCustomerDetails = OpenCustomerDetails;
     }
-        
+
     angular
         .module('dealerportal.service', ['dealerportal.enum', 'dealerportal.resource', 'ui.router', 'uiGmapgoogle-maps', 'uiGmapgoogle-maps.directives.api.utils', 'ui.bootstrap'])
         .config(['uiGmapGoogleMapApiProvider', function (GoogleMapApi) {
