@@ -34,7 +34,7 @@ module.exports = function (config) {
             'karma-jasmine',
             'karma-coverage'
         ],
-        preprocessors: {
+        preprocessors: { 
           'test/unit{,**/}*.js': ['coverage']
         },
 
