@@ -35,18 +35,15 @@ module.exports = function (config) {
             'karma-coverage'
         ],
         preprocessors: {
-          'src/app/{,**/}*.js': ['coverage']
+          'test/unit{,**/}*.js': ['coverage']
         },
 
-        reporters: ['coverage'],
+        reporters: ['progress'],
 
+
+        logLevel:config.Log_INFO,
         coverageReporter: {
-            dir: 'coverage/',
-            subdir: '.',
-            reporters: [
-                {type: 'html', dir: 'coverage/'},
-                {type: 'cobertura'}
-            ]
+            type:'text'
         }
     });
 };
