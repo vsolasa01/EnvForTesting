@@ -50,6 +50,10 @@
             return false;
         }
 
+        function testingMethod(){
+            return ('hello world');
+        }
+
         function isAuthenticated() {
             var deferred = $q.defer();
             if (authenticationDeferred === null) {
